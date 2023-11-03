@@ -1,0 +1,1 @@
+(Si,Sj)=|wk|wk∈Si&wk∈Sj|log(|Si|)+log(|Sj|)(5.1)(s)=d+sum(Score(t)∗Similarity(s,t))(5.2)

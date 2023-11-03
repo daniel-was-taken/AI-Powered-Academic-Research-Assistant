@@ -1,7 +1,19 @@
-from pdfminer.high_level import extract_text
+from pdfreader import SimplePDFViewer, PageDoesNotExist
 
-text = extract_text("toscrape.pdf")
-output_file = 'text/textcontent.txt'
+fd = open("BEtest.pdf", "rb")
+viewer = SimplePDFViewer(fd)
+
+plain_text = ""
+
+try:
+    while True:
+        viewer.render()
+        plain_text += "".join(viewer.canvas.strings)
+        viewer.next()
+except PageDoesNotExist:
+    pass
+
+
+output_file = 'text/textscrape.txt'
 with open(output_file, 'w', encoding='utf-8') as file:
-    file.write(text)
-        
+    file.write(plain_text)
