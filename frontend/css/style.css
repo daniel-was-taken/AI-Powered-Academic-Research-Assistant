@@ -1,0 +1,56 @@
+html, body {
+	background-image: linear-gradient(to bottom right, rgb(60, 175, 252), rgb(58, 176, 236), rgb(56, 177, 220), rgb(54, 178, 203), rgb(52, 179, 187), rgb(50, 180, 171), rgb(47, 181, 155), rgb(45, 182, 139), rgb(43, 183, 123), rgb(41, 184, 106), rgb(39, 185, 90), rgb(37, 186, 74));
+	margin: 0;
+	height: 100%;
+}
+.primary-content {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.resp-textbox {
+	position: relative;
+	width: 300px;
+}
+.resp-textbox > input[type=text] {
+	width: 100%;
+	padding: 5px;
+	font-size: 20px;
+	background-color: #0003;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25) inset;
+	color: #fff;
+}
+.resp-textbox > input[type=text]:focus {
+	outline: none;
+	box-shadow: 325px 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+.resp-textbox > input[type=text]::placeholder {
+  color: #fff8;
+}
+
+         
+.buttonsubmit {
+    background-image: linear-gradient(to bottom right, rgb(60, 175, 252), rgb(58, 176, 236), rgb(56, 177, 220), rgb(54, 178, 203), rgb(52, 179, 187), rgb(50, 180, 171), rgb(47, 181, 155), rgb(45, 182, 139), rgb(43, 183, 123), rgb(41, 184, 106), rgb(39, 185, 90), rgb(37, 186, 74));
+    margin: 10px;
+    padding: 7px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .buttonsubmit:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+ 
