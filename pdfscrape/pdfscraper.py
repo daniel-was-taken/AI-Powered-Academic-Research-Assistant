@@ -96,12 +96,12 @@ def crop_image(element, pageObj):
         cropped_pdf_writer.write(cropped_pdf_file)
 
 # Create a function to convert the PDF to images
-def convert_to_images(input_file,):
-    pages = convert_from_path(r'C:\Users\divye\Downloads\poppler-23.11.0')
-    images = convert_from_path(input_file)
-    image = images[0]
-    output_file = 'PDF_image.png'
-    image.save(output_file, 'PNG')
+# def convert_to_images(input_file,):
+#     pages = convert_from_path('pdfscrape\ExamplePDF.pdf', poppler_path=r"C:\Users\divye\Downloads\poppler-23.11.0")
+#     images = convert_from_path(input_file)
+#     image = images[0]
+#     output_file = 'PDF_image.png'
+#     image.save(output_file, 'PNG')
 
 # Create a function to read text from images
 def image_to_text(image_path):
@@ -195,20 +195,18 @@ for pagenum, page in enumerate(extract_pages(pdf_path)):
             # Check the elements for images
             if isinstance(element, LTFigure):
                 # Crop the image from PDF
-                crop_image(element, pageObj)
+                # crop_image(element, pageObj)
                 # Convert the croped pdf to image
-                convert_to_images('cropped_image.pdf')
+                # convert_to_images('cropped_image.pdf')
                 # Extract the text from image
-                image_text = image_to_text('PDF_image.png')
-                text_from_images.append(image_text)
-                page_content.append(image_text)
-                # Add a placeholder in the text and format lists
-                page_text.append('image')
-                line_format.append('image')
-                # Update the flag for image detection
+                # image_text = image_to_text('PDF_image.png')
+                # text_from_images.append(image_text)
+                # page_content.append(image_text)
+                # # Add a placeholder in the text and format lists
+                # page_text.append('image')
+                # line_format.append('image')
+                # # Update the flag for image detection
                 image_flag = True
-
-
 
     # Create the key of the dictionary
     dctkey = 'Page_'+str(pagenum)
