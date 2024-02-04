@@ -96,12 +96,12 @@ def crop_image(element, pageObj):
         cropped_pdf_writer.write(cropped_pdf_file)
 
 # Create a function to convert the PDF to images
-# def convert_to_images(input_file,):
-#     pages = convert_from_path('pdfscrape\ExamplePDF.pdf', poppler_path=r"C:\Users\divye\Downloads\poppler-23.11.0")
-#     images = convert_from_path(input_file)
-#     image = images[0]
-#     output_file = 'PDF_image.png'
-#     image.save(output_file, 'PNG')
+def convert_to_images(input_file,):
+    pages = convert_from_path('pdfscrape\toscrape.pdf', poppler_path=r"D:\Release-23.11.0-0\poppler-23.11.0\Library\bin")
+    images = convert_from_path(input_file)
+    image = images[0]
+    output_file = 'PDF_image.png'
+    image.save(output_file, 'PNG')
 
 # Create a function to read text from images
 def image_to_text(image_path):
