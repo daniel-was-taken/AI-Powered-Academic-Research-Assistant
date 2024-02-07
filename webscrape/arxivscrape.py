@@ -28,5 +28,7 @@ print("Number of papers extracted : ",df.shape[0])
 df.head()
 data = {"Title":df["Title"],"ID":df["Id"],"URL": df['URL'],"Summary":df['Summary']}
 df1 = pd.DataFrame(data)
-
+data2 = {"URL":df["URL"]}
+df2 = pd.DataFrame(data2)
+df2.to_csv("OnlyURL.csv",index=False)
 df1.to_csv("Scrape.csv", index=False)
