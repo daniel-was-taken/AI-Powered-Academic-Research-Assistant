@@ -1,0 +1,93 @@
+Title,ID,URL,Summary
+Can Mamba Learn How to Learn? A Comparative Study on In-Context Learning Tasks,http://arxiv.org/abs/2402.04248v1,http://arxiv.org/pdf/2402.04248v1,"State-space models (SSMs), such as Mamba Gu & Dao (2034), have been proposed
+as alternatives to Transformer networks in language modeling, by incorporating
+gating, convolutions, and input-dependent token selection to mitigate the
+quadratic cost of multi-head attention. Although SSMs exhibit competitive
+performance, their in-context learning (ICL) capabilities, a remarkable
+emergent property of modern language models that enables task execution without
+parameter optimization, remain underexplored compared to Transformers. In this
+study, we evaluate the ICL performance of SSMs, focusing on Mamba, against
+Transformer models across various tasks. Our results show that SSMs perform
+comparably to Transformers in standard regression ICL tasks, while
+outperforming them in tasks like sparse parity learning. However, SSMs fall
+short in tasks involving non-standard retrieval functionality. To address these
+limitations, we introduce a hybrid model, \variant, that combines Mamba with
+attention blocks, surpassing individual models in tasks where they struggle
+independently. Our findings suggest that hybrid architectures offer promising
+avenues for enhancing ICL in language models."
+CAST: Clustering Self-Attention using Surrogate Tokens for Efficient Transformers,http://arxiv.org/abs/2402.04239v1,http://arxiv.org/pdf/2402.04239v1,"The Transformer architecture has shown to be a powerful tool for a wide range
+of tasks. It is based on the self-attention mechanism, which is an inherently
+computationally expensive operation with quadratic computational complexity:
+memory usage and compute time increase quadratically with the length of the
+input sequences, thus limiting the application of Transformers. In this work,
+we propose a novel Clustering self-Attention mechanism using Surrogate Tokens
+(CAST), to optimize the attention computation and achieve efficient
+transformers. CAST utilizes learnable surrogate tokens to construct a cluster
+affinity matrix, used to cluster the input sequence and generate novel cluster
+summaries. The self-attention from within each cluster is then combined with
+the cluster summaries of other clusters, enabling information flow across the
+entire input sequence. CAST improves efficiency by reducing the complexity from
+$O(N^2)$ to $O(\alpha N)$ where N is the sequence length, and {\alpha} is
+constant according to the number of clusters and samples per cluster. We show
+that CAST performs better than or comparable to the baseline Transformers on
+long-range sequence modeling tasks, while also achieving higher results on time
+and memory efficiency than other efficient transformers."
+From zero-mode intermittency to hidden symmetry in random scalar advection,http://arxiv.org/abs/2402.04198v1,http://arxiv.org/pdf/2402.04198v1,"The statistical behavior of scalars passively advected by random flows
+exhibits intermittency in the form of anomalous multiscaling, in many ways
+similar to the patterns commonly observed in incompressible high-Reynolds
+fluids. This similarity suggests a generic dynamical mechanism underlying
+intermittency, though its specific nature remains unclear. Scalar turbulence is
+framed in a linear setting that points towards a zero-mode scenario connecting
+anomalous scaling to the presence of statistical conservation laws; the duality
+is fully substantiated within Kraichnan theory of random flows. However,
+extending the zero-mode scenario to nonlinear settings faces formidable
+technical challenges. Here, we revisit the scalar problem in the light of a
+hidden symmetry scenario introduced in recent deterministic turbulence studies
+addressing the Sabra shell model and the Navier-Stokes equations. Hidden
+symmetry uses a rescaling strategy based entirely on symmetry considerations,
+transforming the original dynamics into a rescaled (hidden) system; It
+ultimately identifies the scaling exponents as the eigenvalues of a
+Perron-Frobenius operator acting on invariant measures of the rescaled
+equations. Considering a minimal shell model of scalar advection of the
+Kraichnan type that was previously studied by Biferale & Wirth, the present
+work extends the hidden symmetry approach to a stochastic setting, in order to
+explicitly contrast it with the zero-mode scenario. Our study indicates that
+the zero-mode scenario represents only one facet of intermittency, here
+prescribing the scaling exponents of even-order correlators. Besides, we argue
+that hidden symmetry provides a more generic mechanism, fully prescribing
+intermittency in terms of scaling anomalies, but also in terms of its
+multiplicative random nature and fusion rules required to explicitly compute
+zero-modes from first principles."
+Low energy effective theories of composite dark matter with real representations,http://arxiv.org/abs/2402.04176v1,http://arxiv.org/pdf/2402.04176v1,"We consider pseudo Nambu-Goldstone bosons arising from Dirac fermions
+transforming in real representations of a confining gauge group as dark matter
+candidates. We consider a special case of two Dirac fermions and couple the
+resulting dark sector to the Standard Model using a vector mediator. Within
+this construction, we develop a consistent low energy effective theory, with
+special attention to Wess-Zumino-Witten term given the topologically
+non-trivial coset space. We furthermore include the heavier spin-0 flavour
+singlet state and the spin-1 vector meson multiplet, by using the Hidden Local
+Symmetry Lagrangian for the latter. Although we concentrate on special case of
+two flavours, our results are generic and can be applied to a wider variety of
+theories featuring real representations. We apply our formalism and comment on
+the effect of the flavour singlet for dark matter phenomenology. Finally, we
+also comment on generalisation of our formalism for higher representations and
+provide potential consequences of discrete symmetry breaking."
+Attention with Markov: A Framework for Principled Analysis of Transformers via Markov Chains,http://arxiv.org/abs/2402.04161v1,http://arxiv.org/pdf/2402.04161v1,"In recent years, attention-based transformers have achieved tremendous
+success across a variety of disciplines including natural languages. A key
+ingredient behind their success is the generative pretraining procedure, during
+which these models are trained on a large text corpus in an auto-regressive
+manner. To shed light on this phenomenon, we propose a new framework that
+allows both theory and systematic experiments to study the sequential modeling
+capabilities of transformers through the lens of Markov chains. Inspired by the
+Markovianity of natural languages, we model the data as a Markovian source and
+utilize this framework to systematically study the interplay between the
+data-distributional properties, the transformer architecture, the learnt
+distribution, and the final model performance. In particular, we theoretically
+characterize the loss landscape of single-layer transformers and show the
+existence of global minima and bad local minima contingent upon the specific
+data characteristics and the transformer architecture. Backed by experiments,
+we demonstrate that our theoretical findings are in congruence with the
+empirical results. We further investigate these findings in the broader context
+of higher order Markov chains and deeper architectures, and outline open
+problems in this arena. Code is available at
+\url{https://github.com/Bond1995/Markov}."
