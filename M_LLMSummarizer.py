@@ -29,10 +29,10 @@ model_id = "mistralai/Mistral-7B-Instruct-v0.1"
 
 
 
-model_4bit = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", quantization_config = quantization_config)
+model_4bit = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", quantization_config = quantization_config, cache_dir = 'D:/BEProject/model')
 # , quantization_config=quantization_config
 # model_4bit = "mistralai/Mistral-7B-Instruct-v0.1"
-tokenizer = AutoTokenizer.from_pretrained(model_id)
+tokenizer = AutoTokenizer.from_pretrained(model_id, cache_dir = 'D:/BEProject/model')
 
 # pipe = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
 tpipeline = pipeline(
