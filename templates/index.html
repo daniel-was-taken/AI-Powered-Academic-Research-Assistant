@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="primary-content">
+  <form method="post">
+    <label for="input">Enter text to summarise</label>
+    <br>
+    <div class="resp-textbox">
+      <textarea type="text" name="input" value="{{ request.form['input'] }}"></textarea>
+    </div>
+    <button type="submit" class="buttonsubmit">Submit</button>
+  </form>
+
+  <div>
+    {{summary}}
+  </div>
+</div>
+
+
+{% endblock %}
