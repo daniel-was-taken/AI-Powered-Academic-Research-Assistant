@@ -1,3 +1,6 @@
 /venv
 /covid19_ai_imaging.jsonl
-/model
+/data
+/AutoAWQ
+/.cache
+colabrequirements.txt
