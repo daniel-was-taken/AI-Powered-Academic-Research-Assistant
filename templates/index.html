@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="primary-content">
-  <form method="post">
+  <form action="/summary" method="POST" >
     <label for="input">Enter text to summarise</label>
     <br>
     <div class="resp-textbox">
@@ -12,9 +12,6 @@
     <button type="submit" class="buttonsubmit">Submit</button>
   </form>
 
-  <div>
-    {{summary}}
-  </div>
 </div>
 
 
