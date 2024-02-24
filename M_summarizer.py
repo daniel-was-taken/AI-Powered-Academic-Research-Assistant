@@ -1,18 +1,22 @@
 # Read the file and store the input in a variable
-with open("text/textscrape2.txt", "r", encoding="utf-8") as f:
+with open("text/textcontent.txt", "r", encoding="utf-8") as f:
     input_text = f.read()
 
 from transformers import LongT5ForConditionalGeneration, AutoTokenizer
 from transformers import pipeline
 import torch
 import datetime
+from textsum.summarize import Summarizer
 
 start = datetime.datetime.now()
 print(start)
 
 # pipe = pipeline("summarization", model="Falconsai/text_summarization")
 # pipe = pipeline("summarization", model="facebook/bart-large-cnn")
-pipe = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
+# pipe = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
+
+summarizer = Summarizer('pszemraj/long-t5-tglobal-base-sci-simplify')
+
 # summarizer = pipeline(
 #     "summarization",
 #     "pszemraj/long-t5-tglobal-base-16384-book-summary",
@@ -20,11 +24,11 @@ pipe = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
 # )
 # long_text = "Here is a lot of text I don't want to read. Replace me"
 
-result = pipe(input_text, min_length=800, max_length = 1024 )
-print(result[0]["summary_text"])
+# result = pipe(input_text, min_length=800, max_length = 1024 )
+# print(result[0]["summary_text"])
 
-end = datetime.datetime.now()
-print(end)
+# end = datetime.datetime.now()
+# print(end)
 # # Load pre-trained T5 model and tokenizer
 # model_name = "google/long-t5-tglobal-base"
 # tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -39,7 +43,9 @@ print(end)
 # # print("Original text:", input_text)
 # # print("Summary:", summary)
 
+summary = summarizer.summarize_string(input_text)
+
 output_file = 'text/summary.txt'
 with open(output_file, 'w', encoding='utf-8') as file:
-    file.write(result[0]["summary_text"])
+    file.write(summary)
 
