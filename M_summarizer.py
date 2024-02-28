@@ -4,7 +4,7 @@
 # print(start)
 
 def get_summary():
-    with open("text/textscrape2.txt", "r", encoding="utf-8") as f:
+    with open("text/textcontent.txt", "r", encoding="utf-8") as f:
         input_text = f.read()
 
     from textsum.summarize import Summarizer
@@ -13,8 +13,9 @@ def get_summary():
 
     
     summary = summarizer.summarize_string(input_text)
-    new_summary = [ summary for x in range(4)]
-    return new_summary
+    # new_summary = [ summary for x in range(4)]
+    # return new_summary
+    return summary
 
     # output_file = 'text/summary.txt'
     # with open(output_file, 'w', encoding='utf-8') as file:
