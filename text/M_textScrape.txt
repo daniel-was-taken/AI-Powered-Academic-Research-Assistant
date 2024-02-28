@@ -1,0 +1,338 @@
+Evaluation Warning : The document was created with Spire.PDF for Python.                 AI-Powered Academic Research Assistant
+
+                  Submitted in partial fulfillment of the requirements
+                                  for the degree of
+
+                            B.E. Computer Engineering
+
+                                        By
+
+                        Daniel Ferreira Roll No:54 212255
+
+                        Prem Tatkari  Roll No:56 212262
+
+                        Divyesh Mistry Roll No:57 212258
+
+                        Kyran Almeida Roll No:58 212252
+
+                                       Guide
+                               Prof. Pradnya Sawant
+                                 Assistant Professor
+
+
+
+                        Department of Computer Engineering
+                         St. Francis Institute of Technology
+                               (Engineering College)
+
+                               University of Mumbai
+                                     2023-2024
+
+
+Evaluation Warning : The document was created with Spire.PDF for Python.                                         CERTIFICATE
+
+
+
+            This is to certify that the project entitled “AI-Powered Academic Research As-
+
+            sistant”is a bonafide work of“Daniel Ferreira(Roll no.54), Prem Tatkari(Roll
+
+            no.56), Divyesh Mistry(Roll no.57) and Kyran Almeida(Roll no.58)” submit-
+
+            ted to the University of Mumbai in partial fulfillment of the requirement for the
+
+            award of the degree of B.E. in Computer Engineering.
+
+
+
+            ————————–
+
+            (Prof. Pradnya Sawant)
+
+            Guide
+
+
+
+            ————————–                                        ————————–
+
+            (Dr. Kavita Sonawane)                            (Dr. Sincy George)
+
+            Head Of Department                               Principal
+
+
+
+                                                  ii
+
+
+Evaluation Warning : The document was created with Spire.PDF for Python.                               Project Approval Report for B.E.
+
+
+
+            This project report entitled“AI-Powered Academic Research Assistant”byDaniel
+            Ferreira(Roll no.:54), Prem Tatkari(Roll no.:56), Divyesh Mistry(Roll no:57)
+            and Kyran Almeida(Roll no:58) is approved for the degree of B.E. in Computer
+            Engineering.
+
+
+
+                                                                 Examiners
+
+
+
+                                                                 1. ——————————–
+
+
+
+                                                                 2. ——————————–
+
+
+
+            Date: 31/10/2023
+
+            Place: Mumbai
+
+
+
+                                                  iii
+
+
+Evaluation Warning : The document was created with Spire.PDF for Python.                                            Declaration
+
+
+
+            We declare that this written submission represents our ideas in our own words and
+            where others’ ideas or words have been included; we have adequately cited and
+            referenced the original sources. We also declare that we have adhered to all princi-
+            ples of academic honesty and integrity and have not misrepresented or fabricated
+            or falsified any idea/data/fact/source in this submission. We understand that any
+            violation of the above will be cause for disciplinary action by the Institute and can
+            also evoke penal action from the sources which have thus not been properly cited
+            or from whom proper permission has not been taken when needed.
+
+
+
+                                                         Daniel Ferreira (54)
+
+
+
+                                                         Prem Tatkari (56)
+
+
+
+                                                         Divyesh Mistry (57)
+
+
+
+                                                         Kyran Almeida (58)
+
+
+
+            Date: 31/10/2023
+
+
+
+                                                  iv
+
+
+Evaluation Warning : The document was created with Spire.PDF for Python.                                              Abstract
+
+
+
+            In the ever-expanding landscape of academic research, the demand for efficient
+            and intelligent tools to assist researchers in navigating, comprehending, and syn-
+            thesising vast amounts of information has never been more pressing. This project
+            introduces an innovative AI-powered Academic Research Assistant—a dynamic
+            and sophisticated system designed to revolutionise the research process. Har-
+            nessing the capabilities of cutting-edge natural language processing and machine
+            learning techniques, the AI-powered assistant seamlessly integrates into the re-
+            searcher’s workflow. As a result, the AI-powered Academic Research Assistant
+            stands poised to reshape the landscape of academic research. It offers a tangible
+            solution to the information overload conundrum, amplifying research efficiency,
+            knowledge dissemination, and cross-disciplinary collaboration. This project not
+            only exemplifies technological innovation but also underscores the potential for
+            AI to augment human intelligence in tackling complex, knowledge-intensive chal-
+            lenges.
+
+            Keywords: Machine Learning, AI, Academic Research Assistant, Natural Lan-
+            guage Processing
+
+
+
+                                                  v
+
+
+Evaluation Warning : The document was created with Spire.PDF for Python.            Contents
+
+
+
+            1  Introduction                                                              1
+                1.1  Description . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  1
+                1.2  Problem Formulation . . . . . . . . . . . . . . . . . . . . . . . .  1
+                1.3  Motivation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  2
+                1.4  Proposed Solution . . . . . . . . . . . . . . . . . . . . . . . . . .  2
+                1.5  Scope of the project . . . . . . . . . . . . . . . . . . . . . . . . .  3
+
+            2  Review of Literature                                                      4
+
+            3  System Analysis                                                           6
+                3.1  Functional Requirements . . . . . . . . . . . . . . . . . . . . . .  6
+                3.2  Non-Functional Requirements . . . . . . . . . . . . . . . . . . .  6
+                3.3  Specific Requirements . . . . . . . . . . . . . . . . . . . . . . .  7
+                3.4  Use-Case Diagrams and Description . . . . . . . . . . . . . . . .  8
+
+            4  Analysis Modeling                                                         9
+                4.1  Activity Diagram . . . . . . . . . . . . . . . . . . . . . . . . . .  9
+                4.2  Functional Modeling . . . . . . . . . . . . . . . . . . . . . . . .  10
+
+            5  Design                                                                  13
+                5.1  Architecture Design . . . . . . . . . . . . . . . . . . . . . . . . .  13
+                     5.1.1  Preprocessing the question . . . . . . . . . . . . . . . . .  14
+                     5.1.2  Web scraping . . . . . . . . . . . . . . . . . . . . . . . .  14
+                     5.1.3  Preprocessing the web data . . . . . . . . . . . . . . . . .  14
+                     5.1.4  Abstractive Summarisation . . . . . . . . . . . . . . . . .  14
+
+                                                  vi
+
+
+Evaluation Warning : The document was created with Spire.PDF for Python.            CONTENTS                                                           CONTENTS
+
+                     5.1.5  Sentence Ranking . . . . . . . . . . . . . . . . . . . . . .  15
+                5.2  Performance Evaluation Parameters . . . . . . . . . . . . . . . .  15
+                     5.2.1  Recall-Oriented Understudy for Gisting Evaluation (ROUGE)
+                             Score . . . . . . . . . . . . . . . . . . . . . . . . . . . .  15
+                     5.2.2  GLUE Benchmark . . . . . . . . . . . . . . . . . . . . .  16
+                     5.2.3  SQuAD Benchmark . . . . . . . . . . . . . . . . . . . .  16
+
+            6  Implementation                                                          17
+                6.1  Algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  17
+                6.2  Experimentation . . . . . . . . . . . . . . . . . . . . . . . . . . .  19
+
+            7  Conclusions                                                             21
+                7.1  Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  21
+                7.2  Future Scope . . . . . . . . . . . . . . . . . . . . . . . . . . . .  21
+
+            References                                                                 22
+
+            Acknowledgements                                                           23
+
+
+
+                                                  vii
+
+
+Evaluation Warning : The document was created with Spire.PDF for Python.            List of Figures
+
+
+
+                3.1  Use-Case Diagram for AI-Powered Academic Research Assistant         8
+
+                4.1  Activity diagram for AI-Powered Academic Research Assistant . .  9
+                4.2  DFD Level 0 for AI-Powered Academic Research Assistant . . . .  10
+                4.3  DFD Level 1 for AI-Powered Academic Research Assistant . . . .  11
+                4.4  DFD Level 2 for AI-Powered Academic Research Assistant . . . .  11
+
+                5.1  Block Diagram for AI-Powered Academic Research Assistant . .  13
+
+                6.1  Transformer architecture.[4] . . . . . . . . . . . . . . . . . . . .  17
+                6.2  Illustration of the two attention mechanisms experimented with in
+                     LongT5.[1] . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  18
+                6.3  Preprocessing . . . . . . . . . . . . . . . . . . . . . . . . . . . .  19
+                6.4  Webscraping . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  20
+
+
+
+                                                  viii
+
+
+Evaluation Warning : The document was created with Spire.PDF for Python.                                           Chapter 1
+
+                                         Introduction
+
+
+
+                 An Academic Research Assistant is a crucial role in the field of academic
+              research, providing support to faculty members and research teams. They assist
+              in conducting literature reviews, gathering and analysing data, and preparing
+              reports or manuscripts for publication. Research assistants often work closely
+              with professors or researchers, helping them design experiments, develop re-
+              search methodologies, and formulate research questions. Our project aims to
+              provide researchers with an AI-powered academic research assistant. It will
+              ease the process of information gathering for researchers.
+
+              1.1  Description
+
+              AI-Powered Academic Research Assistant is a one-step solution to all your re-
+              search needs. We plan to develop an application that is easy-to-operate and
+              solves many problems for researchers. Our platform lets you find research pa-
+              pers related to your area of interest along with their summaries and key take-
+              aways.
+
+              1.2  Problem Formulation
+
+              Researchers often spend significant time and effort searching for relevant re-
+              search papers, extracting useful information, and organising their findings. This
+              project aims to automate these tasks and provide researchers with a streamlined
+              and personalised research experience. The solution is an AI-powered research
+
+                                                   1
+
+
+Evaluation Warning : The document was created with Spire.PDF for Python.              Chapter 1                                                           Introduction
+
+              assistant that uses web scraping, machine learning, and natural language pro-
+              cessing to improve the research process.
+
+              To address these issues, there is a need for a more streamlined and automated
+              job placement system that facilitates better communication, reduces inefficien-
+              cies, and provides data-driven insights for continuous improvement. Such a
+              system would benefit both students and employers by expanding opportunities
+              and ensuring a more inclusive and efficient job placement process.
+
+              1.3  Motivation
+
+                 Embarking on the journey to create an AI-powered Academic Research As-
+              sistant holds the promise of transforming the way knowledge is discovered and
+              shared. Imagine a world where researchers can delve into the depths of in-
+              formation with unprecedented ease, where connections between seemingly un-
+              related studies are unveiled effortlessly, and where time-consuming tasks are
+              automated, freeing up intellectual energy for true innovation. This initiative is
+              about providing researchers, educators, and learners with a tool that can catalyse
+              breakthroughs, expedite learning, and foster worldwide collaboration, not just
+              technology. By pursuing this endeavour, we are not only embracing the cutting
+              edge of AI, but also being a catalyst for academic development. The difficulties
+              we’ll face and the solutions we’ll devise have the potential to reshape research
+              methodology, leaving an enduring mark on how we advance human knowledge.
+              Our commitment to developing an AI-powered Academic Research Assistant is
+              an investment not just in the future of education and research, but also in our
+              own development as a creative visionary.
+
+              1.4  Proposed Solution
+
+                 The proposed solution is an AI-powered academic research assistant that
+              utilises web scraping, machine learning, and natural language processing tech-
+              niques to enhance the research process. The system will scrape relevant data
+
+                                                     2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

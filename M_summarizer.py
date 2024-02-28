@@ -11,9 +11,10 @@ def get_summary():
 
     summarizer = Summarizer('pszemraj/long-t5-tglobal-base-sci-simplify')
 
-
+    
     summary = summarizer.summarize_string(input_text)
-    return summary
+    new_summary = [ summary for x in range(4)]
+    return new_summary
 
     # output_file = 'text/summary.txt'
     # with open(output_file, 'w', encoding='utf-8') as file:

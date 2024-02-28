@@ -4,7 +4,7 @@ from spire.pdf import *
 # Create a PdfDocument object
 doc = PdfDocument()
 # Load a PDF document
-doc.LoadFromFile("toscrape.pdf")
+doc.LoadFromFile("BEtest.pdf")
 
 # Create an empty list to store extracted text
 list = []
@@ -18,7 +18,7 @@ for i in range(doc.Pages.Count):
     list.append(text)
 
 # Write the extracted text into a text file
-with open("ExtractTextFromDocument.txt", "w", encoding = "utf-8") as text_file:
+with open("text/M_textScrape.txt", "w", encoding = "utf-8") as text_file:
     for text in list:
         text_file.write(text + "\n")
 

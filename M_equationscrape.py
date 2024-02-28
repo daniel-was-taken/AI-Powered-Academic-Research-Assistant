@@ -1,7 +1,7 @@
 import re
 
 # text = "5.1.3PreprocessingthewebdataThedatathatweextractedfromthewebmaynotbeinaformatthatissuitableforfurtherprocesses.Inthisstep,wewillneedtocleanthedatabyremovinganyunwantedcharacters,correctinganyerrors,andconvertingthedataintoaconsistentformat5.1.4AbstractiveSummarisationATransformerisusedforabstractivesummarisation,specificallytheLongT5model.TheLongT5modelworksbyfirstencodingtheinputtextintoase-quenceoftokens.ThesetokensarethenpassedthroughtheTransformeren-coder,whichlearnstoidentifytherelationshipsbetweenthetokens.Theen-codedtokensarethenpassedthroughtheTransformerdecoder,whichgeneratestheoutputsummary.14Chapter5Design5.1.5SentenceRankingFindoutkeytakeawaysfromallthepapers.Thesekeytakeawaysgiveusanideaabouttheessentialsentencesfromthepapers.TextRankturnsouttobewellsuitedforthistypeofapplication,sinceitallowsforarankingovertextunitsthatisrecursivelycomputedbasedoninformationdrawnfromtheentiretext.[5]Formally,giventwosentencesSiandSj,withasentencebeingrepre-sentedbythesetofNiwordsthatappearinthesentence:Si=wi1,wi2,...,wiNi,Similarity(Si,Sj)=|wk|wk∈Si&wk∈Sj|log(|Si|)+log(|Sj|)(5.1)Thescoreiscalculatedforallsentencesusing,Score(s)=d+sum(Score(t)∗Similarity(s,t))(5.2)Where,Score(s)isthescoreofsentences,disadampingfactor,typicallysetto0.85,Score(t)isthescoreofsentencet,Similarity(s,t)isthesimilaritybetweensentencessandt.5.2PerformanceEvaluationParameters5.2.1Recall-OrientedUnderstudyforGistingEvaluation(ROUGE)ScoreTheROUGEscoreisusedtoevaluatethequalityofmachinetranslationoutputs."
-input_file = 'text/textcontent.txt'
+input_file = 'text/textscrape2.txt'
 
 with open(input_file,'r',encoding='utf-8') as file:
     text = file.read()
@@ -16,8 +16,27 @@ equations = re.findall(equation_pattern, text)
 # Print the extracted equations
 
 
+
+
+
+def extract_formulas(text):
+    # Define a regular expression pattern to match formulas
+    formula_pattern = r'\b(?:[a-zA-Z]+[\d]*|\d+)(?:\s*[-+*/^]\s*(?:[a-zA-Z]+[\d]*|\d+))+\b'
+    
+    # Find all matches of formulas in the text
+    formulas = re.findall(formula_pattern, text)
+    
+    return formulas
+
+
+# Extract formulas from the example text
+formulas = extract_formulas(text)
+
+# Print the extracted formulas
+for formula in formulas:
+    print("Formula:", formula)
+
 output_file = 'text/equation.txt'
 with open(output_file, 'w', encoding='utf-8') as file:
-    for equation in equations:
+    for equation in formulas:
         file.write(equation)
-    
