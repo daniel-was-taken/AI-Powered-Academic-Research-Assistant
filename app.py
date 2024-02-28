@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request
 
+from M_summarizer import get_summary
+
+
 app = Flask(__name__)
 
 
@@ -10,7 +13,9 @@ def home():
 @app.route("/summary", methods=['GET','POST'])
 def summary():
     if request.method == "POST":
-       input = request.form["input"]
+    #    input = request.form["input"]
+       input = get_summary()
+
     if not input:
         input="HELLO WORLD"
     return render_template("summary.html", summary = input)
