@@ -2,17 +2,17 @@
 
 {% block content %}
 
-<div class="primary-content">
-  <form action="/summary" method="POST" >
-    <label for="input">Enter text to summarise</label>
-    <br>
-    <div class="resp-textbox">
-      <textarea type="text" name="input" value="{{ request.form['input'] }}"></textarea>
-    </div>
-    <button type="submit" class="buttonsubmit">Submit</button>
-  </form>
-
-</div>
-
-
+  <header>
+    <h1>AI Assistant</h1>
+  </header>
+  <div class="position-absolute top-50 start-50 translate-middle">
+    <form method="post">
+      <div class="input-group">
+        <input type="text" class="form-control" id="in" placeholder="Enter query" aria-label="input"
+          aria-describedby="button-addon2" name="input" value="{{ request.form['input'] }}">
+        <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
+      </div>
+    </form>
+  </div>
+  
 {% endblock %}
