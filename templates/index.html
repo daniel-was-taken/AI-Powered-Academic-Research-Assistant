@@ -6,7 +6,7 @@
     <h1>AI Assistant</h1>
   </header>
   <div class="position-absolute top-50 start-50 translate-middle">
-    <form method="post">
+    <form action="/summary" method="POST" >
       <div class="input-group">
         <input type="text" class="form-control" id="in" placeholder="Enter query" aria-label="input"
           aria-describedby="button-addon2" name="input" value="{{ request.form['input'] }}">
