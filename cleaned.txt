@@ -1,0 +1,654 @@
+AIPowered Academic Research Assistant
+Submitted in partial fulfillment of the requirements
+for the degree of
+BE Computer Engineering
+By
+Daniel Ferreira Roll No54 212255
+Prem Tatkari
+Roll No56 212262
+Divyesh Mistry Roll No57 212258
+Kyran Almeida Roll No58 212252
+Guide
+Prof Pradnya Sawant
+Assistant Professor
+Department of Computer Engineering
+St Francis Institute of Technology
+Engineering College
+University of Mumbai
+20232024
+CERTIFICATE
+This is to certify that the project entitled AIPowered Academic Research As
+sistant is a bonafide work of Daniel FerreiraRoll no54 Prem TatkariRoll
+no56 Divyesh MistryRoll no57 and Kyran AlmeidaRoll no58 submit
+ted to the University of Mumbai in partial fulfillment of the requirement for the
+award of the degree of BE in Computer Engineering
+
+Prof Pradnya Sawant
+Guide
+
+
+Dr Kavita Sonawane
+Dr Sincy George
+Head Of Department
+Principal
+ii
+Project Approval Report for BE
+This project report entitled AIPowered Academic Research Assistant by Daniel
+FerreiraRoll no54 Prem TatkariRoll no56 Divyesh MistryRoll no57
+and Kyran AlmeidaRoll no58 is approved for the degree of BE in Computer
+Engineering
+Examiners
+1 
+2 
+Date 31102023
+Place Mumbai
+iii
+Declaration
+We declare that this written submission represents our ideas in our own words and
+where others ideas or words have been included we have adequately cited and
+referenced the original sources We also declare that we have adhered to all princi
+ples of academic honesty and integrity and have not misrepresented or fabricated
+or falsified any ideadatafactsource in this submission We understand that any
+violation of the above will be cause for disciplinary action by the Institute and can
+also evoke penal action from the sources which have thus not been properly cited
+or from whom proper permission has not been taken when needed
+Daniel Ferreira 54
+Prem Tatkari 56
+Divyesh Mistry 57
+Kyran Almeida 58
+Date 31102023
+iv
+Abstract
+In the everexpanding landscape of academic research the demand for efficient
+and intelligent tools to assist researchers in navigating comprehending and syn
+thesising vast amounts of information has never been more pressing This project
+introduces an innovative AIpowered Academic Research Assistanta dynamic
+and sophisticated system designed to revolutionise the research process Har
+nessing the capabilities of cuttingedge natural language processing and machine
+learning techniques the AIpowered assistant seamlessly integrates into the re
+searchers workflow As a result the AIpowered Academic Research Assistant
+stands poised to reshape the landscape of academic research It offers a tangible
+solution to the information overload conundrum amplifying research efficiency
+knowledge dissemination and crossdisciplinary collaboration This project not
+only exemplifies technological innovation but also underscores the potential for
+AI to augment human intelligence in tackling complex knowledgeintensive chal
+lenges
+Keywords Machine Learning AI Academic Research Assistant Natural Lan
+guage Processing
+v
+Contents
+1
+Introduction
+1
+11
+Description                             
+1
+12
+Problem Formulation                        
+1
+13
+Motivation                              
+2
+14
+Proposed Solution                          
+2
+15
+Scope of the project                         
+3
+2
+Review of Literature
+4
+3
+System Analysis
+6
+31
+Functional Requirements                      
+6
+32
+NonFunctional Requirements
+                  
+6
+33
+Specific Requirements
+                      
+7
+34
+UseCase Diagrams and Description                
+8
+4
+Analysis Modeling
+9
+41
+Activity Diagram                          
+9
+42
+Functional Modeling                        
+10
+5
+Design
+13
+51
+Architecture Design                         
+13
+511
+Preprocessing the question                 
+14
+512
+Web scraping                        
+14
+513
+Preprocessing the web data                 
+14
+514
+Abstractive Summarisation                 
+14
+vi
+CONTENTS
+CONTENTS
+515
+Sentence Ranking                      
+15
+52
+Performance Evaluation Parameters
+               
+15
+521
+RecallOriented Understudy for Gisting Evaluation ROUGE
+Score                            
+15
+522
+GLUE Benchmark                     
+16
+523
+SQuAD Benchmark
+                   
+16
+6
+Implementation
+17
+61
+Algorithm                              
+17
+62
+Experimentation                           
+19
+7
+Conclusions
+21
+71
+Conclusion
+                            
+21
+72
+Future Scope
+                           
+21
+References
+22
+Acknowledgements
+23
+vii
+List of Figures
+31
+UseCase Diagram for AIPowered Academic Research Assistant
+8
+41
+Activity diagram for AIPowered Academic Research Assistant  
+9
+42
+DFD Level 0 for AIPowered Academic Research Assistant    
+10
+43
+DFD Level 1 for AIPowered Academic Research Assistant    
+11
+44
+DFD Level 2 for AIPowered Academic Research Assistant    
+11
+51
+Block Diagram for AIPowered Academic Research Assistant
+ 
+13
+61
+Transformer architecture4
+                   
+17
+62
+Illustration of the two attention mechanisms experimented with in
+LongT51
+                            
+18
+63
+Preprocessing                            
+19
+64
+Webscraping                             
+20
+viii
+Chapter 1
+Introduction
+An Academic Research Assistant is a crucial role in the field of academic
+research providing support to faculty members and research teams They assist
+in conducting literature reviews gathering and analysing data and preparing
+reports or manuscripts for publication Research assistants often work closely
+with professors or researchers helping them design experiments develop re
+search methodologies and formulate research questions Our project aims to
+provide researchers with an AIpowered academic research assistant It will
+ease the process of information gathering for researchers
+11
+Description
+AIPowered Academic Research Assistant is a onestep solution to all your re
+search needs We plan to develop an application that is easytooperate and
+solves many problems for researchers Our platform lets you find research pa
+pers related to your area of interest along with their summaries and key take
+aways
+12
+Problem Formulation
+Researchers often spend significant time and effort searching for relevant re
+search papers extracting useful information and organising their findings This
+project aims to automate these tasks and provide researchers with a streamlined
+and personalised research experience The solution is an AIpowered research
+1
+Chapter 1
+Introduction
+assistant that uses web scraping machine learning and natural language pro
+cessing to improve the research process
+To address these issues there is a need for a more streamlined and automated
+job placement system that facilitates better communication reduces inefficien
+cies and provides datadriven insights for continuous improvement Such a
+system would benefit both students and employers by expanding opportunities
+and ensuring a more inclusive and efficient job placement process
+13
+Motivation
+Embarking on the journey to create an AIpowered Academic Research As
+sistant holds the promise of transforming the way knowledge is discovered and
+shared Imagine a world where researchers can delve into the depths of in
+formation with unprecedented ease where connections between seemingly un
+related studies are unveiled effortlessly and where timeconsuming tasks are
+automated freeing up intellectual energy for true innovation This initiative is
+about providing researchers educators and learners with a tool that can catalyse
+breakthroughs expedite learning and foster worldwide collaboration not just
+technology By pursuing this endeavour we are not only embracing the cutting
+edge of AI but also being a catalyst for academic development The difficulties
+well face and the solutions well devise have the potential to reshape research
+methodology leaving an enduring mark on how we advance human knowledge
+Our commitment to developing an AIpowered Academic Research Assistant is
+an investment not just in the future of education and research but also in our
+own development as a creative visionary
+14
+Proposed Solution
+The proposed solution is an AIpowered academic research assistant that
+utilises web scraping machine learning and natural language processing tech
+niques to enhance the research process The system will scrape relevant data
+2
+Chapter 1
+Introduction
+from academic websites journals ensuring comprehensive coverage of research
+sources The project will culminate in the development of a userfriendly web
+interface where users can input queries browse search results and explore pa
+pers
+15
+Scope of the project
+The scope of this project encompasses the development of a comprehensive
+AIpowered Academic Research Assistant designed to enhance every facet of
+the research process It will involve implementing natural language processing
+techniques to efficiently parse and comprehend diverse academic literature The
+assistant will be capable of extracting key insights and generating concise sum
+maries The project will require building an intuitive user interface ensuring
+seamless integration into researchers workflows Ethical considerations data
+privacy and responsible AI usage will be integral components of the develop
+ment Overall the scope envisions a transformative tool that streamlines in
+formation synthesis encourages knowledge exchange and catalyses academic
+innovation
+3
+Chapter 2
+Review of Literature
+LongT5 1 a new texttotext transformer for long sequences LongT5 is
+based on the T5 transformer architecture but it makes several modifications
+to improve its performance on long sequences These modifications include
+Using a new attention mechanism that is more efficient for long sequences
+Pretraining LongT5 on a dataset of long sequences Scaling up the size of
+LongT5 On the evaluation of LongT5 on several summarization and question
+answering tasks They show that LongT5 outperforms the original T5 model on
+these tasks and it achieves stateoftheart results on some of them However
+LongT5 is not yet as widely used as other language models so there is less
+research available on its strengths and weaknesses
+PEGASUS 2 a new pretraining method for abstractive summarization
+PEGASUS is based on the Transformer language model but it makes sev
+eral modifications to improve its performance on abstractive summarization
+These modifications include Using a new objective function that encourages
+the model to generate summaries that are both informative and fluent Pre
+training PEGASUS on a dataset of humanwritten summaries and their corre
+sponding source documents On the evaluation of PEGASUS on several sum
+marization tasks They show that PEGASUS outperforms the stateoftheart
+on these tasks But the authors of the paper do not compare their model to other
+models that have been pretrained on similar datasets
+On Extractive and Abstractive Neural Document Summarization with Trans
+former Language Models 3 presents a study on extractive and abstractive neu
+4
+Chapter 2
+Review of Literature
+ral document summarization with transformer language models They compare
+the performance of several transformerbased models on a variety of summa
+rization tasks They show that transformerbased models can achieve stateof
+theart results on both extractive and abstractive summarization tasks They
+trained the transformer models from scratch But such training is very expen
+sive LongT5 PEGASUS and the transformerbased models have all achieved
+stateoftheart results on a variety of summarization tasks These models are
+likely to play an important role in the development of future text summariza
+tion systems The field of text summarization is rapidly evolving and there are
+a number of exciting research directions that are being explored As these re
+search directions continue to be developed it is likely that text summarization
+systems will become even more powerful and capable
+5
+Chapter 3
+System Analysis
+31
+Functional Requirements
+1 Search and Discovery The system will allow users to search for aca
+demic papers research articles and related content The search results will
+be relevant and presented in a userfriendly format
+2 Web Scraping Web scraping is the process of extracting content and data
+from a website Using automated tools such as Selenium and requests html
+libraries this task can be performed seamlessly
+3 Natural Language ProcessingThe system will employ advanced natural
+language processing techniques to understand user queries interpret con
+tent and generate summaries
+4 User Interface An intuitive and userfriendly interface allows users to
+interact with the assistant easily The interface is responsive accessible
+and adaptable to different devices
+5 Abstractive Summarization Task of generating a concise summary that
+captures the salient ideas of the source text
+32
+NonFunctional Requirements
+1 Performance The system should be capable of handling a large volume
+of data without experiencing significant delays Response times for various
+6
+Chapter 3
+System Analysis
+tasks eg search summarization should be within acceptable limits
+2 Usability and User Experience The user interface would be intuitive
+userfriendly and accessible
+It will be designed to accommodate re
+searchers with varying levels of technical expertise and adhere to estab
+lished design principles for effective user experience
+3 Compatibility The system should be compatible with a variety of devices
+and platforms including desktops laptops tablets and mobile phones and
+support multiple web browsers
+4 Ethical Considerations The system should adhere to ethical guidelines
+ensuring transparency in how recommendations are generated and han
+dling user data for privacy regulations
+33
+Specific Requirements
+Hardware Specifications
+ 4 GB RAM minimum 8 GB RAM recommended
+ 16 GHz or faster processor
+ 200 MB of available disk space minimum 500 MB Recommendedfor
+Visual Studio Code
+Software Specifications
+ Operating System Windows
+ Backend Flask
+ Machine learning model LongT5
+ Frontend HTML CSS Javascript
+ Editor Visual Studio Code
+7
+Chapter 3
+System Analysis
+34
+UseCase Diagrams and Description
+Figure 31 UseCase Diagram for AIPowered Academic Research Assistant
+Use Case Description
+The above use case diagram Figure 31 shows the highlevel functions and
+scope of the system A use case describes how a system behaves in response to
+a request from the perspective of the user Users of our system can carry out the
+following tasks The user enters their query using natural language They can
+then see the summary that was created and the key takeaways
+8
+Chapter 4
+Analysis Modeling
+41
+Activity Diagram
+Figure 41 Activity diagram for AIPowered Academic Research Assistant
+9
+Chapter 4
+Analysis Modeling
+The Activity Diagram 41 shows the process of generating a summary and key
+takeaways from an AIpowered model The system uses techniques such as
+Data Preprocessing Webscraping and a transformer model to generate the
+output
+The activity diagram shows the following steps
+1 The user inputs the topic they want to research
+2 The system preprocesses the query and finds out relevant topics
+3 The model performs webscraping for the given topic
+4 The scraped data is further preprocessed and fed to the summarization and
+sentence ranking model
+5 The model generates the Summarization and Key Takeaways for the queried
+topic
+42
+Functional Modeling
+Figure 42 DFD Level 0 for AIPowered Academic Research Assistant
+10
+Chapter 4
+Analysis Modeling
+Figure 43 DFD Level 1 for AIPowered Academic Research Assistant
+Figure 44 DFD Level 2 for AIPowered Academic Research Assistant
+11
+Chapter 4
+Analysis Modeling
+The above diagrams show the data flow of the system in three levels which are
+Level 0 Level 1 and Level 2
+Level 0 shows the overall interaction between the user and the system The User
+inputs the Query to the model and gets a Summary and Key Takeaways as the
+output The model scraps the data from the academic websites for generating
+the output
+Level 1 is further divided into 2 sublevels focusing in more detail about the
+individual actors separately giving more information about the data flow in the
+system
+Level 2 focuses on each module starting from the User input which is given to
+the model for webscrapping This Scraped data is used to generate Summaries
+and Key takeaways which are displayed to the user as the final output
+12
+Chapter 5
+Design
+51
+Architecture Design
+Figure 51 Block Diagram for AIPowered Academic Research Assistant
+13
+Chapter 5
+Design
+511
+Preprocessing the question
+Tokenization Split the question into individual words or tokens This can be
+done using libraries like NLTK
+Stopword Removal Remove common stop words eg the is in from
+the list of tokens These words often dont contribute significantly to the mean
+ing and are unlikely to be keywords
+512
+Web scraping
+The sample data was preprocessed by For web scraping the research papers
+the requests html library is used in Python It has an HTMLSession object
+that opens a browser window Chromium for scraping After creating a ses
+sion a get request can be sent to the desired link using the get function in the
+HTMLSession class It calls the request function to create a request for a given
+URL which then returns a response The render function is used to load the
+Javascript on the website before scraping After the page is loaded we use the
+find function to extract the desired data
+513
+Preprocessing the web data
+The data that we extracted from the web may not be in a format that is suitable
+for further processes In this step we will need to clean the data by removing
+any unwanted characters correcting any errors and converting the data into a
+consistent formatEx UTF8
+514
+Abstractive Summarisation
+A Transformer is used for abstractive summarisation specifically the LongT5
+model The LongT5 model works by first encoding the input text into a se
+quence of tokens These tokens are then passed through the Transformer en
+coder which learns to identify the relationships between the tokens The en
+coded tokens are then passed through the Transformer decoder which generates
+the output summary
+14
+Chapter 5
+Design
+515
+Sentence Ranking
+Find out key takeaways from all the papers These key takeaways give us an
+idea about the essential sentences from the papers TextRank turns out to be
+well suited for this type of application since it allows for a ranking over text
+units that is recursively computed based on information drawn from the entire
+text
+5Formally given two sentences Si and S j with a sentence being repre
+sented by the set of Ni words that appear in the sentence Si  wi
+1 wi
+2  wi
+Ni
+SimilaritySiS j  wkwk  Siwk  Sj
+logSilogS j
+51
+The score is calculated for all sentences using
+Scores  d sumScoretSimilarityst
+52
+Where
+Scores is the score of sentence s
+d is a damping factor typically set to 085
+Scoret is the score of sentence t
+Similarityst is the similarity between sentences s and t
+52
+Performance Evaluation Parameters
+521
+RecallOriented Understudy for Gisting Evaluation ROUGE Score
+The ROUGE score is used to evaluate the quality of machine translation
+outputs It is calculated by comparing the machine translation output to a set of
+humangenerated reference summaries A higher ROUGE score indicates that
+the machine translation output contains more information from the reference
+summaries
+15
+Chapter 5
+Design
+522
+GLUE Benchmark
+GLUE benchmark is a natural language processing NLP benchmark that
+consists of a collection of nine tasks including text summarization question
+answering and natural language inference A higher score on the GLUE bench
+mark indicates that the model is better at performing a variety of NLP tasks
+523
+SQuAD Benchmark
+SQuAD benchmark is a questionanswering benchmark that consists of a
+collection of over 100000 questions that are answered by paragraphs from
+Wikipedia A higher score on the SQuAD benchmark indicates that the model
+is better at answering text questions
+16
+Chapter 6
+Implementation
+61
+Algorithm
+Transformer Architecture
+Figure 61 Transformer architecture4
+Encoders in Transformers also known as the transformer encoder are a key
+component of the transformer encoderdecoder architecture They are respon
+17
+Chapter 6
+Implementation
+sible for analyzing and representing the input sequence in a way the model can
+understand The encoder processes the input sequence and produces a contin
+uous representation or embedding of the input These embeddings are then
+passed to the decoder to generate the output sequence Each layer of the en
+coder contains a selfattention mechanism that allows the model to weigh the
+importance of different input sequence parts by calculating the embeddings dot
+product This mechanism is also known as multihead attention
+The decoder also typically consists of multiple layers including a selfattention
+mechanism and a feedforward network The decoder uses the embeddings pro
+duced by the encoder and its internal states to generate the output sequence
+Attention Mechanism of LongT5
+Figure 62 Illustration of the two attention mechanisms experimented with in LongT51
+For Local Attention the sparse slidingwindow local attention operation al
+lows a given token to attend only r tokens to the left and right of it with r127
+by default Local Attention does not introduce any new parameters to the
+model The complexity of the mechanism is linear in input sequence length l
+Ol r Transient Global Attention is an extension of Local Attention It fur
+thermore allows each input token to interact with all other tokens in the layer
+18
+Chapter 6
+Implementation
+This is achieved via splitting an input sequence into blocks of a fixed length
+k with a default k16 Then a global token for such a block is obtained via
+summing and normalizing the embeddings of every token in the block Thanks
+to this the attention allows each token to attend to both nearby tokens like in
+Local attention and also every global token like in the case of standard global
+attention transient represents the fact the global tokens are constructed dynam
+ically within each attention operation As a consequence TGlobal attention
+introduces a few new parameters  global relative position biases and a layer
+normalization for global tokens embedding The complexity of this mechanism
+is Olr lk
+62
+Experimentation
+The experimental results of preprocessing of question and web scraping of a
+single research paper is shown in Fig 63 and Fig 64 respectively
+Figure 63 Preprocessing
+19
+Chapter 6
+Implementation
+Figure 64 Webscraping
+20
+Chapter 7
+Conclusions
+71
+Conclusion
+In conclusion The AIpowered academic research assistant with web scraping
+capabilities has the potential to be an indispensable tool for researchers signifi
+cantly reducing the time and effort spent on information retrieval data analysis
+and literature review By leveraging AIML techniques and web scraping this
+research assistant aims to empower researchers and contribute to advancements
+in various fields of study
+72
+Future Scope
+The AIpowered academic research assistant with web scraping capabilities
+holds great potential for further development and integration into the research
+community As technology advances we can expect this tool to become increas
+ingly sophisticated and userfriendly It will likely evolve to support a broader
+range of research tasks such as automated data synthesis and even assisting in
+hypothesis formulation Additionally improvements in natural language pro
+cessing and machine learning techniques will enhance its ability to understand
+and interpret complex research questions Furthermore as ethical and privacy
+concerns related to web scraping are addressed and regulated this assistant can
+become a trusted and widely adopted resource for researchers across diverse
+domains fostering more efficient and impactful scientific discoveries
+21
+References
+1 Guo Mandy  Ainslie Joshua  Uthus David  Ontanon Santiago 
+Ni Jianmo  Sung YunHsuan  Yang Yinfei LongT5 Efficient Text
+ToText Transformer for Long Sequences arXiv211207916 csCL
+2021
+2 Zhang Jingqing  Zhao Yao  Saleh Mohammad  Liu Peter PEGA
+SUS Pretraining with Extracted Gapsentences for Abstractive Summa
+rization arXiv191208777 csCL 2020
+3 Subramanian Sandeep  Li Raymond  Pilault Jonathan  Pal Christo
+pher On Extractive and Abstractive Neural Document Summarization
+with Transformer Language Models arXiv190903186 csCL 2020
+4 Ashish Vaswani Noam Shazeer Niki Parmar Jakob Uszkoreit Llion
+Jones Aidan N Gomez ukasz Kaiser and Illia Polosukhin 2017 At
+tention is all you need In Advances in Neural Information Processing
+Systems Volume 30 arXiv170603762v7 csCL 2023
+5 Mihalcea Rada  Tarau Paul TextRank Bringing Order into Texts
+Association for Computational Linguistics 2004
+22
+Acknowledgements
+We are thankful to a number of individuals who have contributed to our fi
+nal year project and without their help it would not have been possible First
+of all we would like to express our gratitude to Prof Pradnya Sawant our
+project guide for their prompt suggestions guidance and encouragement over
+the course of our entire project
+We sincerely appreciate all our project coordinators for their tremendous as
+sistance to our project We also appreciate the support of the faculty in our
+department
+We express our sincere gratitude to our respected Director Bro Shantilal Ku
+jur our Principal Dr Sincy George and our Head of Department CMPN Dr
+Kavita Sonawane for providing the facilities encouragement as well as a con
+ducive environment for learning
+Lastly we would like to thank our parents and friends who played a crucial role
+in keeping us motivated throughout with their constant nurture and support
+Sincerely
+Daniel Ferreira
+Prem Tatkari
+Divyesh Mistry
+Kyran Almeida
+23
