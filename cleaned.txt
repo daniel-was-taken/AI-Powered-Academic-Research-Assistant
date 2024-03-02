@@ -1,654 +1,1379 @@
-AIPowered Academic Research Assistant
-Submitted in partial fulfillment of the requirements
-for the degree of
-BE Computer Engineering
-By
-Daniel Ferreira Roll No54 212255
-Prem Tatkari
-Roll No56 212262
-Divyesh Mistry Roll No57 212258
-Kyran Almeida Roll No58 212252
-Guide
-Prof Pradnya Sawant
-Assistant Professor
-Department of Computer Engineering
-St Francis Institute of Technology
-Engineering College
-University of Mumbai
-20232024
-CERTIFICATE
-This is to certify that the project entitled AIPowered Academic Research As
-sistant is a bonafide work of Daniel FerreiraRoll no54 Prem TatkariRoll
-no56 Divyesh MistryRoll no57 and Kyran AlmeidaRoll no58 submit
-ted to the University of Mumbai in partial fulfillment of the requirement for the
-award of the degree of BE in Computer Engineering
-
-Prof Pradnya Sawant
-Guide
-
-
-Dr Kavita Sonawane
-Dr Sincy George
-Head Of Department
-Principal
-ii
-Project Approval Report for BE
-This project report entitled AIPowered Academic Research Assistant by Daniel
-FerreiraRoll no54 Prem TatkariRoll no56 Divyesh MistryRoll no57
-and Kyran AlmeidaRoll no58 is approved for the degree of BE in Computer
-Engineering
-Examiners
-1 
-2 
-Date 31102023
-Place Mumbai
-iii
-Declaration
-We declare that this written submission represents our ideas in our own words and
-where others ideas or words have been included we have adequately cited and
-referenced the original sources We also declare that we have adhered to all princi
-ples of academic honesty and integrity and have not misrepresented or fabricated
-or falsified any ideadatafactsource in this submission We understand that any
-violation of the above will be cause for disciplinary action by the Institute and can
-also evoke penal action from the sources which have thus not been properly cited
-or from whom proper permission has not been taken when needed
-Daniel Ferreira 54
-Prem Tatkari 56
-Divyesh Mistry 57
-Kyran Almeida 58
-Date 31102023
-iv
-Abstract
-In the everexpanding landscape of academic research the demand for efficient
-and intelligent tools to assist researchers in navigating comprehending and syn
-thesising vast amounts of information has never been more pressing This project
-introduces an innovative AIpowered Academic Research Assistanta dynamic
-and sophisticated system designed to revolutionise the research process Har
-nessing the capabilities of cuttingedge natural language processing and machine
-learning techniques the AIpowered assistant seamlessly integrates into the re
-searchers workflow As a result the AIpowered Academic Research Assistant
-stands poised to reshape the landscape of academic research It offers a tangible
-solution to the information overload conundrum amplifying research efficiency
-knowledge dissemination and crossdisciplinary collaboration This project not
-only exemplifies technological innovation but also underscores the potential for
-AI to augment human intelligence in tackling complex knowledgeintensive chal
-lenges
-Keywords Machine Learning AI Academic Research Assistant Natural Lan
-guage Processing
+Attention Alignment and Flexible Positional Embeddings
+Improve Transformer Length Extrapolation
+TaChung Chi
+Carnegie Mellon University
+tachungcandrewcmuedu
+TingHan Fan
+Independent Researcher
+tinghanfalumniprincetonedu
+Alexander I Rudnicky
+Carnegie Mellon University
+aircscmuedu
+3
+2
+0
+2
 v
-Contents
+o
+N
+1
+
+L
+C
+
+s
+c
+
+1
+v
+4
+8
+6
+0
+0
+
+1
+1
+3
+2
+
+v
+i
+X
+r
+a
+Abstract
+An ideal lengthextrapolatable Transformer lan
+guage model can handle sequences longer than
+the training length without any long sequence
+finetuning Such longcontext utilization ca
+pability highly relies on a flexible positional
+embedding design Upon investigating the flex
+ibility of existing large pretrained Transformer
+language models we find that the T5 family
+deserves a closer look as its positional embed
+dings capture rich and flexible attention pat
+terns However T5 suffers from the dispersed
+attention issue the longer the input sequence
+the flatter the attention distribution To alleviate
+the issue we propose two attention alignment
+strategies via temperature scaling Our findings
+improve the longcontext utilization capabil
+ity of T5 on language modeling retrieval and
+multidocument question answering without
+any finetuning suggesting that a flexible po
+sitional embedding design and attention align
+ment go a long way toward Transformer length
+extrapolation1
 1
 Introduction
-1
-11
-Description                             
-1
-12
-Problem Formulation                        
-1
-13
-Motivation                              
-2
-14
-Proposed Solution                          
-2
-15
-Scope of the project                         
-3
-2
-Review of Literature
-4
-3
-System Analysis
-6
-31
-Functional Requirements                      
-6
+Pretraining large Transformer language models
+on long sequences is inherently expensive due to
+selfattentions quadratic complexity wrt the in
+put sequence length Vaswani et al 2017 Even
+with the help of memoryefficient attention Rabe
+and Staats 2021 Dao et al 2022 the maximum
+supported input length of current opensource pre
+trained Transformer language models is still capped
+at 4096 tokens Touvron et al 2023 limiting their
+efficacy in handling longcontext tasks
+One notable research topic aiming to lift
+the input length restriction is Length Extrapo
+lation Press et al 2022
+Ideally a length
+is
+extrapolatable Transformer language model
+trained on short sequences and can perform equally
+1httpsgithubcomchijames
+Retrieval Tasks
+Line
+Topic
+Passkey
+512
+028
+347
+15k
+012
+663
+512
+027
+347
+15k
+011
+704
+512
+032
+309
+15k
+024
+597
+Criteria
+Pmax
+H
+Table 1 The Dispersed Attention Issue of FlanT5
+XL Encoder Pmax is the averaged maximum proba
+bility and H is the averaged entropy After increasing
+the sequence length from 512 to 15k we observe larger
+entropy and smaller maximum probability implying a
+flatter selfattention distribution
+well on longer ones without any further finetuning
+This is made possible with carefully designed po
+sitional embeddings Press et al 2022 Chi et al
+2022 2023 Unfortunately existing approaches
+are tailored for natural language modeling a task
+known to have strong recency bias and they of
+ten do not perform well on other seemingly simple
+tasks such as passkey topic and line retrieval Mo
+htashami and Jaggi 2023 Li et al 2023
+To circumvent the recency bias we sift through
+the positional embeddings of existing opensource
+large pretrained Transformer language models in
+Table 2 to find a flexible design and the T5 fam
+ily Raffel et al 2020 comes to our attention As
+visualized in Figure 1 the flexibility of T5s posi
+tional embeddings allows it to encourage recency
+bias on one head and discourage that on another
+head However there is no free lunch T5 suffers
+from the dispersed attention issue as shown in Ta
+ble 1 In a nutshell the attention distributions of
+long input sequences tend to be flatter than those
+of short input sequences As a remedy we propose
+two finetuningfree attention alignment strategies
+via Softmax temperature scaling Yao et al 2021
+Su 2021 to mitigate the dispersed attention is
+sue maximum probability Pmax or entropy H
+alignment
+AttentionAlignmentTransformerLengthExtrapolation
+We validate the effectiveness of our alignment
+Models T5 2020 OPT 2022 ChatGLM 2022 LLaMA 2023 Falcon 2023 Pythia 2023 XGen 2023 BLOOM 2022 MPT 2023
+PE
+Learned
+Learned
+Relative Absolute
+Rotary
+Relative
+Rotary
+Relative
+Rotary
+Relative
+Rotary
+Relative
+Rotary
+Relative
+ALiBi
+Relative
+ALiBi
+Relative
+Table 2 Opensource Transformer language models and their positional embeddings T5 is the only model
+equipped with learnable relative positional embeddings which enable its longcontext utilization capability
+strategies on five tasks including language model
+ing retrieval and multidocument question answer
+ing We also provide a theoretical analysis of how
+our alignment strategies work by under the hood
+investigating the relation between the Softmax tem
+perature and data distribution
+2 Related Work
+Transformer
+Embeddings
+Positional
+Transformerbased models rely on positional
+embeddings to encode positional
+information
+We summarize opensource large pretrained
+Transformer language models and their positional
+embeddings in Table 2 The relative variants
+are widely adopted due to their better empirical
+performance Su et al 2021 and possible
+lengthextrapolatable capability Press et al 2022
+In this work we put special focus on the T5
+positional embeddings due to their flexibility as
+shown in Figure 1
+Transformer Length Extrapolation Existing
+research on Transformer length extrapolation is
+mostly done on the task of natural language mod
+eling Press et al 2022 Chi et al 2022 2023
+Unfortunately the reported positive results do not
+carry over to the task of longcontext retrieval Mo
+htashami and Jaggi 2023 Li et al 2023 This
+contrastive observation can be explained by mod
+els short empirical receptive field Chi et al 2023
+In short the strong decaying prior of positional em
+beddings prevents models from accessing faraway
+tokens that are necessary for retrieval tasks In this
+work we improve the flexible positional embed
+dings of T5 to get around this limitation
+Transformer Position Interpolation Instead of
+performing direct length extrapolation another line
+of research conducts model finetuning on long
+input sequences Chen et al 2023 where the
+main focus is to identify the most efficient fine
+tuning scheme that improves longcontext utiliza
+tion Positive results have been reported on retrieval
+tasks Li et al 2023 However we argue that
+finetuning incurs additional costs since it needs
+1 GPU resources to perform long sequence fine
+tuning with large models and 2 a predefined target
+sequence length which still imposes a sequence
+length upper limit Our proposed methods can cir
+cumvent these two limitations
+with
+Tasks
+Retrieval
+Transformers
+Transformerbased approaches often consist
+of a retriever and a reader to overcome the context
+length restriction Guu et al 2020 Lewis et al
+2020 Izacard and Grave 2021 Borgeaud et al
+2022 The retriever retrieves relevant text snippets
+from a huge database and the reader digests the
+retrieved information to generate the correct
+output Our proposed attention alignment strategy
+can be used to significantly increase the input
+sequence length of the reader thereby allowing
+more retrieved information to participate in
+the decision process For smallscale retrieval
+problems our methods even obviates the need for
+context segmentation and an external keyvalue
+store used in prior work Mohtashami and Jaggi
+2023 serving as a more elegant approach
+Softmax Temperature Scaling To increase the
+length extrapolation capability of Transformers
+previous work Yao et al 2021 Su 2021 scales
+the temperature of Softmax logarithmically wrt
+the sequence length to ensure invariant entropy
+Our entropy alignment strategy is also inspired by
+this line of research except that we adopt a differ
+ent procedure outlined later in Algorithm 1 Inter
+estingly our experiment results in 52 show that
+aligning by entropy performs worse than the other
+proposed maximum probability alignment strategy
+3 Longcontext Retrieval Tasks with T5
+31 Why Retrieval
+As suggested by recent work Mohtashami and
+Jaggi 2023 Li et al 2023 the task of long
+context retrieval serves as a controllable bench
+mark to measure how well a Transformer language
+model utilizes longcontext inputs One prominent
+characteristic of retrieval tasks is that only a subset
+of the input is of interest requiring a model to accu
+a 1st Attention Head
+b 27nd Attention Head
+Figure 1 Visualization of T5 Positional Embeddings To plot figures of bmn we set m  7500 and vary the
+value of n from 0 to 15k Each attention head of a FlanT5XL encoder learns a set of positional embeddings that
+capture different attention bias For example the positional embeddings in the left figure encourage the model to
+focus on nearby tokens In contrast the ones in the right figure let the model focus on only remote tokens
+rately pick up the necessary information The other
+characteristic is that the key information can sit
+anywhere in an input requiring a model to attend
+flexibly Finally the controllable aspect allows us
+to gradually increase the input sequence length to
+test models length extrapolation capability
+32 Why T5
+To solve retrieval tasks using Transformer language
+models it is necessary to choose a positional em
+bedding design that permits accurate and flexible
+lengthextrapolatable attention After checking
+through the existing positional embeddings in Ta
+ble 2 we find the T5 family Raffel et al 2020 fits
+our needs As for other candidates learnable abso
+lute positional embeddings Vaswani et al 2017
+Zhang et al 2022 must be evaluated within the
+training length ALiBi Press et al 2022 and Ro
+tary Su et al 2021 have a recency bias and they
+cannot extrapolate easily without finetuning
+For each attention head T5 encoder maintains a
+bucket B of 32 learnable parameters and assigns
+the relative positional bias rpe bias bmn as2
+bmn 
+
+Bm  n if 0  m  n  8
+
+Bn  m  16 if  8  m  n  0
+Bmin15 8   logmn8
+
+Bmin31 24   lognm8
+log1288
+log1288
+ 8 if 8  m  n
+ 8 if m  n  8
+where 0  m  L and 0  n  L are two
+position indices bmn will be added to the m n
+2httpsgithubcomhuggingfacetransformers
+blobv4332srctransformersmodelst5
+modelingt5pyL390
+th entry of the L  L selfattention matrix The
+summation becomes the input to the temperature
+scaled Softmax We plot the learned rpe bias of a
+T5 encoder in Figure 1 We can tell that its attention
+heads encode rich attention patterns For example
+head 1 learns to focus on the nearby tokens whereas
+head 27 learns to ignore the nearby tokens and
+allow access to faraway tokens
+33 The Dispersed Attention Issue of T5
+Encoder
+Unfortunately directly applying T5 models on re
+trieval tasks does not yield perfect results Upon
+inspecting the intermediate model states we find
+that a longer input sequence consists of more to
+kens competing for the same amount ie Softmax
+sums to 1 of attention resulting in the dispersed at
+tention issue In Table 1 we see that the longer the
+input sequence the flatter the selfattention distri
+bution The situation is not hopeless if the desired
+information still attains a higher attention weight
+than the remaining tokens Our proposed solution
+in 4 will let the key information stand out
+4 Proposed Methods
+A natural solution to the dispersed attention issue
+described in 3 is to sharpen the selfattention dis
+tribution which can be achieved by reducing the
+temperature  during extrapolation We set the ex
+trapolation temperature ex such that the sharpness
+during training with tr  1 and that during extrap
+olation with ex  1 are roughly the same As a
+measurement of sharpness we explore the maxi
+Algorithm 1 Attention Alignment Strategies
+Require A short sequence of length Ltr and a
+long sequence of length Lex Encoder E Align
+ment mode M 
+Ensure The Softmax temperature 
+function FINDS  M 
+to 05 We outline the procedure of the alignment
+strategies in Algorithm 1 Note that our proposed
+methods do not require any model finetuning or
+gradient updates Since the T5 model family was
+pretrained using sequences of length 512 we set
+Ltr  512 for all the experiments in this paper
+Set temperature of all Softmax to 
+s   
+for operation in E do
+Perform the operation
+if operation is Softmax l then
+if M is Maximum Probability then
+Append maxSoftmax l to s
+else if M is Entropy then
+Append HSoftmax l to s
+end if
+end if
+end for
+return avgs
+end function
+Str1  FINDS10 M 
+for ex  10 095 09     05 do
+Sexex  FINDSex M 
+end for
+return ex st Sexex  Str1
+mum probability or entropy of a distribution In
+other words our proposed solution is to align the
+maximum probability or entropy of training and
+extrapolation distributions by adjusting ex
+Concretely let li  RL be the ith preSoftmax
+logit vector of a T5 encoder where L  Ltr Lex
+is the sequence length The postSoftmax distri
+bution of li is Pi   Softmax li The
+maximum probability and entropy of Pi  are
+Pi
+max  and Hi  respectively
+Let us take the maximum probability alignment
+strategy as an example We first run the for
+ward pass and compute the averaged maximum
+probability under temperature  over all logit vec
+tors Pmax   1N  cid80
+max  where N 
+R  H  L is the number of logit vectors in a
+T5 encoder with R layers H heads and length
+L sequences Since the temperature is 1 during
+training and ex during extrapolation we denote
+the averaged maximum probability during train
+ing as Ptr
+max1 and that during extrapolation as
+Pex
+maxex Finally to align the maximum probabil
+ity we adjust ex such that Pex
+max1
+In practice we do a grid search on ex from 10
+maxex  Ptr
+i Pi
+5 Experiments
+51 Language Modeling
+Following previous work on Transformer length
+extrapolation we perform an intrinsic evaluation
+on language modeling Press et al 2022 Chi et al
+2022 2023 Ideally our proposed methods should
+alleviate the perplexity explosion problem that hap
+pens during extrapolation As we can see in Ta
+ble 3 both alignment strategies dramatically im
+prove lower the perplexity We want to empha
+size that perplexity is not our primary focus and we
+make no attempt to surpass previous work on this
+metric since lower perplexity often cannot accu
+rately reflect the longcontext utilization capability
+of Transformers on practical tasks Li et al 2023
+Models
+Sequence Length
+1024 2048 4096 8192 15000
+1k
+527
+560
+1k
+500
+634
+1k
+443
+438
+T5LargeLM 359 401 1k 1k
+w Pmax
+347 455 452 455
+w H
+402 439 456 546
+T5XLLM 283 1k 1k 1k
+w Pmax
+302 360 316 417
+w H
+304 368 384 533
+T5XXLLM 109 1k 1k 1k
+w Pmax
+322 297 295 366
+w H
+268 281 342 378
+Table 3 Language Modeling Performance Numbers
+are perplexity The lower the better We use the LM
+Adapted T5 models for this experiment3
+52 Longcontext Retrieval
+Inspired by recently proposed retrieval tasks we
+evaluate the proposed alignment strategies on three
+retrieval tasks Topic retrieval requires a model to
+retrieve the first topic in a long and multitopic con
+versation Li et al 2023 Line retrieval has a long
+series of keyvalue pairs and a model needs to re
+trieve the value corresponding to the given key Li
+et al 2023 Passkey retrieval hides a passkey in a
+3httpsgithubcomgoogleresearch
+texttotexttransfertransformerblobmain
+releasedcheckpointsmdlmadaptedt511lm100k
+Retrieval Tasks
+5
+10
+90
 32
-NonFunctional Requirements
-                  
-6
-33
-Specific Requirements
-                      
-7
-34
-UseCase Diagrams and Description                
-8
-4
-Analysis Modeling
+Models
+20
+97
+94
+0
+Line  of lines
+Topic  of topics
+15
+97 100 92
+FlanT5Large 99 100 97
+w Pmax
+98
+98
+99
+96
+86
+w H
+94
+90
+59
+97
+16
+77
+90
+100 100 100 100 100 96
+FlanT5XL
+w Pmax
+89
+90
+100 100 100 100 100 97
+w H
+96
+88
+87
+95
+96
+99
+99 100 100 98
+FlanT5XXL 100 100 100 99
+w Pmax
+96
+99
+97
+99
+100 100 100 99
+w H
+92
+92
+99
+94
+98
+100 100 97
+93
+89 100 91
+100 100 100 99
+LongChat
+Passkey  of sentences
+25 200 300 400 500 600 680 20k 30k 40k 50k 55k
 9
-41
-Activity Diagram                          
-9
-42
-Functional Modeling                        
+83
+93
+62
+92
+85
+98
+98 100 84
+88
+93
+22
+3
+29
+26 100 100 100 100 100
+45
+62 100 99 100 100 100
+70
+71 100 100 100 100 100
+70
+82 100 100 100 100 100
+84
+95 100 98 100 100 100
+94
+58 100 100 100 100 100
+58
+59 100 100 99 100 99
+78
+96
+98
+83
+57
+80
+79
+95
+97
+76
+83
+31
+85
+21
+47
+90
+25
+16
+79
+15
+98
+97
+Avg
+76
+92
+48
+87
+93
+92
+97
+98
+92
+93
+Table 4 Performance of Retrieval Tasks The numbers are accuracy Full score is 100 The LongChat model
+corresponds to the LongChat13B16K model Li et al 2023 It is a LLaMA13B Touvron et al 2023 model
+finetuned on sequences of length 16k using the positional interpolation technique Chen et al 2023 FlanT5XXL
+has 11B parameters The maximum lengths of the three tasks are all around 145k to 15k tokens
+Topic  of topics
+15
+FlanT5XL
+w Pmax
+w H
+20
 10
 5
-Design
-13
-51
-Architecture Design                         
-13
-511
-Preprocessing the question                 
-14
-512
-Web scraping                        
-14
-513
-Preprocessing the web data                 
-14
-514
-Abstractive Summarisation                 
-14
-vi
-CONTENTS
-CONTENTS
-515
-Sentence Ranking                      
-15
-52
-Performance Evaluation Parameters
-               
-15
+25 200 300 400 500 600 680 20k 30k 40k 50k 55k
+08 075 07 065 065 08 075 075 07 070 07 085 08 075 075 075
+07 055 055 05 05 06 055 055 05 05 05 07 065 06 06 06
+Retrieval Tasks
+Line  of lines
+Passkey  of sentences
+Table 5 Temperatures of Retrieval Tasks We search the optimal temperature from 10 095 09     05
+long junk text snippet and a model needs to return
+that passkey Mohtashami and Jaggi 2023 Since
+the three tasks are formulated in the Question An
+swering QA format we use the FlanT5 models
+to leverage their instructionfollowing capability
+As we can see in Table 4 the retrieval perfor
+mance is greatly boosted after the FlanT5 models
+are equipped with our proposed attention alignment
+strategies In particular the maximum probability
+alignment strategy gives us better results across the
+board Note that LongChat Li et al 2023 the
+best baseline was finetuned from LLaMA Tou
+vron et al 2023 on long sequences of length 16k
+while our proposed methods do not need any fine
+tuning Other baselines such as MPT Team 2023
+and ChatGLM2 Du et al 2022 perform worse
+than LongChat Please refer to Li et al 2023 for
+more details
+We also present the optimal temperature given
+by Algorithm 1 in Table 5 As we can see the
+temperature indeed decreases when the input se
+quence length increases The temperatures of the
+other two model sizes are highly similar to the ones
+presented in Table 5 Please find them in Table 8
+in Appendix A We will conduct more temperature
+analysis later in 6
+53 Multidocument Question Answering
+We choose the multidocument question answer
+ing task as our downstream task Liu et al 2023
+The model input consists of a questions and
+multiple documents extracted from NaturalQues
+tions Kwiatkowski et al 2019 where one of the
+documents golden doc contains the ground truth
+answer As we can see in Table 6 when a model is
+equipped with the proposed maximum probability
+alignment strategy it consistently outperforms the
+original model across model sizes and number of
+input documents
+Apart from the better task performance we be
+lieve the attention dispersed attention issue dis
+cussed in 3 can help demystify the lostinthe
+middle phenomenon Liu et al 2023 of this task
+Transformer models tend to perform worse when
+the ground truth sits near the middle of the input
+context Let us recall the relative positional embed
+ding of head 27 learned in Figure 1 if the ground
+truth answer sits in the middle it will have long
+Models
+FlanT5Large
+w Pmax
+Improvement
+w H
+FlanT5XL
+w Pmax
+Improvement
+w H
+FlanT5XXL
+w Pmax
+Improvement
+w H
+10 Docs
+Avg
+524
+531
+07
 521
-RecallOriented Understudy for Gisting Evaluation ROUGE
-Score                            
-15
-522
-GLUE Benchmark                     
-16
-523
-SQuAD Benchmark
-                   
-16
-6
-Implementation
+594
+611
 17
-61
-Algorithm                              
-17
-62
-Experimentation                           
+605
+636
+637
+01
+636
 19
-7
-Conclusions
-21
-71
-Conclusion
-                            
-21
-72
-Future Scope
-                           
-21
-References
-22
-Acknowledgements
-23
-vii
-List of Figures
-31
-UseCase Diagram for AIPowered Academic Research Assistant
-8
-41
-Activity diagram for AIPowered Academic Research Assistant  
+339
+359
 9
-42
-DFD Level 0 for AIPowered Academic Research Assistant    
-10
-43
-DFD Level 1 for AIPowered Academic Research Assistant    
-11
-44
-DFD Level 2 for AIPowered Academic Research Assistant    
-11
-51
-Block Diagram for AIPowered Academic Research Assistant
+365
+395
+30 Docs golden doc at different positions
+Multidocument Question Answering
+20 Docs
+Avg
+433
+442
+09
+432
+512
+536
+24
+524
+569
+577
+08
+571
+29
+4
+14
+24
+0
+379
+420
+340
+339
+526
+370
+358
+364
+445
+508
+09
+15 30 24 20 19
+18
+342
+333
+335
+411
+476
+548
+464
+399
+446
+584
+609
+557
+491
+449
+491
+25 45 60 50 46 27 09
+429
+513
+403
+524
+531
+612
+475
+589
+591
+604
+535
+502
+21
+15 34 29 27 24 04
+557
+519
+610
+352
+400
+460
+421
+481
+510
+322
+417
+463
+435
+491
+525
+420
+489
+513
+507
+503
+534
+508
+Avg
+387
+400
+13
+367
+465
+503
+38
+449
+524
+540
+16
+534
+Table 6 Performance of Multidocument QA The numbers are accuracy Full score is 100 The improvement
+row represents the absolute accuracy improvement after a FlanT5 model is equipped with our proposed maximum
+probability alignment strategy For the full performance breakdown please refer to Table 9 in Appendix A
+contexts from both sides competing for the atten
+tion weight If this hypothesis holds true we expect
+the performance boost to be prominent for the cases
+where the answer sits near the middle We reveal
+the performance breakdown when the number of
+input documents is 30 As we can see in the im
+provement row those cases indeed achieve greater
+improvement
+Our strategies are not always perfect The per
+formance drops if the ground truth answer is at
+position 29 We believe T5 might have already han
+dled this case pretty well due to the recency bias
+learned on some attention heads and our additional
+temperature scaling sharpens the distribution too
+aggressively We acknowledge this tradeoff in 8
+54 Overall Observation
+The maximum probability alignment strategy is the
+most reliable and bestperforming method across
+all tasks and settings echoing our discussion in
+31 For most data only a subset of the input is
+useful The maximum probability alignment strat
+egy captures this characteristic naturally thereby
+outperforming the entropy alignment strategy that
+cares more about the holistic distribution
+6 Theoretical Analysis
+To shed more light on the underlying mechanisms
+of the two alignment strategies we establish the
+connection between the softmax temperature  and
+data distribution under empirically verified assump
+tions We focus on the 0th layer closest to the
+input embeddings and take the average over all
+logit vectors across attention heads Note that this
+is just a crude approximation of Algorithm 1 for
+analysis purposes since 1 a Transformer language
+model typically encompasses multiple layers and
+2 in Algorithm 1 we take the maximum probabil
+ity or entropy of individual logit vectors as opposed
+to the averaged one
+To compute the averaged logit vector we start
+with a input sequence of length L Using a Trans
+former model with H attention heads specifically
+a T5 Encoder in our context we generate H  L
+presoftmax logit vectors each with a length of L
+Here the number of layers is 1 because we focus
+on the 0th layer These logit vectors are then indi
+vidually sorted and we subsequently calculate the
+average of all H  L sorted logit vectors resulting
+in the averaged logit vector of length L
+Assumption 1 The length L averaged logit vector
+is normally distributed ie its entry li  N 0 2
+To assess whether the averaged logit entries fol
+low a Gaussian distribution we employ QQ plots
+as illustrated in Figure 2 A QQ plot Wilk and
+Gnanadesikan 1968 is a graphical technique used
+for comparing two probability distributions by plot
+ting their quantiles against each other A point x
+y corresponds to a quantile from the second dis
+tribution ycoordinate plotted against the same
+quantile from the first distribution xcoordinate
+a Short sequences around 512
+b Long sequences around 15k
+Figure 2 QQ plots of FlanT5XL We experiment with short and long sequences The red reference line is yx
+Retrieval Tasks
+Line
+Topic
+Passkey
+512
+861
+15k
+880
+512
+871
+15k
+897
+512
+875
+15k
+885
+Criteria
+lmax
+Table 7 Largest Logit Entry of FlanT5XL lmax is
+the largest logit entry of the averaged logit vector It is
+consistent across different input sequence lengths
+When the two distributions under comparison are
+similar the points in the QQ plot will roughly align
+with the identity line y  x In our case where
+we aim to determine the degree of Gaussian be
+havior in the averaged logit vector the linearity
+of the plot serves as an indicator  the closer the
+points are to the identity line the more Gaussian
+the distribution
+Assumption 2 The largest logit entry of the aver
+aged logit vector during training and extrapolation
+max  ltr
+are the same lex
+max
+This is verified in Table 7
+61 Maximum Probability Alignment
+Let lmax be the largest value in the logit vector l
+Let  be the temperature of the Softmax function
+The probability of the largest entry is
+Pmax 
+elmax
+i1 eli
+cid80L
+
+Since Softmax is shiftinvariant the logit vector
+can always be made zeromean cid80
+i li  0 Next
+according to Assumption 1 the denominator of
+Softmax can be approximated as
+L
+cid88
+i1
+eli  L  Eeli   L  e22 2
+1
+This implies Pmax is approximately
+Pmax 
+elmax
+Le22 2
+During the training stage the temperature  is 1
+Ptr
+max 
+max
+eltr
+Ltre2
+tr2
+
+which gives an expression of the largest logit entry
+during the training stage
+ltr
+max  log
+cid16
+maxLtre2
+Ptr
+tr2cid17
+2
+According to Assumption 2 the largest probability
+during the extrapolation stage can be simplified as
+A 2
+max
+eltr
+Lexe2
+ex2 2
+Pex
+max 
+cid16
+2
+
+max
+elex
+Lexe2
+maxLtre2
+Ptr
+Lexe2
+ex2 2
+ex2 2
+tr2cid171
+Since  is a free parameter during extrapolation
+we adjust it to carry out the maximum probability
+alignment strategy
+Proposition 1 Under Assumption 1 and 2 we
+can adjust the temperature  to align the maximum
+probability Ptr
+max  P
+max  Pex
+log Ltr  log P  2
+log Lex  log P  2
+tr2
+ex2 2
+
  
-13
-61
-Transformer architecture4
-                   
-17
-62
-Illustration of the two attention mechanisms experimented with in
-LongT51
-                            
-18
-63
-Preprocessing                            
-19
-64
-Webscraping                             
-20
-viii
-Chapter 1
-Introduction
-An Academic Research Assistant is a crucial role in the field of academic
-research providing support to faculty members and research teams They assist
-in conducting literature reviews gathering and analysing data and preparing
-reports or manuscripts for publication Research assistants often work closely
-with professors or researchers helping them design experiments develop re
-search methodologies and formulate research questions Our project aims to
-provide researchers with an AIpowered academic research assistant It will
-ease the process of information gathering for researchers
-11
-Description
-AIPowered Academic Research Assistant is a onestep solution to all your re
-search needs We plan to develop an application that is easytooperate and
-solves many problems for researchers Our platform lets you find research pa
-pers related to your area of interest along with their summaries and key take
-aways
-12
-Problem Formulation
-Researchers often spend significant time and effort searching for relevant re
-search papers extracting useful information and organising their findings This
-project aims to automate these tasks and provide researchers with a streamlined
-and personalised research experience The solution is an AIpowered research
-1
-Chapter 1
-Introduction
-assistant that uses web scraping machine learning and natural language pro
-cessing to improve the research process
-To address these issues there is a need for a more streamlined and automated
-job placement system that facilitates better communication reduces inefficien
-cies and provides datadriven insights for continuous improvement Such a
-system would benefit both students and employers by expanding opportunities
-and ensuring a more inclusive and efficient job placement process
-13
-Motivation
-Embarking on the journey to create an AIpowered Academic Research As
-sistant holds the promise of transforming the way knowledge is discovered and
-shared Imagine a world where researchers can delve into the depths of in
-formation with unprecedented ease where connections between seemingly un
-related studies are unveiled effortlessly and where timeconsuming tasks are
-automated freeing up intellectual energy for true innovation This initiative is
-about providing researchers educators and learners with a tool that can catalyse
-breakthroughs expedite learning and foster worldwide collaboration not just
-technology By pursuing this endeavour we are not only embracing the cutting
-edge of AI but also being a catalyst for academic development The difficulties
-well face and the solutions well devise have the potential to reshape research
-methodology leaving an enduring mark on how we advance human knowledge
-Our commitment to developing an AIpowered Academic Research Assistant is
-an investment not just in the future of education and research but also in our
-own development as a creative visionary
-14
-Proposed Solution
-The proposed solution is an AIpowered academic research assistant that
-utilises web scraping machine learning and natural language processing tech
-niques to enhance the research process The system will scrape relevant data
+
+B
+A  C
+ 2
+
+B 2
+A 2  C
+
+Assuming   0 we can solve the quadratic equa
+tion A 2  B  C  0 to get   We always pick
+the larger root as our final solution
+62 Entropy Alignment
+The entropy of a discrete probability computed by
+Softmax is
+H  
+eli
+D
+cid88
+i
+log
+eli
+D
+ log D 
+cid80
+i
+li
+ eli
+D
+
+where D  cid80
+i eli is the denominator of Soft
+max which can be approximated using Eq 1 On
+the other hand we note that cid80
+i lieli  LElel
+When l  N 0 2 Elel is approximated as see
+detailed derivation in Appendix A
+Elel 
+cid90 
+
+
+lel
+
 2
-Chapter 1
-Introduction
-from academic websites journals ensuring comprehensive coverage of research
-sources The project will culminate in the development of a userfriendly web
-interface where users can input queries browse search results and explore pa
-pers
-15
-Scope of the project
-The scope of this project encompasses the development of a comprehensive
-AIpowered Academic Research Assistant designed to enhance every facet of
-the research process It will involve implementing natural language processing
-techniques to efficiently parse and comprehend diverse academic literature The
-assistant will be capable of extracting key insights and generating concise sum
-maries The project will require building an intuitive user interface ensuring
-seamless integration into researchers workflows Ethical considerations data
-privacy and responsible AI usage will be integral components of the develop
-ment Overall the scope envisions a transformative tool that streamlines in
-formation synthesis encourages knowledge exchange and catalyses academic
-innovation
+e l2
+22 dl  e222
 3
-Chapter 2
-Review of Literature
-LongT5 1 a new texttotext transformer for long sequences LongT5 is
-based on the T5 transformer architecture but it makes several modifications
-to improve its performance on long sequences These modifications include
-Using a new attention mechanism that is more efficient for long sequences
-Pretraining LongT5 on a dataset of long sequences Scaling up the size of
-LongT5 On the evaluation of LongT5 on several summarization and question
-answering tasks They show that LongT5 outperforms the original T5 model on
-these tasks and it achieves stateoftheart results on some of them However
-LongT5 is not yet as widely used as other language models so there is less
-research available on its strengths and weaknesses
-PEGASUS 2 a new pretraining method for abstractive summarization
-PEGASUS is based on the Transformer language model but it makes sev
-eral modifications to improve its performance on abstractive summarization
-These modifications include Using a new objective function that encourages
-the model to generate summaries that are both informative and fluent Pre
-training PEGASUS on a dataset of humanwritten summaries and their corre
-sponding source documents On the evaluation of PEGASUS on several sum
-marization tasks They show that PEGASUS outperforms the stateoftheart
-on these tasks But the authors of the paper do not compare their model to other
-models that have been pretrained on similar datasets
-On Extractive and Abstractive Neural Document Summarization with Trans
-former Language Models 3 presents a study on extractive and abstractive neu
-4
-Chapter 2
-Review of Literature
-ral document summarization with transformer language models They compare
-the performance of several transformerbased models on a variety of summa
-rization tasks They show that transformerbased models can achieve stateof
-theart results on both extractive and abstractive summarization tasks They
-trained the transformer models from scratch But such training is very expen
-sive LongT5 PEGASUS and the transformerbased models have all achieved
-stateoftheart results on a variety of summarization tasks These models are
-likely to play an important role in the development of future text summariza
-tion systems The field of text summarization is rapidly evolving and there are
-a number of exciting research directions that are being explored As these re
-search directions continue to be developed it is likely that text summarization
-systems will become even more powerful and capable
-5
-Chapter 3
-System Analysis
-31
-Functional Requirements
-1 Search and Discovery The system will allow users to search for aca
-demic papers research articles and related content The search results will
-be relevant and presented in a userfriendly format
-2 Web Scraping Web scraping is the process of extracting content and data
-from a website Using automated tools such as Selenium and requests html
-libraries this task can be performed seamlessly
-3 Natural Language ProcessingThe system will employ advanced natural
-language processing techniques to understand user queries interpret con
-tent and generate summaries
-4 User Interface An intuitive and userfriendly interface allows users to
-interact with the assistant easily The interface is responsive accessible
-and adaptable to different devices
-5 Abstractive Summarization Task of generating a concise summary that
-captures the salient ideas of the source text
-32
-NonFunctional Requirements
-1 Performance The system should be capable of handling a large volume
-of data without experiencing significant delays Response times for various
-6
-Chapter 3
-System Analysis
-tasks eg search summarization should be within acceptable limits
-2 Usability and User Experience The user interface would be intuitive
-userfriendly and accessible
-It will be designed to accommodate re
-searchers with varying levels of technical expertise and adhere to estab
-lished design principles for effective user experience
-3 Compatibility The system should be compatible with a variety of devices
-and platforms including desktops laptops tablets and mobile phones and
-support multiple web browsers
-4 Ethical Considerations The system should adhere to ethical guidelines
-ensuring transparency in how recommendations are generated and han
-dling user data for privacy regulations
-33
-Specific Requirements
-Hardware Specifications
- 4 GB RAM minimum 8 GB RAM recommended
- 16 GHz or faster processor
- 200 MB of available disk space minimum 500 MB Recommendedfor
-Visual Studio Code
-Software Specifications
- Operating System Windows
- Backend Flask
- Machine learning model LongT5
- Frontend HTML CSS Javascript
- Editor Visual Studio Code
-7
-Chapter 3
-System Analysis
-34
-UseCase Diagrams and Description
-Figure 31 UseCase Diagram for AIPowered Academic Research Assistant
-Use Case Description
-The above use case diagram Figure 31 shows the highlevel functions and
-scope of the system A use case describes how a system behaves in response to
-a request from the perspective of the user Users of our system can carry out the
-following tasks The user enters their query using natural language They can
-then see the summary that was created and the key takeaways
-8
-Chapter 4
-Analysis Modeling
-41
-Activity Diagram
-Figure 41 Activity diagram for AIPowered Academic Research Assistant
-9
-Chapter 4
-Analysis Modeling
-The Activity Diagram 41 shows the process of generating a summary and key
-takeaways from an AIpowered model The system uses techniques such as
-Data Preprocessing Webscraping and a transformer model to generate the
-output
-The activity diagram shows the following steps
-1 The user inputs the topic they want to research
-2 The system preprocesses the query and finds out relevant topics
-3 The model performs webscraping for the given topic
-4 The scraped data is further preprocessed and fed to the summarization and
-sentence ranking model
-5 The model generates the Summarization and Key Takeaways for the queried
-topic
-42
-Functional Modeling
-Figure 42 DFD Level 0 for AIPowered Academic Research Assistant
-10
-Chapter 4
-Analysis Modeling
-Figure 43 DFD Level 1 for AIPowered Academic Research Assistant
-Figure 44 DFD Level 2 for AIPowered Academic Research Assistant
-11
-Chapter 4
-Analysis Modeling
-The above diagrams show the data flow of the system in three levels which are
-Level 0 Level 1 and Level 2
-Level 0 shows the overall interaction between the user and the system The User
-inputs the Query to the model and gets a Summary and Key Takeaways as the
-output The model scraps the data from the academic websites for generating
-the output
-Level 1 is further divided into 2 sublevels focusing in more detail about the
-individual actors separately giving more information about the data flow in the
-system
-Level 2 focuses on each module starting from the User input which is given to
-the model for webscrapping This Scraped data is used to generate Summaries
-and Key takeaways which are displayed to the user as the final output
-12
-Chapter 5
-Design
-51
-Architecture Design
-Figure 51 Block Diagram for AIPowered Academic Research Assistant
-13
-Chapter 5
-Design
-511
-Preprocessing the question
-Tokenization Split the question into individual words or tokens This can be
-done using libraries like NLTK
-Stopword Removal Remove common stop words eg the is in from
-the list of tokens These words often dont contribute significantly to the mean
-ing and are unlikely to be keywords
-512
-Web scraping
-The sample data was preprocessed by For web scraping the research papers
-the requests html library is used in Python It has an HTMLSession object
-that opens a browser window Chromium for scraping After creating a ses
-sion a get request can be sent to the desired link using the get function in the
-HTMLSession class It calls the request function to create a request for a given
-URL which then returns a response The render function is used to load the
-Javascript on the website before scraping After the page is loaded we use the
-find function to extract the desired data
-513
-Preprocessing the web data
-The data that we extracted from the web may not be in a format that is suitable
-for further processes In this step we will need to clean the data by removing
-any unwanted characters correcting any errors and converting the data into a
-consistent formatEx UTF8
-514
-Abstractive Summarisation
-A Transformer is used for abstractive summarisation specifically the LongT5
-model The LongT5 model works by first encoding the input text into a se
-quence of tokens These tokens are then passed through the Transformer en
-coder which learns to identify the relationships between the tokens The en
-coded tokens are then passed through the Transformer decoder which generates
-the output summary
-14
-Chapter 5
-Design
-515
-Sentence Ranking
-Find out key takeaways from all the papers These key takeaways give us an
-idea about the essential sentences from the papers TextRank turns out to be
-well suited for this type of application since it allows for a ranking over text
-units that is recursively computed based on information drawn from the entire
-text
-5Formally given two sentences Si and S j with a sentence being repre
-sented by the set of Ni words that appear in the sentence Si  wi
-1 wi
-2  wi
-Ni
-SimilaritySiS j  wkwk  Siwk  Sj
-logSilogS j
-51
-The score is calculated for all sentences using
-Scores  d sumScoretSimilarityst
-52
-Where
-Scores is the score of sentence s
-d is a damping factor typically set to 085
-Scoret is the score of sentence t
-Similarityst is the similarity between sentences s and t
-52
-Performance Evaluation Parameters
-521
-RecallOriented Understudy for Gisting Evaluation ROUGE Score
-The ROUGE score is used to evaluate the quality of machine translation
-outputs It is calculated by comparing the machine translation output to a set of
-humangenerated reference summaries A higher ROUGE score indicates that
-the machine translation output contains more information from the reference
-summaries
-15
-Chapter 5
-Design
-522
-GLUE Benchmark
-GLUE benchmark is a natural language processing NLP benchmark that
-consists of a collection of nine tasks including text summarization question
-answering and natural language inference A higher score on the GLUE bench
-mark indicates that the model is better at performing a variety of NLP tasks
-523
-SQuAD Benchmark
-SQuAD benchmark is a questionanswering benchmark that consists of a
-collection of over 100000 questions that are answered by paragraphs from
-Wikipedia A higher score on the SQuAD benchmark indicates that the model
-is better at answering text questions
-16
-Chapter 6
-Implementation
-61
-Algorithm
-Transformer Architecture
-Figure 61 Transformer architecture4
-Encoders in Transformers also known as the transformer encoder are a key
-component of the transformer encoderdecoder architecture They are respon
-17
-Chapter 6
-Implementation
-sible for analyzing and representing the input sequence in a way the model can
-understand The encoder processes the input sequence and produces a contin
-uous representation or embedding of the input These embeddings are then
-passed to the decoder to generate the output sequence Each layer of the en
-coder contains a selfattention mechanism that allows the model to weigh the
-importance of different input sequence parts by calculating the embeddings dot
-product This mechanism is also known as multihead attention
-The decoder also typically consists of multiple layers including a selfattention
-mechanism and a feedforward network The decoder uses the embeddings pro
-duced by the encoder and its internal states to generate the output sequence
-Attention Mechanism of LongT5
-Figure 62 Illustration of the two attention mechanisms experimented with in LongT51
-For Local Attention the sparse slidingwindow local attention operation al
-lows a given token to attend only r tokens to the left and right of it with r127
-by default Local Attention does not introduce any new parameters to the
-model The complexity of the mechanism is linear in input sequence length l
-Ol r Transient Global Attention is an extension of Local Attention It fur
-thermore allows each input token to interact with all other tokens in the layer
-18
-Chapter 6
-Implementation
-This is achieved via splitting an input sequence into blocks of a fixed length
-k with a default k16 Then a global token for such a block is obtained via
-summing and normalizing the embeddings of every token in the block Thanks
-to this the attention allows each token to attend to both nearby tokens like in
-Local attention and also every global token like in the case of standard global
-attention transient represents the fact the global tokens are constructed dynam
-ically within each attention operation As a consequence TGlobal attention
-introduces a few new parameters  global relative position biases and a layer
-normalization for global tokens embedding The complexity of this mechanism
-is Olr lk
-62
-Experimentation
-The experimental results of preprocessing of question and web scraping of a
-single research paper is shown in Fig 63 and Fig 64 respectively
-Figure 63 Preprocessing
-19
-Chapter 6
-Implementation
-Figure 64 Webscraping
-20
-Chapter 7
-Conclusions
-71
-Conclusion
-In conclusion The AIpowered academic research assistant with web scraping
-capabilities has the potential to be an indispensable tool for researchers signifi
-cantly reducing the time and effort spent on information retrieval data analysis
-and literature review By leveraging AIML techniques and web scraping this
-research assistant aims to empower researchers and contribute to advancements
-in various fields of study
-72
-Future Scope
-The AIpowered academic research assistant with web scraping capabilities
-holds great potential for further development and integration into the research
-community As technology advances we can expect this tool to become increas
-ingly sophisticated and userfriendly It will likely evolve to support a broader
-range of research tasks such as automated data synthesis and even assisting in
-hypothesis formulation Additionally improvements in natural language pro
-cessing and machine learning techniques will enhance its ability to understand
-and interpret complex research questions Furthermore as ethical and privacy
-concerns related to web scraping are addressed and regulated this assistant can
-become a trusted and widely adopted resource for researchers across diverse
-domains fostering more efficient and impactful scientific discoveries
-21
+Thus combining Eq 1 and 3 the entropy H is
+approximated as
+H  log L 
+ log L 
+2
+2 2 
+2
+2 2
+Le22 2 2
+ 2
+Le22 2
+Since  is set to 1 during the training stage we
+have Htr  log Ltr  2
+2  During extrapolation
+tr
+we align the entropy ie Hex  Htr by adjusting
+ 
+log Lex 
+2
+ex
+2 2  Hex  Htr  log Ltr 
+2
+tr
+2
+
+Since  is a free parameter during extrapolation we
+adjust it to carry out the entropy alignment strategy
+Proposition 2 Under Assumption 1 we can adjust
+the temperature  to align the entropy Htr  Hex
+ex
+ 
+cid113
+tr  2 log Lex
+2
+Ltr
+63 Realworld Temperatures
+We verify Proposition 1 and 2 on the topic retrieval
+task by plotting the temperature curves in Figure 3
+We empirically evaluate tr at the training length
+and ex every extrapolation length considering only
+the 0th layer Please find the temperature curves
+for the other two retrieval tasks in Appendix A
+While both proposed alignment strategies lower
+the temperature when the input sequence length
+increases the entropy alignment strategy does so
+more aggressively We believe this leads to its in
+ferior performance observed in Table 4 and 6 w
+Figure 3 Topic Retrieval Temperature Analysis
+Curves are given by Proposition 1 and 2 Cross signs
+and dots are given by Algorithm 1 logL 512 is given
+by Yao et al 2021 Su 2021
+H In addition the real temperatures given by Al
+gorithm 1 is always higher than those given by the
+two propositions After checking the perlayer at
+tention distributions we find that the 0th layer has
+flatter distributions compared to higher layers Be
+cause the two propositions are derived based on the
+0th layer and a flatter distribution needs a lower
+temperature to correct the temperatures given by
+them tend to be lower than the ones given by Al
+gorithm 1 that takes the average of temperatures
+across all layers
+Finally the previously proposed logdecaying
+rule   logLex Ltr Yao et al 2021 Su 2021
+was motivated by the idea of entropy invariance
+but our analysis shows that it is more similar to the
+maximum probability alignment strategy Proposi
+tion 1
+7 Conclusion
+In this paper we find that the T5 model family has
+great potential when it comes to Transformer length
+extrapolation We propose the maximum probabil
+ity and entropy alignment strategies to fix T5s
+dispersed attention issue without model finetuning
+We conduct experiments on natural language mod
+eling retrieval tasks and multidocument question
+answering to demonstrate the effectiveness of our
+proposed methods Finally we present a simpli
+fied theoretical analysis to elucidate how the tem
+perature is scaled to achieve attention alignment
+We hope that our work can inspire future length
+extrapolatable Transformer designs
+8 Limitations
+We base our theoretical analysis on a simplified
+Transformer language model which might be fur
+ther improved by taking all the layers and their
+interactions into account In addition we find that
+different layers have different degrees of distribu
+tion flatness which could be leveraged in future
+work to perform perlayer attention alignment Fi
+nally our temperature scaling scheme sometimes
+sharpen a distribution too aggressively as discussed
+in the multidocument question answering experi
+ments This drawback could be possibly improved
+by designing a more finegrained attention align
+ment strategy
+Acknowledgment
+The first author acknowledges the support from the
+Boeing Company 2019STUPA259
 References
-1 Guo Mandy  Ainslie Joshua  Uthus David  Ontanon Santiago 
-Ni Jianmo  Sung YunHsuan  Yang Yinfei LongT5 Efficient Text
-ToText Transformer for Long Sequences arXiv211207916 csCL
-2021
-2 Zhang Jingqing  Zhao Yao  Saleh Mohammad  Liu Peter PEGA
-SUS Pretraining with Extracted Gapsentences for Abstractive Summa
-rization arXiv191208777 csCL 2020
-3 Subramanian Sandeep  Li Raymond  Pilault Jonathan  Pal Christo
-pher On Extractive and Abstractive Neural Document Summarization
-with Transformer Language Models arXiv190903186 csCL 2020
-4 Ashish Vaswani Noam Shazeer Niki Parmar Jakob Uszkoreit Llion
-Jones Aidan N Gomez ukasz Kaiser and Illia Polosukhin 2017 At
-tention is all you need In Advances in Neural Information Processing
-Systems Volume 30 arXiv170603762v7 csCL 2023
-5 Mihalcea Rada  Tarau Paul TextRank Bringing Order into Texts
-Association for Computational Linguistics 2004
+Salesforce AI 2023 Long sequence modeling with
+xgen A 7b llm trained on 8k input sequence length
+Stella Biderman Hailey Schoelkopf Quentin Gregory
+Anthony Herbie Bradley Kyle OBrien Eric Hal
+lahan Mohammad Aflah Khan Shivanshu Purohit
+USVSN Sai Prashanth Edward Raff et al 2023
+Pythia A suite for analyzing large language mod
+In International
+els across training and scaling
+Conference on Machine Learning pages 23972430
+PMLR
+Sebastian Borgeaud Arthur Mensch Jordan Hoff
+mann Trevor Cai Eliza Rutherford Katie Milli
+can George Bm Van Den Driessche JeanBaptiste
+Lespiau Bogdan Damoc Aidan Clark et al 2022
+Improving language models by retrieving from tril
+lions of tokens In International conference on ma
+chine learning pages 22062240 PMLR
+Shouyuan Chen Sherman Wong Liangjian Chen and
+Yuandong Tian 2023 Extending context window of
+large language models via positional interpolation
+arXiv preprint arXiv230615595
+TaChung Chi TingHan Fan Peter J Ramadge and
+Alexander I Rudnicky 2022 KERPLE Kernelized
+Relative Positional Embedding for Length Extrapola
+tion In Advances in Neural Information Processing
+Systems NeurIPS New Orleans USA
+TaChung Chi TingHan Fan Alexander I Rudnicky
+and Peter J Ramadge 2023 Dissecting Transformer
+Length Extrapolation via the Lens of Receptive Field
+Analysis In Annual Meeting of the Association for
+Computational Linguistics ACL Toronto Canada
+Tri Dao Dan Fu Stefano Ermon Atri Rudra and
+Christopher R 2022 Flashattention Fast and
+memoryefficient exact attention with ioawareness
+Advances in Neural Information Processing Systems
+351634416359
+Zhengxiao Du Yujie Qian Xiao Liu Ming Ding
+Jiezhong Qiu Zhilin Yang and Jie Tang 2022 Glm
+General language model pretraining with autoregres
+sive blank infilling In Proceedings of the 60th An
+nual Meeting of the Association for Computational
+Linguistics Volume 1 Long Papers pages 320335
+Kelvin Guu Kenton Lee Zora Tung Panupong Pasu
+pat and Mingwei Chang 2020 Retrieval augmented
+language model pretraining In International confer
+ence on machine learning pages 39293938 PMLR
+Gautier Izacard and Edouard Grave 2021 Leveraging
+passage retrieval with generative models for open do
+main question answering In Proceedings of the 16th
+Conference of the European Chapter of the Associ
+ation for Computational Linguistics Main Volume
+pages 874880 Online Association for Computa
+tional Linguistics
+Tom Kwiatkowski Jennimaria Palomaki Olivia Red
+field Michael Collins Ankur Parikh Chris Alberti
+Danielle Epstein Illia Polosukhin Jacob Devlin Ken
+ton Lee et al 2019 Natural questions a benchmark
+for question answering research Transactions of the
+Association for Computational Linguistics 7453
+466
+Patrick Lewis Ethan Perez Aleksandra Piktus Fabio
+Petroni Vladimir Karpukhin Naman Goyal Hein
+rich Kttler Mike Lewis Wentau Yih Tim Rock
+tschel et al 2020 Retrievalaugmented generation
+for knowledgeintensive nlp tasks Advances in Neu
+ral Information Processing Systems 3394599474
+Dacheng Li Rulin Shao Anze Xie Ying Sheng Lian
+min Zheng Joseph E Gonzalez Ion Stoica Xuezhe
+Ma and Hao Zhang 2023 How long can opensource
+llms truly promise on context length
+Nelson F Liu Kevin Lin John Hewitt Ashwin Paran
+jape Michele Bevilacqua Fabio Petroni and Percy
+Liang 2023
+in the middle How lan
+guage models use long contexts arXiv preprint
+arXiv230703172
+Lost
+Amirkeivan Mohtashami and Martin Jaggi 2023
+Landmark attention Randomaccess infinite con
+arXiv preprint
+text
+transformers
+arXiv230516300
+length for
+Guilherme Penedo Quentin Malartic Daniel Hesslow
+Ruxandra Cojocaru Alessandro Cappelli Hamza
+Alobeidli Baptiste Pannier Ebtesam Almazrouei
+and Julien Launay 2023 The refinedweb dataset
+for falcon llm outperforming curated corpora with
+arXiv preprint
+web data and web data only
+arXiv230601116
+An open bilingual pretrained model arXiv preprint
+arXiv221002414
+Susan Zhang Stephen Roller Naman Goyal Mikel
+Artetxe Moya Chen Shuohui Chen Christopher De
+wan Mona Diab Xian Li Xi Victoria Lin et al 2022
+Opt Open pretrained transformer language models
+arXiv preprint arXiv220501068
+Ofir Press Noah Smith and Mike Lewis 2022 Train
+short test long Attention with linear biases enables
+input length extrapolation In International Confer
+ence on Learning Representations
+Markus N Rabe and Charles Staats 2021 Selfattention
+arXiv preprint
+does not need o n2 memory
+arXiv211205682
+Colin Raffel Noam Shazeer Adam Roberts Katherine
+Lee Sharan Narang Michael Matena Yanqi Zhou
+Wei Li and Peter J Liu 2020 Exploring the limits
+of transfer learning with a unified texttotext trans
+former The Journal of Machine Learning Research
+21154855551
+Teven Le Scao Angela Fan Christopher Akiki El
+lie Pavlick Suzana Ilic Daniel Hesslow Roman
+Castagn Alexandra Sasha Luccioni Franois Yvon
+Matthias Gall et al 2022 Bloom A 176b
+parameter openaccess multilingual language model
+arXiv preprint arXiv221105100
+Jianlin Su 2021 Scaling attention via the lens of en
+tropy invariance
+Jianlin Su Yu Lu Shengfeng Pan Ahmed Murtadha
+Bo Wen and Yunfeng Liu 2021 Roformer En
+hanced transformer with rotary position embedding
+arXiv preprint arXiv210409864
+The MosaicML NLP Team 2023
+Introducing mpt
+7b A new standard for opensource commercially
+usable llms httpswwwmosaicmlcomblogmpt
+30b
+Hugo Touvron Thibaut Lavril Gautier Izacard Xavier
+Martinet MarieAnne Lachaux Timothe Lacroix
+Baptiste Rozire Naman Goyal Eric Hambro
+Faisal Azhar et al 2023 Llama Open and effi
+cient foundation language models arXiv preprint
+arXiv230213971
+Ashish Vaswani Noam Shazeer Niki Parmar Jakob
+Uszkoreit Llion Jones Aidan N Gomez ukasz
+Kaiser and Illia Polosukhin 2017 Attention is all
+you need Advances in neural information processing
+systems 30
+Martin B Wilk and Ram Gnanadesikan 1968 Probabil
+ity plotting methods for the analysis for the analysis
+of data Biometrika 551117
+Shunyu Yao Binghui Peng Christos Papadimitriou
+and Karthik Narasimhan 2021 Selfattention net
+works can process bounded hierarchical languages
+In Proceedings of the 59th Annual Meeting of the
+Association for Computational Linguistics and the
+11th International Joint Conference on Natural Lan
+guage Processing Volume 1 Long Papers pages
+37703785 Online Association for Computational
+Linguistics
+Aohan Zeng Xiao Liu Zhengxiao Du Zihan Wang
+Hanyu Lai Ming Ding Zhuoyi Yang Yifan Xu
+Wendi Zheng Xiao Xia et al 2022 Glm130b
+Figure 4 Line Retrieval Temperature Analysis
+Curves are given by Proposition 1 and 2 Cross signs
+and dots are given by Algorithm 1 logL 512 is given
+by Yao et al 2021 Su 2021
+A Appendix
+A1 More Realworld Temperatures
+We verify Proposition 1 and 2 on the remaining two
+retrieval task by plotting the temperature curves in
+Figure 4 and 5 We empirically evaluate tr at the
+training length and ex every extrapolation length
+considering only the 0th layer
+A2 Detailed Expansion of Eq 3
+cid90 
+lel
+
+e l2
+22 dl
+Elel 
+
+2
+22ll2
+e
+22 dl
+
+l
+
+2
+cid90 
+
+
+cid90 
+
+
+
+ e22
+2
+
+cid90 
+
+
+e l22
+22 dl
+l
+
+2
+l
+
+e l224
 22
-Acknowledgements
-We are thankful to a number of individuals who have contributed to our fi
-nal year project and without their help it would not have been possible First
-of all we would like to express our gratitude to Prof Pradnya Sawant our
-project guide for their prompt suggestions guidance and encouragement over
-the course of our entire project
-We sincerely appreciate all our project coordinators for their tremendous as
-sistance to our project We also appreciate the support of the faculty in our
-department
-We express our sincere gratitude to our respected Director Bro Shantilal Ku
-jur our Principal Dr Sincy George and our Head of Department CMPN Dr
-Kavita Sonawane for providing the facilities encouragement as well as a con
-ducive environment for learning
-Lastly we would like to thank our parents and friends who played a crucial role
-in keeping us motivated throughout with their constant nurture and support
-Sincerely
-Daniel Ferreira
-Prem Tatkari
-Divyesh Mistry
-Kyran Almeida
-23
+dl
+4
+ e222
+A3 More Temperatures of Retrieval Tasks
+We report the temperatures of the three retrieval
+tasks across model sizes given by Algorithm 1 in
+Table 8
+A4 Breakdown of Multidocument Question
+Answering
+We report the performance breakdown of different
+number of input documents in Table 9
+Figure 5 Passkey Retrieval Temperature Analysis
+Curves are given by Proposition 1 and 2 Cross signs
+and dots are given by Algorithm 1 logL 512 is given
+by Yao et al 2021 Su 2021
+Models
+FlanT5Large
+w Pmax
+w H
+FlanT5XL
+w Pmax
+w H
+FlanT5XXL
+w Pmax
+w H
+Topic  of topics
+15
+20
+10
+5
+Retrieval Tasks
+Line  of lines
+Passkey  of sentences
+25 200 300 400 500 600 680 20k 30k 40k 50k 55k
+085 08 075 075 075 085 08 08 075 075 075 085 080 080 075 075
+07 06 055 05 05 065 055 055 05 05 05 06 055 05 05 05
+08 075 07 065 065 08 075 075 07 070 07 085 08 075 075 075
+07 055 055 05 05 06 055 055 05 05 05 07 065 06 06 06
+085 08 075 075 075 08 08 075 075 075 075 085 08 08 075 075
+075 065 06 055 055 065 06 06 055 055 055 065 06 055 055 05
+Table 8 Temperatures of Retrieval Tasks We search the optimal temperature from 10 095 09     05
+Multidocument Question Answering
+30 Docs
+14
+Models
+10 Docs
+4
+20 Docs
+9
+0
+4
+9
+4
+0
+0
+9
+19
+14
+29
+FlanT5Large 606 485 480 545 440 396 380 402 526 420 365 340 339 339 379
+609 498 486 535 456 408 397 413 508 445 395 364 359 358 370
+w Max
+589 501 473 524 452 404 3800 400 476 411 352 335 322 333 342
+w Ent
+640 554 589 606 479 451 473 553 584 446 400 399 417 464 548
+FlanT5XL
+653 573 608 622 516 490 494 560 609 491 460 449 463 491 557
+w Max
+w Ent
+647 567 600 593 501 479 498 551 524 435 421 403 420 429 513
+FlanT5XXL 651 610 646 611 539 524 547 624 589 491 481 475 489 531 612
+662 618 632 628 559 544 556 596 604 525 510 502 513 535 591
+w Max
+673 621 613 632 561 541 543 576 610 534 508 503 507 519 557
+w Ent
+19
+24
+Table 9 Full Performance Breakdown of Retrieval Tasks The numbers are accuracy Full score is 100 0 4 9
+indicate the position of the golden document that contains the answer to a question
