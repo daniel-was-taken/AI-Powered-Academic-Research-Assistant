@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request
 
 from M_summarizer import get_summary
-
-
+from datetime import datetime
 app = Flask(__name__)
 
 
@@ -14,7 +13,13 @@ def home():
 def summary():
     if request.method == "POST":
     #    input = request.form["input"]
+       current_dateTime = datetime.now()
+
+       print(current_dateTime)
        input = get_summary()
+       current_dateTime = datetime.now()
+
+       print(current_dateTime)
 
     if not input:
         input="HELLO WORLD"
