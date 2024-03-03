@@ -3,8 +3,10 @@
 # start = datetime.datetime.now()
 # print(start)
 
-def get_summary():
-    with open("text/textcontent.txt", "r", encoding="utf-8") as f:
+def get_summary(text):
+    # with open("text/textcontent.txt", "r", encoding="utf-8") as f:
+    #     input_text = f.read()
+    with open(text, "r", encoding="utf-8") as f:
         input_text = f.read()
 
     from textsum.summarize import Summarizer
