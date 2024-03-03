@@ -26,8 +26,8 @@ def download_all_pdfs(csv_file, base_filename="Pdf", target_folder="ScrapedPDFs"
       else:
         print(f"Failed to download PDF from {pdf_url}")
 
-csv_file = "OnlyURL.csv"
-base_filename = "MyReport"
-target_folder = "OnlyPDFs"
+# csv_file = "OnlyURL.csv"
+# base_filename = "MyReport"
+# target_folder = "OnlyPDFs"
 
-download_all_pdfs(csv_file, base_filename, target_folder)
+# download_all_pdfs(csv_file, base_filename, target_folder)

@@ -31,7 +31,7 @@ def clean_data(filename, output_filename):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-clean_data('text/textcontent.txt', 'cleaned2.txt')
+# clean_data('text/textcontent.txt', 'cleaned2.txt')
 
 
 # def clean_body(text):
