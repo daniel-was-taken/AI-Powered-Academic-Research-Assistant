@@ -25,7 +25,7 @@ def summary():
 
         pdfscrape(base_filename)
 
-        textFile = 'text' + base_filename + '.txt'
+        textFile = 'text/' + base_filename + '.txt'
         cleanText = base_filename + '_cleaned' + '.txt'
         preprocess.clean_data(textFile, cleanText)
 
