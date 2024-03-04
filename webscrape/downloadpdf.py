@@ -11,8 +11,9 @@ def download_all_pdfs(csv_file, base_filename="Pdf", target_folder="ScrapedPDFs"
     next(reader)  # Skip header row 
     for i, row in enumerate(reader):
       pdf_url = row[0]
-      filename = f"{base_filename}{i + 1}.pdf"
-
+      # filename = f"{base_filename}{i + 1}.pdf" 
+      # Enable the above line for multiple files
+      filename = f"{base_filename}.pdf"
       full_path = os.path.join(target_folder, filename)
 
       response = requests.get(pdf_url, stream=True)

@@ -1,7 +1,8 @@
 import fitz 
+
 def pdfscrape(name):
     # doc = fitz.open('BEtest.pdf')
-    doc = fitz.open(name)
+    doc = fitz.open(f'OnlyPDFs/{name}.pdf')
     text = "" 
     for page in doc: 
         text += page.get_text() 

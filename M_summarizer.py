@@ -11,8 +11,8 @@ def get_summary(text):
 
     from textsum.summarize import Summarizer
 
-    # summarizer = Summarizer('pszemraj/long-t5-tglobal-base-sci-simplify')
-    summarizer = Summarizer('daniel-was-taken/long-t5-tglobal-base-sci-simplify-finetuned-scisumm')
+    summarizer = Summarizer('pszemraj/long-t5-tglobal-base-sci-simplify')
+    # summarizer = Summarizer('daniel-was-taken/long-t5-tglobal-base-sci-simplify-finetuned-scisumm')
     # summary =  summarizer("text/textscrape2.txt")
 
 
@@ -30,5 +30,3 @@ def get_summary(text):
     return summary
 # start = datetime.datetime.now()
 # print(start)
-
-get_summary()
