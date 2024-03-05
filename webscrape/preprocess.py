@@ -19,7 +19,7 @@ def clean_data(filename, output_filename):
                 
         cleaned_data = ' '.join([str(elem) for elem in long_words]).strip()
         # cleaned_data = re.sub(r'\s{2,}', '\n', data) #Extra spaces
-        cleaned_data = re.sub(r'[^a-zA-Z0-9\s]','', cleaned_data)  #Anything except alpha numeric except whitespace
+        cleaned_data = re.sub(r'[^a-zA-Z0-9\s.,]','', cleaned_data)  #Anything except alpha numeric except whitespace
 
         with open(output_filename, 'w') as f:
             f.write(cleaned_data)
