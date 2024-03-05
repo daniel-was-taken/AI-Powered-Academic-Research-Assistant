@@ -9,7 +9,7 @@ def clean_data(filename, output_filename):
         with open(filename, 'r', encoding='latin-1') as f:
             data = f.read()
         newText = data.lower()
-        newText = re.sub('[^\w\s\d\.]','',newText)
+        newText = re.sub('[^\w\s\d\.,"]','',newText)
         newText = ' '.join(newText.split())
         tokens = [w for w in newText.split() if not w in STOP_WORDS]
         long_words=[]
