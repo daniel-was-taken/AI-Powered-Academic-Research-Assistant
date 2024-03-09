@@ -13,12 +13,12 @@ def get_summary(text):
 
     # summarizer = Summarizer('pszemraj/long-t5-tglobal-base-sci-simplify')
     # token_batch_length=4096,
-    summarizer = Summarizer('daniel-was-taken/long-t5-tglobal-base-sci-simplify-finetuned-scisumm')
+    summarizer = Summarizer('daniel-was-taken/long-t5-tglobal-base-sci-simplify-scisumm')
     # summary =  summarizer("text/textscrape2.txt")
 
 
 
-    summary = summarizer.summarize_string(input_text)
+    summary = summarizer.summarize_string(text)
     # new_summary = [ summary for x in range(4)]
     # return new_summary
     
@@ -35,4 +35,5 @@ def get_summary(text):
 
 with open("text/textcontent.txt", "r", encoding="utf-8") as f:
     input_text = f.read()
+
 get_summary(input_text)
