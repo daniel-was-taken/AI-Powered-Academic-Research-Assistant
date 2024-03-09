@@ -3,14 +3,16 @@
 {% block content %}
 
 
-<div class="position-absolute text-justify top-10 start-50 translate-middle">
-    <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThis"
+<div class="position-absolute text-justify top-10 start-50 translate-middle w-50">
+    <button class="btn btn-dark w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThis"
         aria-expanded="false" aria-controls="collapseThis">
+        {{summary_data[0]}}
         Paper Title
     </button>
 </div>
 
-<div class="position-absolute text-justify top-50 start-50 translate-middle overflow-auto summary collapse" id="collapseThis">
+<div class="position-absolute text-justify top-50 start-50 translate-middle overflow-auto summary collapse w-50" id="collapseThis">
+    {{summary_data[1]}}
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi convallis dolor at aliquet consectetur. Vestibulum
     tortor erat, faucibus eu arcu nec, semper aliquam ligula. Suspendisse commodo ligula nec enim molestie convallis.
     Duis venenatis ullamcorper ultricies. Vivamus ornare dictum sem eu lacinia. Sed feugiat ligula in porttitor lacinia.
