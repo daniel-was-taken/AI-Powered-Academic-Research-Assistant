@@ -5,9 +5,13 @@ import arxiv
 def scrape(topic):
   # topic = input("Enter the topic you need to search for : ")
   # num = int(input("Enter how many papers you want: "))
+
+  # Refined Topic based on CS
+  refined_topic = f"ti:{topic} AND cat:cs*"
+
   num = 1
   search = arxiv.Search(
-    query = topic,
+    query = refined_topic,
     max_results = num,
     sort_by = arxiv.SortCriterion.SubmittedDate,
     sort_order = arxiv.SortOrder.Descending
@@ -34,3 +38,4 @@ def scrape(topic):
   df2 = pd.DataFrame(data2)
   df2.to_csv("OnlyURL.csv",index=False)
   df1.to_csv("Scrape.csv", index=False)
+
