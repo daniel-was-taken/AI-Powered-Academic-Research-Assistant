@@ -5,3 +5,5 @@
 /.cache
 colabrequirements.txt
 /__pycache__
+/OnlyPDFs
+/webscrape/__pycache__

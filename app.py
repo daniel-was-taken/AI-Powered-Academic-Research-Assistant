@@ -32,7 +32,7 @@ def summary():
         current_dateTime = datetime.now()
 
         print(current_dateTime)
-        input = get_summary(cleanText)
+        input = get_summary(textFile)
         current_dateTime = datetime.now()
 
         print(current_dateTime)
