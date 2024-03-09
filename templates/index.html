@@ -1,18 +1,48 @@
 {% extends "base.html" %}
 
+{% block head %}
+
+<link rel="stylesheet" href="/static/css/style.css">
+{% endblock %}
+
 {% block content %}
 
-  <header>
-    <h1>AI Assistant</h1>
-  </header>
-  <div class="position-absolute top-50 start-50 translate-middle">
-    <form action="/summary" method="POST" >
-      <div class="input-group">
-        <input type="text" class="form-control" id="in" placeholder="Enter query" aria-label="input"
-          aria-describedby="button-addon2" name="input" value="{{ request.form['input'] }}">
-        <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
-      </div>
-    </form>
+<!-- <header>
+  <h1>AI Assistant</h1>
+</header> -->
+
+<p class="text-center align-middle">
+  AI-Powered Academic Research Assistant
+
+</p>
+
+
+<form action="/summary" method="POST">
+  <div class="messageBox position-absolute top-50 start-50 translate-middle">
+    <input required="" placeholder="Enter your query..." type="text" id="messageInput" aria-label="input" name="input"
+      value="{{ request.form['input'] }}" />
+    <button id="sendButton" type="submit">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+        <path fill="none"
+          d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888">
+        </path>
+        <path stroke-linejoin="round" stroke-linecap="round" stroke-width="33.67" stroke="#6c6c6c"
+          d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888">
+        </path>
+      </svg>
+    </button>
+
   </div>
-  
+</form>
+
+<!-- <div class="position-absolute top-50 start-50 translate-middle">
+  <form action="/summary" method="POST">
+    <div class="input-group">
+      <input type="text" class="form-control" id="in" placeholder="Enter query" aria-label="input"
+        aria-describedby="button-addon2" name="input" value="{{ request.form['input'] }}">
+      <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
+    </div>
+  </form>
+</div> -->
+
 {% endblock %}

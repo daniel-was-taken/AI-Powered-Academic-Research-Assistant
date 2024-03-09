@@ -27,7 +27,7 @@ def summary():
 
         textFile = 'text/' + base_filename + '.txt'
         cleanText = base_filename + '_cleaned' + '.txt'
-        preprocess.clean_data(textFile, cleanText)
+        # preprocess.clean_data(textFile, cleanText)
 
         current_dateTime = datetime.now()
 
