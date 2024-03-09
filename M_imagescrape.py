@@ -21,5 +21,5 @@ for i in range(len(pdf)):
         img = img.transpose(PIL.Image.FLIP_LEFT_RIGHT)
         #
         extension = base_img["ext"]
-        img.save(open(f"images/image{counter}.{extension}", "wb"))
+        img.save(open(f"static/images/image{counter}.{extension}", "wb"))
         counter += 1

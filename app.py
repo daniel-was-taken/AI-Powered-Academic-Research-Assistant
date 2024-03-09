@@ -42,6 +42,11 @@ def summary():
         input = "HELLO WORLD"
     return render_template("summary.html", summary_data=[title,input])
 
+@app.route("/images")
+def images():
+    counter = 7
+    return render_template("images.html", counter=counter+1)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
