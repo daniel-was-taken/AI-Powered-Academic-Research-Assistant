@@ -13,7 +13,7 @@ def get_summary(text):
 
     # summarizer = Summarizer('pszemraj/long-t5-tglobal-base-sci-simplify')
     # token_batch_length=4096,
-    summarizer = Summarizer('daniel-was-taken/long-t5-tglobal-base-sci-simplify-scisumm')
+    summarizer = Summarizer('daniel-was-taken/long-t5-tglobal-base-sci-simplify-scisumm', load_in_8bit=True)
     # summary =  summarizer("text/textscrape2.txt")
 
 
