@@ -8,6 +8,7 @@ html {
 	font-family: "Montserrat", sans-serif;
 	margin: 0;
 	height: 100%;
+	color: #fff;
 }
 
 body {
@@ -114,4 +115,20 @@ header h1 {
 #sendButton:hover svg path {
 	fill: #3c3c3c;
 	stroke: white;
+}
+
+.center {
+	font-size: xx-large;
+	color: #fff;
+	text-align: center;
+	top: 40%;
+}
+
+.summary {
+	height: 75%;
+	text-align: justify;
+}
+
+.summary::-webkit-scrollbar {
+    display: none;
 }

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-
+import pandas as pd
 from M_summarizer import get_summary
 from datetime import datetime
 from webscrape import arxivscrape, downloadpdf, preprocess
@@ -17,7 +17,8 @@ def summary():
     if request.method == "POST":
         topic = request.form["input"]
         arxivscrape.scrape(topic)
-
+        df = pd.read_csv("Scrape.csv")
+        title = df.iloc[0,0]
         csv_file = "OnlyURL.csv"
         base_filename = "NewReport"
         target_folder = "OnlyPDFs"
@@ -39,7 +40,12 @@ def summary():
 
     if not input:
         input = "HELLO WORLD"
-    return render_template("summary.html", summary=input)
+    return render_template("summary.html", summary_data=[title,input])
+
+@app.route("/images")
+def images():
+    counter = 7
+    return render_template("images.html", counter=counter+1)
 
 
 if __name__ == '__main__':
