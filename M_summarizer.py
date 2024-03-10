@@ -11,9 +11,9 @@ def get_summary(text):
 
     from textsum.summarize import Summarizer
 
-    summarizer = Summarizer('pszemraj/long-t5-tglobal-base-sci-simplify')
+    # summarizer = Summarizer('pszemraj/long-t5-tglobal-base-sci-simplify')
     # token_batch_length=4096,
-    # summarizer = Summarizer('daniel-was-taken/long-t5-tglobal-base-sci-simplify-finetuned-scisumm')
+    summarizer = Summarizer('daniel-was-taken/long-t5-tglobal-base-sci-simplify-scisumm')
     # summary =  summarizer("text/textscrape2.txt")
 
 
