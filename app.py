@@ -4,7 +4,10 @@ from M_summarizer import get_summary
 from datetime import datetime
 from webscrape import arxivscrape, downloadpdf, preprocess
 from M_pdfscrape import pdfscrape
+import os
 app = Flask(__name__)
+UPLOAD_FOLDER = 'OnlyPDFs'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
@@ -51,7 +54,8 @@ def upload():
     if request.method == "POST":
         pdf = request.files.get("pdf")
         base_filename = pdf.filename[:-4]
-        pdfscrape(pdf)
+        pdf.save(os.path.join(app.config['UPLOAD_FOLDER'], pdf.filename))
+        pdfscrape(base_filename)
 
         textFile = 'text/' + base_filename + '.txt'
         cleanText = base_filename + '_cleaned' + '.txt'
