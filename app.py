@@ -6,7 +6,6 @@ from webscrape import arxivscrape, downloadpdf, preprocess
 from M_pdfscrape import pdfscrape
 app = Flask(__name__)
 
-
 @app.route("/", methods=['GET', 'POST'])
 def home():
     return render_template("index.html")
@@ -47,6 +46,28 @@ def images():
     counter = 7
     return render_template("images.html", counter=counter+1)
 
+@app.route("/upload", methods=("GET","POST"))
+def upload():
+    if request.method == "POST":
+        pdf = request.files.get("pdf")
+        base_filename = pdf.filename[:-4]
+        pdfscrape(pdf)
+
+        textFile = 'text/' + base_filename + '.txt'
+        cleanText = base_filename + '_cleaned' + '.txt'
+        # preprocess.clean_data(textFile, cleanText)
+
+        current_dateTime = datetime.now()
+
+        print(current_dateTime)
+        input = get_summary(textFile)
+        current_dateTime = datetime.now()
+
+        print(current_dateTime)
+
+    if not input:
+        input = "HELLO WORLD"
+    return render_template("summary.html", summary_data=[base_filename,input])
 
 if __name__ == '__main__':
     app.run(debug=True)

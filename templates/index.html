@@ -37,6 +37,14 @@
     </div>
   </form>
 
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <div class="messageBox position-absolute bottom-0 start-50 translate-middle">
+      <label for="pdf">Upload pdf</label>
+      <input class="form-control" id="pdf" name="pdf" type="file" />
+      <button class="btn btn-primary" type="submit">Upload</button>
+    </div>
+  </form>
+
 </div>
 
 <!-- <div class="position-absolute top-50 start-50 translate-middle">
@@ -53,7 +61,7 @@
   function loading() {
     $("#loading").show();
     $("#content").hide();
-    setTimeout(()=> console.log("Done"), 5000)
+    setTimeout(() => console.log("Done"), 5000)
   }
 </script>
 
