@@ -1,0 +1,1437 @@
+Multi-agent control of airplane wing stability
+under the ﬂexural torsion ﬂutter
+Dmitry. S. Shalymova,b, Oleg N. Granichina,b, Zeev Volkovichc and Gerhard-Wilhelm
+Weberd
+aSt. Petersburg State University, Universitetskaya nab. 7-9, Saint-Petersburg, 199034,
+Russia; bIPME RAS, V.O., Bolshoj pr., 61, St. Petersburg, 199178, Russia; cSoftware
+Engineering Department, Ort Braude College, Rehov Snunit 51, POB 78, Karmiel 2161002,
+Israel; dPolitechnika Poznanska, Wydzial Inzynierii Zarzadzania, ul. Jacka Rychlewskiego 2,
+60-965 Poznan, Poland
+ARTICLE HISTORY
+Compiled December 9, 2020
+ABSTRACT
+This paper proposes a novel method for prevention of the increasing oscillation of
+an aircraft wing under the ﬂexural torsion ﬂutter. The paper introduces the novel
+multi-agent method for control of an aircraft wing, assuming that the wing sur-
+face consists of controlled ’feathers’ (agents). Theoretical evaluation of the approach
+demonstrates its high ability to prevent ﬂexural-torsional vibrations of an aircraft.
+Our model expands the possibilities for damping the wing oscillations, which po-
+tentially allows an increase in aircraft speed without misgiving of ﬂutter. The study
+shows that the main limitation is the time, during which the system is able to damp
+vibrations to a safe level and keep them. The relevance of this indicator is important
+because of the rather fast process of increasing wing oscillations during ﬂutter. In
+this paper, we suggest a new method for controlling an aircraft wing, with the use of
+which it becomes theoretically possible to increase the maximum ﬂight speed of an
+aircraft without ﬂutter occurrence. A mathematical model of the bending-torsional
+vibrations of an airplane wing with controlled feathers on its surface is presented.
+Based on the Speed-Gradient method a new control laws are synthesized.
+KEYWORDS
+Flutter, ﬂexural-torsional vibrations of an aircraft, wing with feathers, multi-agent
+system, speed-gradient method
+1. INTRODUCTION
+In this paper, we investigate airplane wing stability under the ﬂexural torsion ﬂutter.
+This problem is strategically important for the aircraft industry.
+In fact, after reaching a certain ﬂight speed, small oscillations of the wing begin to
+rapidly and catastrophically increase until the wing breaks. The stability of an aircraft
+wing characterizes the wing’s ability to maintain its integrity, when oscillations occur.
+The design of the aircraft is resilient. During the ﬂight, its elements can experience
+signiﬁcant strain. For example, on a heavy transport aircraft, even in horizontal ﬂight
+at a constant speed, the deﬂection of the wing end is measured in meters, cf. [47].
+CONTACT D. S. Shalymov. Email: dmitry.shalymov@gmail.com
+arXiv:2012.04582v1  [cs.IT]  8 Dec 2020
+Deformations of the wing aﬀect the size and distribution of the aerodynamic load.
+They can lead to a loss of structural stability, both static (e.g. wing divergence) and
+dynamic (e.g. ﬂutter).
+Therefore, the issues of ensuring the required aerodynamic characteristics and wing
+stability in various ﬂight modes of the aircraft are traditionally paid great attention to
+when designing. It should be noted that the elements of wing mechanization that are
+widespread in modern aircraft building (pre-ﬂaps, ailerons, ﬂaps, etc.) serve precisely
+this purpose; in particular, in the most critical take-oﬀ and landing modes. However,
+there are no ways to eﬀectively counter wing ﬂutter.
+Flutter is a phenomenon, which occurs after reaching a certain ﬂight speed Vflat,
+when small wing oscillations begin to increase until the wing breaks. To avoid such
+consequences, currently one imposes a limit on the maximum ﬂight speed of the air-
+craft, calculated as (1.2 − 1.3)Vmax = Vflat. This signiﬁcantly reduces the potential
+technical characteristics of the aircraft.
+As a rule, an order to avoid the occurrence of ﬂutter, lots of limitations are intro-
+duced on the maximum ﬂight speed of the aircraft, which depends on the speed, at
+which the ﬂutter Vflat occurs. This practice signiﬁcantly lowers the potential perfor-
+mance of the aircraft. By eﬀectively avoiding ﬂutter, it becomes possible to remove
+such restrictions and use the aircraft more eﬃciently.
+Until now, there are no eﬀective methods for dealing with ﬂutter. The designers
+strive to increase Vflat as much as possible in order to raise the aircraft’s high-speed
+ceiling. However, the existing approaches to increasing Vflat are strongly limited by
+the features of speciﬁc aircraft models and their characteristics.
+In this paper, in order to solve the described problem, we propose to cover an aircraft
+wing with lots of small-sized movable elements, which are capable of purposefully
+changing their orientation in the air ﬂow. The movable elements allow creating of
+additional forces and moments, acting on the wing and preventing the growth of its
+deformations.
+Suppose that the entire free surface of the wing is covered with such controllable
+elements: we call them feathers. The wing is covered with such feathers both above
+and below, and in the neutral position, they do not change the calculated wing proﬁle,
+see Fig.1. The last condition ensures that the wing dynamics does not deteriorate with
+passive feathers in the neutral position.
+Figure 1. Wing with feathers
+2
+The novelty of our approach lies in the use of ’feathers’ on the surface of the aircraft.
+In this way, the wing of the aircraft becomes a multi-agent system, which we control,
+based on methods from control theory. This approach is new and has not been used
+before in the problem of dealing with ﬂutter.
+The proposed approach should improve the existing situation due to the following:
+the controlled elements (feathers) can change their position in the air ﬂow in such a
+way that they prevent the occurrence of oscillations and general deformation of the
+wing. Moreover, the feathers in their neutral position do not change the calculated
+wing proﬁle. This ensures that the dynamics of the wing do not deteriorate even if
+they are turned oﬀ and are not used (which corresponds to passive feathers in neutral).
+In this paper, we propose the laws of control of an airplane wing with ’feathers’.
+However, these laws are rather theoretical ones. In practice, a critical performance
+indicator is the time, needed for the system to damp and maintain vibrations to a safe
+level. The relevance of this indicator is due to the rather rapid process of increasing
+wing oscillations during ﬂutter. In theory, we believe that the ’feather’ changes its
+orientation in the air ﬂow instantly. Unfortunately, in real physical systems, there is
+always a delay. The impact of the delay on our theoretical conclusions should be rather
+investigated in the further works.
+The rest of the paper is structured in the following way: Section 2 provides overview
+of related work. Section 3 is devoted to study of the equation of system dynamics
+for small ﬂexural-torsional vibrations of a wing with feathers on the surface. Section
+4 describes the synthesis of the dynamic system control law, based on the speed-
+gradient method. A control law is obtained in the form of feedback on deviation with
+constant coeﬃcients. Section 5 introduces the transition to multi-agent control. Section
+6 summarizes the paper.
+2. RELATED WORK
+The ﬂight condition boundary between stable and self-sustaining motions is known as
+ﬂutter speed and ﬂutter boundary. There are several types of ﬂutter, which signiﬁcantly
+vary depending on the way, in which the stability is lost with the any change in ﬂight
+conditions like increase in dynamic pressure. An explosive ﬂutter occurs after a small
+increase of speed from just below the ﬂutter speed to slightly above the ﬂutter speed.
+This results in highly divergent oscillations and wing break within a fraction of a
+second.
+The moderate ﬂutter occurs when loss of stability can be identiﬁed well below
+the ﬂutter speed. In this case, the ﬂutter speed can be predicted by extrapolating
+instabilities. The mild type ﬂutter occurs when the system is stable but lowly damped
+signiﬁcantly before the ﬂutter speed.
+Unlike traditional stable aircraft ﬂight control systems, which aim to improve sta-
+bility, improve handling, gust alleviation, control ride comfort etc., the approach which
+aims to stabilize an unstable system is called Active Flutter Suppression (AFS). The
+AFS system must stabilize an aeroelastic system that would otherwise be unstable
+in all ﬂight conditions and aircraft maneuvers, covering all conﬁguration and loading
+options as well as all ﬂutter mechanisms. That is why AFS is important for eﬀective
+solution of aeroelastic instability problems. AFS can lead to signiﬁcant weight savings
+and more eﬃcient and versatile airframes as described in particular in [2]. A broad
+overview of AFS research is rather presented in [33]. The ability to suppress ﬂutter
+instability through actively controlled closed-loop action of control surfaces has a long
+3
+history, see, for example [1]. Numerous studies in the ﬁeld of AFS were carried out
+as early as the 1970s and 1980s, cf. [3]. Various approaches to the synthesis of AFS
+systems control law, including methods of adaptive control and control with variable
+parameters, are considered also in [14–17].
+The physics-based approach of AFS research of [18] investigates the laws of ﬂutter
+control, based on searching the physical or mathematical structure of the ﬂutter prob-
+lem in order to identify the mechanisms responsible for the ﬂutter instability and ﬁnd
+the ways to suppress them. The concepts of ‘active ﬂexible wing’ or ‘active ﬂexible
+airframe’ are considered in [8]; ﬂight stability and controllability of rigid and ﬂexible
+aircraft are considered in [4–6]; the inﬂuence of aeroelastic behavior on stability and
+controllability of ﬂight using corrections to the derivatives of static aeroelastic stability
+was studied in [7]; the perspective of using active controls is presented in [10].
+The idea of using an active control system, according to which special mechanisms
+are located on the wing of the aircraft that control the surfaces of the airframe to
+achieve the desired dynamic behavior, has been considered and discussed from the
+ﬁrst days of manned ﬂights, cf.[4,5]. Adaptive control is attractive in the case of ﬂutter
+suppression due to many variations in plant characteristics and ability to respond to
+damage scenarios, cf. [20–25]. In [19], an attempt is made to order and reduce various
+laws of modern control theory used to suppress ﬂutter.
+Control problems of nonlinear systems, as well as topological aspects of active sys-
+tems, are considered in [27–31]. A broad review of methods for the synthesis of control
+laws and modeling of aeroelastic systems is rather presented in [32]. The identically lo-
+cated accelerometers and forces method is used to create an eﬀective viscous damping
+matrix for the equations of the system that would stabilize it [16]. A similar approach
+to the active control of structures with guaranteed stability is presented in [17]. Control
+laws that modify the net stiﬀness and mass distribution are investigated in [15].
+Other aspects of the problem of the ﬂutter suppression law are discussed in [26,31].
+The inﬂuence of control system hardware delays, which is very important in the case
+of ﬂutter, is considered in [26]. A special approach to active control of systems with
+changing parameters and control of nonlinear aeroelastic systems is investigated in [27–
+30]. Broader prospects for the use of AFS in practice appeared with the development
+of fast drives and actuators [9]. Overview of aeroservoelasticity is done in [11].
+Today it is possible to carry out high accuracy aerodynamic modeling of active
+controlled systems based on control laws, which were usually synthesized using low-
+order mathematical models [12,13]. However, such models still pose a serious problem
+for developers and designers due to their large size.
+The ﬂutter behavior is investigated in numerous more recent works; cf. [35,38]. A
+control system, applied to transonic ﬂutter suppression, is presented in [37]. Robustness
+to measurement noises and time delay is demonstrated. Stochastic modeling, based
+on the ﬁrst-order reliability method for ﬂutter reliability analysis of an aircraft wing
+is proposed in [35]. General aero-elastic system in a subsonic regime is investigated in
+[36]. As part of aeroelastic analysis a ﬂutter speed for a more fuel eﬃcient slender wing
+is identiﬁed in [34]. A systematic robust control design method for AFS is provided in
+[38]. The method is used to increase the ﬂutter speed of a small unmanned aircraft.
+AFS continues to be considered with caution and is prohibited from use on com-
+mercial and military aircraft. This is because a failure of the AFS system while the
+divergent ﬂutter is unstable can lead to the failure of the airframe so quickly that the
+crew cannot react in any way, for example, by reducing the ﬂight speed.
+Multi-agent systems (MAS) have numerous applications like civilian, security and
+military ones. Centralized quantitative and qualitative modeling, analysis, constraint
+4
+satisfaction, maintenance and control seem to be too strict for these systems. On the
+other hand, the distributed and incremental reasoning on the systems seems to be
+more scalable, robust, and ﬂexible. That is why an investigation of multi-agent con-
+trol systems is popular nowadays and has been researched for decades, cf. [40,41,43].
+Multiagent approach is able to replace the general model of the interactions in a com-
+plex system with a set of local models. This can be eﬀectively applied in distributed
+nonstationary systems such as dynamical networks of [35,44], where the problem of
+consensus is investigated. Agents can be modeled as integrators on segments, cf. [40,42].
+The problem of control goal achievement for such agents is closely related to the con-
+sensus problems of [39,44] and can be reduced to it in some cases as described in [42].
+Consensus in multi-agent network systems from MaxEnt perspective is investigated in
+[39]. For more details, see, for example, [54,55].
+Dynamical networks and multi-agent protocol for the airplane is investigated in
+[45,51]. The wing is covered with controlled agents ’feathers’ and multi-agent control
+is used for leveling the perturbing forces in the turbulence. Each ’feather’ is controlled
+based on a feedback about pressure of its own and neighbor feathers.
+3. DYNAMICS EQUATIONS OF WING WITH FEATHERS
+A wing with feathers has never been considered before for the problem of ﬂutter
+suppression. Therefore, in this section we provide description of our novel approach,
+based on the feathers. Let us consider the phenomenon of ﬂexural-torsional ﬂutter of
+the wing as described in [48,49]. Let the plane be in a steady horizontal ﬂight at a
+constant speed. We schematize the non-sweeping wing of the half-span l and feathers in
+neutral position with a cantilevered beam. This beam is loaded with a static distributed
+load on bending and torsion. The elastic axis of the wing passes through the Stiﬀness
+Centers (SC’s) of the sections and does not coincide with the line of Gravity Centers
+(GC’s) of the sections. We assume the wing stiﬀness in the longitudinal and transverse
+directions of the wing plane to be very large. The assumption allows neglecting of these
+types of vibrations. We also neglect possible movements of the SC and GC along the
+sections during the ﬂight.
+Figure 2 illustrates the following:
+• O is the stiﬀness center of the wing section on the fuselage;
+• X-axis is directed on a free stream;
+• Z-axis is directed along the elastic axis of the undeformed wing;
+• Y -axis complements the coordinate system to the right;
+• x0 - is the distance from the leading edge of the wing to the SC section;
+• σT - is the distance between SC and GC.
+We note that typically the GC is located behind the SC section.
+Figure 3 illustrates the following: b is the wing section chord; h is the transverse
+deﬂection of the section A1A2; αCT is the angle of attack in the section of the un-
+deformed wing; Θ is the angle of twisting of the section due to torsional deformations
+of the wing.
+The corresponding equations of the elastic line of the beam are of the form, cf. [1]:
+�
+∂2
+∂z2
+�
+EJ ∂2y
+∂z2
+�
+= q0,
+∂
+∂z
+�
+GJK ∂Θ
+∂z
+�
+= m0,
+(1)
+5
+Figure 2. Stiﬀness Centers and Gravity Centers lines on a wing
+Figure 3. Wing cross section
+6
+where
+• y is the deﬂection of the stiﬀness axis in the current wing section;
+• Θ is the wing twist angle, which is considered positive if it increases the angle
+of attack in the section;
+• EJ, GJk are the wing stiﬀness in bending and torsion, respectively;
+• q0 and m0 are the linear force and moment relative to the stiﬀness axis acting
+on the wing.
+The functions of Eq. (1) do not depend on time, since the wing is in a steady
+(stationary) state; i.e. solutions of Eq. (1) can depend only upon z:
+y = y0(z), Θ = Θ0(z).
+(2)
+These solutions must satisfy the boundary conditions at the ends of the wing:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+y|z=0 = 0;
+∂y
+∂z
+���
+z=0 = 0 (tight fuselage ﬁt);
+EJ ∂2y
+∂z2
+���
+z=l = 0;
+∂
+∂z
+�
+EJ ∂2y
+∂z2
+����
+z=l = 0
+(moment and shear force at the free end),
+Θ|z=0 = 0;
+GJK ∂Θ
+∂z
+��
+z=l = 0
+(angle of rotation of the terminated end and moment at the free end).
+(3)
+Now, suppose that for some random reason (sudden aileron movement, air hole,
+gust of wind, etc.), the wing deviated from its stationary position (see Eq. ((2))).
+After termination of the reason of the deviation, the wing under the action of elastic
+forces will move to its position of equilibrium. If the energy dissipation is not very big
+then the aperiodic process will not occur; however, the wing oscillations will occur.
+We assume that these ﬂuctuations are initially small enough and do not signiﬁcantly
+aﬀect the dynamics of the aircraft.
+According to [48,49], small bending-torsional oscillations of the wing, near its equi-
+librium position (see Eq. (2, 3)) in the laminar ﬂow, are described by the following
+equations:
+�
+∂2
+∂z2
+�
+EJ ∂2y1
+∂z2
+�
++ m∂2y1
+∂t2 − mσT ∂2Θ1
+∂t2 = qa,
+∂
+∂z
+�
+GJK ∂Θ1
+∂z
+�
++ mσT
+∂2y1
+∂t2 − Jm ∂2Θ1
+∂t2 = ma,
+(4)
+where
+• y1 and θ1 are the additional deﬂection and angle of twisting of the wing relative
+to the stationary state (see Eq. (2),(3)), due to ﬂuctuations;
+• m is the linear mass of the wing;
+• Jm is the linear mass moment of inertia of the wing relative to its stiﬀness axis;
+• qa and ma are the linear aerodynamic force of the wing and the linear moment
+of the aerodynamic force relative to the stiﬀness axis, due to wing vibrations.
+Solutions of the system (4) must satisfy boundary conditions similar to (3). We
+represent the right-hand sides of Eq. (4) in the form:
+qa = ∆qa + qu,
+ma = ∆ma + mu,
+(5)
+7
+where
+• ∆qa and ∆ma are the linear aerodynamic force and moment relative to the
+stiﬀness axis respectively, arising due to wing oscillations in the neutral position
+of the feathers;
+• qu and mu - the linear aerodynamic force and moment created by changing the
+orientation of the feathers.
+Following the ﬂutter equations (cf. [48], p. 176, Eq. (35)) and taking into account
+linear aerodynamic forces and moment qu and mu, we rewrite Eq. (4) as
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+∂2
+∂z2 (EJ ∂2y1
+∂z2 ) + m∂2y1
+∂t2 − mσT ∂2Θ1
+∂t2
+−Cα
+y
+�
+Θ1 + ( 3
+4b − x0) 1
+V
+∂Θ1
+∂t − 1
+V
+∂y1
+∂t
+�
+ρbV 2 = qu
+∂
+∂z(GJK ∂Θ1
+∂z ) + mσT
+∂2y1
+∂t2 − Jm ∂2Θ1
+∂t2 − π
+16
+b2
+V
+∂Θ1
+∂t ρbV 2
++
+�
++Cα
+y (x0 − b
+4)
+�
+Θ1 + ( 3
+4b − x0) 1
+V
+∂Θ1
+∂t − 1
+V
+∂y1
+∂t
+��
+ρbV 2 = mu,
+y1 = ∂y1
+∂z = Θ1 = 0,
+z = 0,
+∂2y1
+∂z2 = ∂3y1
+∂z3 = ∂Θ1
+∂z = 0,
+z = l,
+(6)
+where
+• Cα
+y = ∂Cy
+∂α ; Cy is the wing lift coeﬃcient;
+• Cα
+y consider constant along the span;
+• Cy = Cα
+y (α − α0);
+• α = αCT + Θ0 + Θ1 is the instant value of the angle of attack when the wing
+moves;
+• α0 is the value of the angle of attack at which Cy = 0;
+• ρ is the air density.
+As it can be seen from Eq. (6), the bending and torsional vibrations of the wing are
+interdependent, which is one of the necessary conditions for the occurrence of ﬂutter.
+It is also known from [1] that with increasing speed V, the frequencies of the bending
+and torsional oscillations of the wing approach each other, and for V = Vflat they
+coincide. Moreover, there is a phase shift between these oscillations, cf. [48,49]. The
+last is also a necessary condition for the occurrence of ﬂutter.
+It is important to emphasize that for V = Vflat the amplitude of the wing oscillations
+is still small but remains constant. It means that the oscillations themselves are no
+longer self-damped, as it was the case with V < Vflat. The problem arises when V >
+Vflat, i.e. when the slightest deformations of the wing begin to grow catastrophically
+quickly. Therefore, in terms of Eq. (6), to prevent ﬂutter, it is necessary to form qu
+and mu so that the wing oscillation energy is always limited by a certain value. This
+value is safe from the point of view of controllability, stability and integrity of the
+aircraft structure. In other words, when speeds V > Vflat, for the full energy of the
+cantilevered beam, cf [48], the condition must be:
+8
+E = Ekinet+Epoten = 1
+2
+� l
+0
+m
+�∂y1
+∂t
+�2
+dz+1
+2
+� l
+0
+Jm
+�∂Θ1
+∂t
+�2
+dz−
+� l
+0
+mσT
+∂y1
+∂t
+∂Θ1
+∂t dz+
+1
+2
+� l
+0
+EJ
+�∂2y1
+∂z2
+�2
+dz + 1
+2
+� l
+0
+GJK
+�∂Θ1
+∂z
+�2
+dz ≤ E∗.
+(7)
+A stricter requirement is to keep the system (6) in a given small neighborhood of
+the solution of Eq. (2):
+∥¯x∥ ≤ ϵ,
+(8)
+where
+¯x =
+�
+y1, ∂y1
+∂t , Θ1, ∂Θ1
+∂t
+�
+and
+∥¯x∥ is vector norm ¯x.
+Power qu and moment mu impacts on the wing are formed due to the high-speed
+pressure and therefore should depend on the velocity of the ﬂow of V, the position of
+the feathers on the wing, their orientation as well as other factors, associated with the
+adopted aerodynamic calculation scheme.
+Let’s assume that the feathers are absolutely rigid structural elements, and that a
+change in the orientation of the feather does not have a signiﬁcant eﬀect on the airﬂow
+around the remaining feathers and the wing as a whole keeping it laminar. Then, we
+receive:
+qu =
+n(z)
+�
+i
+qui,
+mu =
+n(z)
+�
+i
+mui,
+(9)
+where qui and mui are the additional linear forces and the moment from the i-th
+feather. Summation is carried out over all the feathers, covering the boundary of the
+section. The number of such feathers depends on z and is denoted as n(z).
+Suppose that a feather can deviate from its neutral position by rotating around an
+axis, passing through its leading edge and parallel to the Z-axis. Moreover, for the
+feathers on the upper surface of the wing, the rotation angle is measured from the
+tangent to the proﬁle at the point of rotation of the feather βi ∈ [0, β−], β− < 0, and
+on the lower surface of the wing is measured as βi ∈ [0, β+], β+ > 0, corresponds to
+the neutral position of the wing, and βi is considered positive if it locally increases the
+angle of attack.
+In Fig. 4, we use the following notation:
+• A0 A1 A2 A4 are wing proﬁles (considered thin) in a static position (before
+vibrations);
+• ´A0 ´A1 ´A2 ´A4 are wing proﬁles during oscillations;
+• E and E1 are SC’s of the wing section in the static position and during vibrations,
+respectively;
+• X-axis corresponds to the speed of the main stream;
+9
+Figure 4. Wing proﬁles in static position and during vibrations
+• Y -axis is perpendicular to it and to the axis of rigidity of the undeformed wing;
+• A1 A3 ´A1 ´A3 are the front and back edges of the feather 1 in the neutral position
+on the corresponding proﬁles;
+• A2 A4 ´A2 ´A4 are the front and back edges of the feather 2 (analogue of the
+aileron) in the neutral position on relevant proﬁles;
+• x∗
+1 and x1K are the distances from the leading and trailing edges of the feather
+1 to the leading edge of the wing;
+• x∗
+2 and x2K are similar parameters for the feather 2;
+• EE1 is deﬂection of the wing;
+• Θ1 is the angle of twisting of the wing near the point E1;
+• β1 < 0 is the angle of deviation of the feather 1 from the neutral position;
+• β2 > 0 is the angle of deviation of the feather 2 from the neutral position;
+• ˆA3 and ˆA4 are the trailing edges of the feathers 1 and 2, respectively, after their
+deviations.
+Parameters Θ1, wing deﬂection yCT are ordinates in a static position, βi are con-
+sidered small.
+A similar ﬁgure for the aileron is presented in (cf. [47] p. 143, Fig. 41).
+Following the technique suggested by (cf. [48], pp.143-146), it can be shown that
+the inﬂuence of the i-th feather on the wing is generally calculated using the following
+formulae:
+�
+qui = AiV 2βi + BiV ˙βi,
+mui = CiV 2βi + DiV ˙βi,
+(10)
+where Ai = Cα
+y Giρb2,
+Bi = Cα
+y Hiρb3,
+Ci = −
+�
+Ii + Cα
+y ( x0
+b − 1
+4)Gi
+�
+ρb2,
+Di = −
+�
+Ji + Cα
+y ( x0
+b − 1
+4)Hi
+�
+ρb3,
+Gi = 1
+π [(ψik − ψ∗
+i ) − (sin ψik − sin ψ∗
+i )] ,
+10
+Hi = 1
+2π (cos ψ∗
+i (ψik − ψ∗
+i ) − (sin ψik − sin ψ∗
+i )) − cos ψ∗
+i (sin ψik − sin ψ∗
+i )
++ 1
+2
+�
+(ψik − ψ∗
+i ) + 1
+2(sin 2ψik − sin 2ψ∗
+i )
+�
+;
+Ii = 1
+8 [2(sin ψik − sin ψ∗
+i ) + (sin 2ψik − sin 2ψ∗
+i )] ,
+Ji = − 1
+16 (−2 cos ψ∗
+i (sin ψik − sin ψ∗
+i ) + (ψik − ψ∗
+i ))− 1
+16
+�
+(1
+2 − cos ψ∗
+i )(sin 2ψik − sin 2ψ∗
+i )
+�
+− 1
+16
+�
+(sin ψik − sin ψ∗
+i ) + 1
+3 (sin 3ψik − sin 3ψ∗
+i )
+�
+;
+x∗
+i = b
+2(1 − cos ψ∗
+i ),
+xik = b
+2(1 − cos ψik),
+ψ∗
+i ∈ [0, π],
+ψik ∈ [0, π].
+Let us get back to Eq. (6). In [48,49], its solution near the ﬂutter is represented as
+�
+y1(z, t) = q(t)f(z),
+Θ1(z, t) = r(t)φ(z).
+(11)
+Moreover, functions f(z) and φ(z) are functions of vibration modes, which must
+satisfy the boundary conditions: at z = 0, f = 0; f′ = 0; φ = 0; at z = l, f′′ =
+0; f′′′ = 0; φ′ = 0.
+Here for the sake of simplicity, we take f′ = ∂f
+∂z , f′′′ = ∂3f
+∂z3 .
+We substitute Eq. (11) into Eq. (6) and multiply the ﬁrst equation by f and the
+second equation by φ and then integrate from 0 to l. After simple transformations
+using Eq. (9) and Eq. (10), we obtain the following system
+�
+a11¨q + a12 ˙q + a13q + b11¨r + b12 ˙r + b13r = Q(β, ˙β),
+a21¨q + a22 ˙q + b21¨r + b22 ˙r + b23r = M(β, ˙β),
+(12)
+where
+a11 =
+� l
+0 mf2dz,
+a12 = Cα
+y ρV
+� l
+0 bfdz,
+a13 =
+� l
+0
+d2(EJf ′′)
+dz2
+fdz,
+b11 = −
+� l
+0 mσT fφdz,
+b12 = −Cα
+y ρV
+� l
+0
+� 3
+4b − x0
+�
+bfφdz,
+b13 = −Cα
+y ρV 2 � l
+0 bfφdz,
+a21 =
+� l
+0 mσT fφdz = −b11,
+a22 = −Cα
+y ρV
+� l
+0
+�
+x0 − b
+4
+�
+bfφdz,
+b21 = −
+� l
+0 Jmφ2dz,
+b22 = − π
+16ρV
+� l
+0 b3φ2dz + Cα
+y ρV
+� l
+0 b(x0 − b
+4)
+� 3
+4b − x0
+�
+φ2dz,
+b23 = b(1)
+23 + b(2)
+23 = Cα
+y ρV 2 � l
+0 b(x0 − b
+4)φ2dz +
+� l
+0
+d(GJkφ′)
+dz
+φdz,
+11
+Q(β, ˙β) = �N
+i=1
+�
+¯AiV 2βi + ¯BiV ˙βi
+�
+,
+¯Ai =
+� l
+0 Aifdz,
+¯Bi =
+� l
+0 Bifdz,
+M(β, ˙β) = �N
+i=1
+�
+¯CiV 2βi + ¯DiV ˙βi
+�
+,
+¯Ci =
+� l
+0 Ciφdz,
+¯Di =
+� l
+0 Diφdz,
+β = col {βi, i = 1, N} ,
+˙β = col
+�
+˙βi, i = 1, N
+�
+, where N is the total number of
+feathers on the wing surface.
+Given two functions f and φ and the known distributions of the mass and stiﬀness
+parameters of the wing (we consider them independent of t), the coeﬃcients aij and
+bij, i, j = 1, 2, 3 can be calculated and will be constants. The accuracy of the further
+results depends on the choice of f and φ. Without going into details, we note that
+with good accuracy these functions can be calculated, for example, by the method of
+successive approximations. We complement Eq. (12) with equations for controls
+˙β = u,
+(13)
+where u = col {ui,
+i = 1, N} ;
+βi ∈ [0, β+],
+β+ > 0,
+i ∈
+¯
+1, n+,
+where n+ - is the
+total number of feathers on the lower surface of the wing;
+βi ∈ [β−, 0],
+β− < 0,
+i ∈
+¯
+n+ + 1, N,
+where n− = N − n+ - total number of
+feathers on the upper surface of the wing.
+Now, we use the following notation:
+x = col {q, ˙q, r, ˙r} = col {xi,
+i = ¯
+1, 4} .
+(14)
+Then, we substitute Eq. (14) into Eq. (12) and reduce this system to the normal
+Cauchy form. After that, after combining Eq. (12) and Eq. (13), we get
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+˙x1 = x2,
+˙x2 = �4
+k=1 C1kxk + F1(β, u),
+˙x3 = x4,
+˙x4 = �4
+k=1 C2kxk + F2(β, u),
+˙β = u,
+(15)
+where F1(β, u) = d11Q + d12M = �N
+i=1 (R1iβi + s1iui),
+F2(β, u) = d21Q + d22M = �N
+i=1 (R2iβi + s2iui),
+R1i = V 2 � ¯Aid11 + ¯Cid12
+�
+,
+s1i = V
+� ¯Bid11 + ¯Did12
+�
+,
+d11 =
+�
+a11
+�
+1 − a21b11
+a11b21
+��−1
+,
+d12 = −d11b11/b12,
+R2i = V 2 � ¯Aid21 + ¯Cid22
+�
+,
+s2i = V
+� ¯Bid21 + ¯Did22
+�
+,
+d21 = −a21 d11
+b21 ,
+d22 = (1 − a21d12) /b21,
+C11 = −d11a13,
+C12 = −d11(a12 − b11 a22
+b21 ),
+12
+C13 = −d11(b13 − b11 b23
+b21 ),
+C14 = −d11(b12 − b11 b22
+b21 ),
+C21 = −a21 c11
+b21 ,
+C22 = − (a22 + a21c12) /b21,
+C23 = − (b23 + a21c13) /b21,
+C24 = − (b22 + a21c14) /b21.
+Now, we convert Eq. (7) using Eq. (11) and Eq. (14)
+E = 1
+2
+� l
+0
+mf2dz ˙q2+1
+2
+� l
+0
+Jmφ2dz ˙r2−
+� l
+0
+mσT fφdz ˙q ˙r+1
+2
+� l
+0
+EJ(f′′)2dzq+1
+2
+� l
+0
+GJk(φ′)2dzr =
+1
+2a13x1 + 1
+2a11x2
+2 − 1
+2b(2)
+23 x3 − 1
+2b21x2
+4 − a21x2x4 ≤ E∗.
+(16)
+Finally, we use integration by parts:
+� l
+0
+EJ(f′′)2dz = EJf′′f′��l
+0−
+� l
+0
+�
+EJf′′�′ f′dz = −d (EJf′′)
+dz
+f|l
+0+
+� l
+0
+d2 (EJf′′)
+dz2
+fdz = a13,
+� l
+0
+GJk
+�
+φ′�2 dz = GJkφ′ φ|l
+0 −
+� l
+0
+d (GJkφ′)
+dz
+φdz = −b(2)
+23 .
+Now we summurize the results of the section. We obtained an equation for the
+dynamics of a system that describes small ﬂexural-twisting oscillations of a wing in
+a laminar ﬂow, taking into account the linear aerodynamic force and moment, see
+Eq. (15). Moreover, we obtained the equation for limiting the total energy of such a
+system, see Eq (16). The rate of change of the angle of inclination of the ’feather’ in
+relation to the wing plane can be selected as a control.
+4. CONTROL SYNTHESIS WITH THE SPEED-GRADIENT METHOD
+Up to this point, we have described the dynamic system taking into account how the
+solution should look in the optimal state, determined by Eq. (16). However, we do not
+yet have a control law that would allow us to control the system so that it reaches this
+state. In this section we synthesize such a law.
+First of all, we seek control for the Eq. (15) with the criterion of Eq. (16), using the
+speed-gradient method introduced in [52,53].
+dE
+dt = 1
+2a13x2+a11x2
+� 4
+�
+k=1
+C1kxk + F1(β, u)
+�
+−1
+2b(2)
+23 x4−b21x4
+� 4
+�
+k=1
+C2kxk + F2(β, u)
+�
+− a21x4
+� 4
+�
+k=1
+C1kxk + F1(β, u)
+�
+− a21x2
+� 4
+�
+k=1
+C2kxk + F2(β, u)
+�
+,
+13
+∇u
+�dE
+dt
+�
+= col
+�
+(a11x2 − a21x4)∂F1
+∂ui
+− (b21x4 + a21x2)∂F2
+∂ui
+, i = 1, N
+�
+=
+col {(a11x2 − a21x4)s1i − (b21x4 + a21x2)s2i, i = 1, N} =
+col {(a11s1i − a21s2i)x2 − (a21s1i + b21s2i)x4, i = 1, N} = col {µix2 + νix4, i = 1, N} ,
+where µi = a11s1i − a21s2i;
+νi = −(a21s1i + b21s2i).
+Thus,
+dui
+dt = −γi(µix2 + νix4),
+i = 1, N,
+γi > 0
+or
+dui
+dt = −γi(µi ˙x1 + νi ˙x3) ⇒ ui = −γi(µix1 + νix3) + consti.
+Since for x1 = x2 = x3 = x4 = 0 all values of ui = 0, and it means that consti =
+0,
+i = 1, N.
+The resulting control equation
+ui = −γi(µix1 + νix3)
+(17)
+is a control in the form of feedback on a deviation with constant coeﬃcients.
+5. MULTI-AGENT CONTROL
+Now, suppose that the feathers are some intelligent agents, such that each of them can
+receive information about the movement of the wing in the area, where it is located,
+exchange this information with other agents (transfer their information to them and
+receive their information), process the received data and form local force and moment
+impacts on the wing, trying to keep the wing as close to the curve as possible (see Fig.
+2). Assuming the square of the feather is quite small compared to the surface of the
+wing, we connect the feather with some point on the wing’s surface, when it is in the
+neutral position, i.e. with some point on the wing surface that this feather covers.
+For each feather (i = 1, N) we denote:
+• ¯zi, ¯ψi - coordinates of the point to which the i-th feather is connected;
+• y1i and Θ1i - deﬂection and angle of twisting of the wing at the location of the
+i-th feather (deviations from the curve (2));
+• Ni - the number of feathers with which the i-th feather can exchange information;
+• ¯bij - non-negative weighting coeﬃcient of the signiﬁcance of information from
+the i-th feather to the j-th. Here, we assume that ¯bij = ¯bji and �
+j∈Ni ¯bij = 1 -
+is the normalization condition;
+• ¯bij = 0, if the i-th and j-th feathers are not connected informationally;
+• ¯B = [¯bij] - adjacency matrix.
+14
+According to (8) and (11), for each i = 1, N it is necessary to provide
+��wi
+�� =
+��������
+y1i
+˙y1i
+Θ1i
+˙Θ1i
+��������
+=
+��������
+qf(zi)
+˙qf(zi)
+rφ(zi)
+˙rφ(zi)
+��������
+=
+��Φi¯x
+�� < ϵ
+for t > t1 for a long period of time; t1 - the moment of reaching Vflat; Φi =
+diag{f(zi), f(zi), φi(zi), φi(zi)}
+Moreover, we take into account that
+∥Φi¯x − Φj ¯x∥ = ∥[Φi − Φj] ¯x∥ ≤ ∥Φi¯x∥ + ∥Φj ¯x∥ < 2ϵ = ϵ∗.
+We deﬁne the quality of compensation for deviations from the stationary position
+of the wing using the functional
+L(¯x) = 1
+2
+N
+�
+i=1
+�
+j∈Ni
+¯bij ∥(Φi − Φj) ¯x∥2.
+(18)
+We formulate the problem by analogy with [51] as follows. In conditions of uniform
+rectilinear ﬂight of the aircraft in a laminar ﬂow, when approaching at time t0 to the
+critical speed of onset of (ﬂexural-torsional) ﬂutter wing (and further exceeding this
+speed), it is required to ﬁnd for each feather such controls ui of the system (15), which
+would ensure for the goal functional of Eq. (18) the fulﬁllment of the target condition:
+L(¯x) ≤ ϵ∗
+(19)
+for a small given parameter ϵ∗ > 0 for t > t1 during a suﬃciently long period of
+time, where t1 is the moment of reaching the critical ﬂutter speed.
+5.1. NON-MULTI-AGENT CONTROL SYNTHESIS
+Let us consider the functional
+L(x) = 1
+2
+N
+�
+i=1
+�
+j∈Ni
+¯bij ∥(Φi − Φj)¯x∥2 ≤ ϵ∗.
+We suppose that ¯bij ≥ 0 ∀i, j which implies L ≥ 0.
+∥(Φi − Φj)¯x∥2 = ∥diag{a, b, c, d}¯x∥2 =
+���(fijx1, fijx2, φijx3, φijx4)T ���
+2
+=
+f2
+ij(x2
+1 + x2
+2) + φ2
+ij(x2
+3 + x2
+4),
+where a = f(zi) − f(zj), b = f(zi) − f(zj), c = φ(zi) − φ(zj), d = φ(zi) − φ(zj) and
+fij = fi − fj = f(zi) − f(zj), φij = φi − φj = φ(zi) − φ(zj).
+15
+Now:
+L(x) = 1
+2
+N
+�
+i=1
+�
+j∈Ni
+¯bij
+�
+f2
+ij(x2
+1 + x2
+2) + φ2
+ij(x2
+3 + x2
+3)
+�
+= 1
+2
+�
+χ(x2
+1 + x2
+2) + λ(x2
+3 + x2
+4)
+�
+,
+(20)
+where χ = �N
+i=1
+�
+j∈Ni ¯bijf2
+ij ≥ 0 and λ = �N
+i=1
+�
+j∈Ni ¯bijφ2
+ij ≥ 0 are constants,
+which are determined by the topology of the agent network (for given functions of the
+waveforms f(z) and φ(z)).
+The case when χ = 0 or α = 0 is degenerate, because, in this situation, the functional
+(20) is insensitive to the presence of feathers.
+Following the Speed-Gradient method of [52] and using the equations (20) and (15),
+we obtain:
+dL
+dt = χ(x1x2 + x2 ˙x2) + λ(x3x4 + x4 ˙x4) =
+χx2
+�
+x1 +
+4
+�
+k=1
+C1kxk + F1(β, u)
+�
++ λx4
+�
+x3 +
+4
+�
+k=1
+C2kxk + F2(β, u)
+�
+,
+∇u ˙L = col
+�
+∂ ˙L
+∂up
+, p = 1, N
+�
+,
+∂
+∂up
+�dL
+dt
+�
+= χx2
+∂F1(β, u)
+∂up
++ λx4
+∂F2(β, u)
+∂up
+=
+χx2s1p + λx4s2p = χs1p ˙x1 + λs2p ˙x3.
+(21)
+Consequently:
+dup
+dt = −γp {χs1p ˙x1 + λs2p ˙x3} ⇒
+˙βp = up = −γp {χs1px1 + λs2px3} , γp > 0, p = 1, N,
+(22)
+since the integration constant is zero for the same reasons as in (17).
+The Eq. (17) and Eq. (22) have the same structure, but there are some diﬀerences.
+In fact, according to Eq. (15), we can consider the coeﬃcients s1i and s2i as the
+coeﬃcients of inﬂuence of the i-th feather on the force factor in bending vibrations
+and on the moment factor in torsional vibrations, respectively. Actually, the values of
+these coeﬃcients show the degree of participation of the i-th feather in wing dynamics.
+In Eq. (17), the feedback coeﬃcients take into account the inﬂuence of the types of
+wing oscillations on each other, while in Eq. (22) the feedback coeﬃcients for bend-
+ing and torsional vibrations are strictly separated and determined through inﬂuence
+factors only on its type of oscillation. Equation (22) is not multiagent by nature since
+its dependence upon information about the state of other agents is static and it is
+invariant to the dynamics of the i-th feather.
+16
+5.2. MULTI-AGENT CONTROL SYNTHESIS
+Now, we go back to Eq. (15). We expand the vector of phase coordinates by introducing
+˜xi = col {Φi¯x, βi} .
+(23)
+For this extended vector, we compose a functional – an analog of the functional of
+Eq. (20)
+˜L = 1
+2
+N
+�
+i=1
+�
+j∈Ni
+¯bij ∥col {(Φi − Φj)¯x, βi − βj}∥2.
+(24)
+The application of this approach can be justiﬁed by the fact that for small deviations
+of the wing from the stationary position, determined by Eq. (2), deviations of the
+feathers from their neutral position βi, i = 1, N should be small as well. That is, at
+least for feathers on one side of the wing (lower/upper), we have that
+(βi − βj)2 ≤ β2
+i + β2
+j < 2ϵ2
+β,
+where ϵβ is some fairly small number.
+After simple transformations, we get from (24)
+˜L = L + 1
+2
+N
+�
+i=1
+�
+j∈Ni
+¯bij (βi − βj)2 < ϵ∗ +
+N
+�
+i=1
+�
+j∈Ni
+¯bijϵ2
+β < ϵ∗∗.
+(25)
+Now, we apply the Speed-Gradient method:
+d˜L
+dt = ˙L +
+N
+�
+i=1
+�
+j∈Ni
+¯bij (βi − βj) (ui − uj);
+∇u
+�
+d˜L
+dt
+�
+= col
+
+
+
+∂ ˙L
+∂up
++ 2
+�
+j∈Np
+¯bpj(βp − βj)
+
+
+
+Finally, the control law takes the following form:
+˙βp = up = −˜γp (χs1p ˙x1 + λs2p ˙x3) − 2˜γp
+�
+j∈Np
+¯bpj(βp − βj), ˜γp > 0, p = 1, N.
+(26)
+It is important to note the multi-agent nature of the control protocol of Eq.(23)
+and Eq. (26), since the control signal for the rotation of each feather is formed on the
+basis of information about its own current state and on the basis of the current state
+of the feathers associated with it: the second term in Eq. (26). At the same time, the
+ﬁrst part of the law of Eq. (26) describes control in the form of feedback with constant
+coeﬃcients according to the speed of deviation of bending and torsional vibrations
+from the stationary state of Eq. (2).
+17
+It is essential that if ˙x1 = ˙x3 = 0,. Then this does not entail ui = 0, since in the
+general case there can be x1 ̸= 0 and x3 ̸= 0. To reduce them, it is necessary to apply
+a control deﬁned by Eq (26). The expression ˙βp = up = 0 is true only in the case
+of complete absence of oscillations, when x1 = x2 = x3 = x4 = 0, since only then
+βp = 0, p = 1, N.
+The control of Eq. (26) does not explicitly depend on the time, at which the critical
+ﬂutter speed is reached. The last allows using this control without any changes also in
+the case of multiple transitions in speed across this boundary.
+6. CONCLUSIONS AND OUTLOOK
+This work is the ﬁrst study of the authors, related to multiagent control of the wing
+with feathers aimed to avoid increasing wing oscillations when approaching ﬂutter. In
+the article - a mathematical model of the bending-torsional vibrations of an airplane
+wing with controlled feathers on its surface is given; - three diﬀerent statements of the
+control problem are considered, which diﬀer by the goal functional; - the three control
+laws (Eq. (17), Eq. (22) and Eq. (26)) are synthesized by the Speed-Gradient method.
+Only one of them: Eq. (26) is multi-agent.
+Eq. (22) is an ”intermediate” one for the synthesis of a multi-agent control law.
+It has a similar structure to Eq. (17), but takes into account the presence of other
+feathers and their contribution. However, the information about them remains static.
+It means that the state and dynamics of other pens is not considered. The multi-agent
+control law allows for each feather to take into account information about its own
+current state and about the current state of feathers in the area of the wing where it is
+located. As a rule, this allows for more precise tuning and quicker tuning to external
+factors, which makes this equation the most promising.
+In the future, we advise to study the eﬀectiveness of the obtained control laws
+and to compare them. The most critical indicator in the comparison should be the
+time, during which the system is able to damp vibrations to a safe level and hold
+them. The relevance of this indicator is due to the rather fast process of increasing
+wing oscillations during ﬂutter. Another promising area for the further research is the
+development of multi-agent management of feathers following the example of a swarm
+and research its eﬀectiveness.
+ACKNOWLEDGMENT
+Section 3 of the work was carried out within the project ”Artiﬁcial Intelligence and
+Data Science: Theory, Technology, Industry and Interdisciplinary Research and Ap-
+plications” on the state order of St. Petersburg State University.
+Sections 4-5 of this work was supported by IPME RAS Russian Science Foundation
+(project 16-19-00057).
+References
+[1] Bisplinghoﬀ, R. L., Ashley, H., and Halfman, R. L., Aeroelasticity, Addison-Wesley, Read-
+ing, MA, 1955, p. 527.
+18
+[2] Livne, E., “Integrated Aeroservoelastic Optimization: Status and Progress,” Journal of
+Aircraft, Vol. 36, No. 1, Jan.–Feb. 1999, pp. 122–145.
+[3] Ashley, H., “Flutter Suppression Within Reach,” Aerospace America, Aug. 1988, pp.
+14–16.
+[4] Bollay, W., “Aerodynamic Stability and Automatic Control: The Fourteenth Wright
+Brothers Lecture,” Journal of the Aeronautical Sciences, Vol. 18, No. 9, 1951, pp. 569–617.
+[5] Roskam, J., Airplane Flight Dynamics and Automatic Flight Controls, Parts I and II,
+DARcorporation, Lawrence, KS, 2013.
+[6] Schmidt, D. K., Modern Flight Dynamics, McGraw–Hill, New York, 2012.
+[7] Wykes, J. H., and Lawrence, R. E., “Aerothermoelasticity: Its Impact on Stability and
+Control of Winged Aerospace Vehicles,” Journal of Aircraft, Vol. 2, No. 6, Nov.–Dec.
+1965, pp. 517–526.
+[8] Leylek, E. A., and Costello, M., “Use of Compliant Hinges to Tailor Flight Dynamics of
+Unmanned Aircraft,” Journal of Aircraft, Vol. 52, No. 5, 2015, pp. 1692–1706.
+[9] Wilson, J., “The Flutter of Servo-Controlled Aircraft,” Journal of the Aeronautical Sci-
+ences, Vol. 16, No. 7, 1949, pp. 397–404.
+[10] Nicolai, L., Hunten, K., Zink, P. S., and Flick, P., “System Beneﬁts of Active Flutter
+Suppression for a SensorCraft-Type Vehicle,” AIAA Paper 2010-9349, 2010.
+[11] Mukhopadhyay, V., and Livne, E., “Aeroservoelasticity,” Encyclopedia of Aerospace En-
+gineering, Wiley, Hoboken, NJ, 2010.
+[12] Danowsky, B. P., Thompson, P. M., Farhat, C., Lieu, T., Harris, C., and Lechniak, J.,
+“Incorporation of Feedback Control into a High-Fidelity Aeroservoelastic Fighter Aircraft
+Model,” Journal of Aircraft, Vol. 47, No. 4, 2010, pp. 1274–1282.
+[13] Danowsky,B. P., Lieu, T., and Conderre-Chabot, A., “Control Oriented Aeroservoelastic
+Modeling of a Small Flexible Aircraft Using Computational Fluid Dynamics and Compu-
+tational Structural Dynamics,” AIAA Paper 2016-1749, 2016.
+[14] Bendiksen, O. O., “Energy Approach to Flutter Suppression and Aeroelastic Control,”
+Journal of Guidance, Control, and Dynamics, Vol. 24, No. 1, 2001, pp. 176–184.
+[15] Freymann, R., “New Simpliﬁed Ways to Understand the Interaction Between Aircraft
+Structure and Active Control Systems,” AIAA Paper 1984-1868, 1984.
+[16] Wykes, J., “Structural Dynamic Stability Augmentation and Gust Alleviation of Flexible
+Aircraft,” AIAA Paper 1968-1067, 1968.
+[17] Preumont, A., Vibration Control of Active Structures–An Introduction, 2nd ed., Kluwer
+Academic, Norwell, MA, 2002, pp. 101–103, Chap. 13.
+[18] Vepa, R., “Active Flutter Suppression by Feedback Compensation of Transport Lags,”
+Journal of Guidance, Control, and Dynamics, Vol. 30, No. 3, 2007, pp. 879–882.
+[19] Nissim, E., “Controller Reduction Using Normal Coordinates of Reconstruction Error
+Matrix and Component Cost Analysis Method,” Journal of Guidance, Control, and Dy-
+namics, Vol. 20, No. 4, 1997, pp. 826–828.
+[20] Huang, R., Hu, H. Y., and Zhao, Y. H., “Single-Input/Single-Output Adaptive Flutter
+Suppression of a Three-Dimensional Aeroelastic System,” Journal of Guidance, Control,
+and Dynamics,Vol. 35, No. 2, 2012, pp. 659–665.
+[21] Lee, K. W., and Singh, S. N., “Multi-Input Noncertainty-Equivalent Adaptive Control
+of an Aeroelastic System,” Journal of Guidance, Control, and Dynamics, Vol. 33, No. 5,
+2010, pp. 1451–1460.
+[22] Zeng, J., Wang, J., de Callafon, R., and Brenner, M., “Suppression of the Aeroelas-
+tic/Aeroservoelastic Interaction Using Adaptive Feedback Control Instead of Notching
+Filters,” AIAA Paper 2011-6459, 2011.
+[23] Nguyen, N. T., and Swei, S.-M., “Adaptive Linear Quadratic Gaussian Optimal Control
+Modiﬁcation for Flutter Suppression of Adaptive Wing,” AIAA Paper 2015-0118, 2015.
+[24] Lee, K. W., and Singh, S. N., “Adaptive Control of Multi-Input Aeroelastic System with
+Constrained Inputs,” Journal of Guidance, Control, and Dynamics, Vol. 38, No. 12, 2015,
+pp. 2337–2350.
+[25] Danowsky, B. P., Thompson, P. M., Lee, D. C., and Brenner, M., “Modal Isolation and
+19
+Damping for Adaptive Aeroservoelastic Suppression,” AIAA Paper 2013-4743, 2013.
+[26] Huang, R., Hu, H. Y., and Zhao, Y. H., “Designing Active Flutter Suppression for High-
+Dimensional Aeroelastic Systems Involving a Control Delay,” Journal of Fluids and Struc-
+tures, Vol. 34, No. 1, 2012, pp. 33–50.
+[27] Platanitis, G., and Strganac, T. W., “Control of a Nonlinear Wing Section Using Leading-
+and Trailing-Edge Surfaces,” Journal of Guidance, Control, and Dynamics, Vol. 27, No.
+1, 2004, pp. 52–58.
+[28] Jinwu, X., Yan, Y., and Li, D., “Recent Advance in Nonlinear Aeroelastic Analysis and
+Control of the Aircraft,” Chinese Journal of Aeronautics, Vol. 27, No. 1, Feb. 2014, pp.
+12–22.
+[29] Mannarino, A., Dowell, E. H., and Mantegazza, P., “An Adaptive Controller for Nonlinear
+Flutter Suppression and Free-Play Compensation,” Journal of Vibration and Control, Vol.
+23, No. 14, Nov. 2015, pp. 2269–2290.
+[30] Tantaroudas, N. D., Da Ronch, A., Gai, G., and Badcock, K. J., “An Adaptive Aeroelastic
+Control Approach Using Non Linear Reduced Order Models,” AIAA Paper 2014-2590,
+2014.
+[31] Singh, K. V., McDonough, L. A., Kolonay, R., and Cooper, J., “Receptance Based Active
+Aeroelastic Control Using Multiple Control Surfaces,” Journal of Aircraft, Vol. 51, No. 1,
+2014, pp. 335–342.
+[32] Balakrishnan, A. V., Aeroelasticity, The Continuum Theory, Springer, New York, 2012.
+[33] Eli Livne Aircraft Active Flutter Suppression: State of the Art and Technology Maturation
+Needs JOURNAL OFAIRCRAFT Vol. 55, No. 1, 2018 pp. 410-450
+[34] Malik, S., Ricci, S. Riccobene, L. Aeroelastic analysis of a slender wing. CEAS Aeronaut
+J (2020). https://doi.org/10.1007/s13272-020-00459-6
+[35] Stochastic Modeling and Reliability Analysis of Wing Flutter Sandeep Kumar; Amit K.
+Onkar, Ph.D.; and M. Manjuprasad, Journal of Aerospace Engineering Volume 33 Issue
+5, 2020
+[36] Mohammad Ghalandari, Shahaboddin Shamshirband, Amir Mosavi Kwokwing Chau
+(2019) Flutter speed estimation using presented diﬀerential quadrature method formu-
+lation, Engineering Applications of Computational Fluid Mechanics 13:1, 804-810, DOI:
+10.1080/19942060.2019.1627676
+[37] Zhijun Yang, Rui Huang, Yonghui Zhao, Haiyan Hu Transonic ﬂutter suppression for a
+three-dimensional elastic wing via active disturbance rejection control, Journal of Sound
+and Vibration 445 (2019) 168-187
+[38] Robust Modal Damping Control for Active Flutter Suppression Julian Theis, Harald
+Pﬁfer and Peter Seiler, Journal of guidance, control and dynamics Volume 43, Number 6,
+2020 https://doi.org/10.2514/1.G004846
+[39] A. L. Fradkov, D. S. Shalymov and A. V. Proskurnikov, ”Speed-gradient entropy max-
+imization in networks,” 2016 IEEE Conference on Norbert Wiener in the 21st Century
+(21CW), Melbourne, VIC, 2016, pp. 1-5, doi: 10.1109/NORBERT.2016.7547461
+[40] A. Aleksandrov, A. Fradkov and A. Semenov, ”Delayed and Switched Control of Forma-
+tions on a Line Segment: Delays and Switches Do Not Matter,” in IEEE Transactions on
+Automatic Control, vol. 65, no. 2, pp. 794-800, Feb. 2020, doi: 10.1109/TAC.2019.2918995.
+[41] Weiss, G. (ed.): Multiagent Systems: A Modern Approach to Distributed Artiﬁcial Intel-
+ligence. MIT Press, Cambridge, MA, USA (1999)
+[42] S. E. Parsegov, A. E. Polyakov and P. S. Shcherbakov, “Nonlinear ﬁxedtime control
+protocol for uniform allocation of agents on a segment,” in: Proc. 51st IEEE Conf. Decision
+and Control, Maui, Hawaii, USA, 2012, pp. 7732–7737.
+[43] R. Olfati-Saber, J. Fax, and R. Murray, “Consensus and cooperation in networked multi-
+agent systems,” Proceedings of the IEEE, vol. 95, no. 1, pp. 215–233, 2007.
+[44] W. Ren and R. W. Beard, “Consensus seeking in multiagent systems under dynamically
+changing interaction topologies,” IEEE Trans. On Automat. Control, vol. 50, no. 5, pp.
+655–661, 2005.
+[45] K. Amelin, N. Amelina, O. Granichin, O. Granichina and Y. Ivanskiy, ”Synchronization
+20
+of Multi-Agent System of “Feathers” on the Surface of the Wing in a Turbulent Airﬂow,”
+2019 IEEE Conference on Control Technology and Applications (CCTA), Hong Kong,
+China, 2019, pp. 355-359, doi: 10.1109/CCTA.2019.8920586.
+[46] O. Granichin, T. Khantuleva and O. Granichina, ”Local voting protocol for the adaptation
+of airplane’s “feathers” in a turbulence ﬂow,” 2017 American Control Conference (ACC),
+Seattle, WA, 2017, pp. 5684-5689, doi: 10.23919/ACC.2017.7963840.
+[47] G.S. Buesgens, Aerodynamics, ﬂight dynamics of long-haul aircraft (In Russian). 1995.
+774 p.
+[48] E.P. Grossman, The vibration course of the parts of the aircraft (In Russian). Moscow.
+1940. 312 p.
+[49] Ya.Ts. Fyn, Introduction to Aeroelastic Theory (In Russian). Moscow 1959. 524 p.
+[50] R.L. Bisplinghoﬀ, H. Ashley and R.L. Halfman, Aeroelasticity. New York 1955.
+[51] O.N. Granichin and T.A. Khantuleva, Adapting wing elements (feathers) of an airplane
+in a turbulent ﬂow with a multiagent protocol,Autom Remote Control 78, 1867–1882.
+2017.
+[52] A. L. Fradkov, Cybernetical physics: from control of chaos to quantum control. Springer-
+Verlag. 2007.
+[53] A. L. Fradkov, Speed-Gradient scheme and its application in adaptive control problems,
+Automation and Remote Control. Vol. 40(9),pp. 1333–1342. 1979.
+[54] E. Ravve, Z. Volkovich, G.-W. Weber, Incremental Reasoning on Strongly Distributed
+Multi-agent Systems, 17th International Symposium on Symbolic and Numeric Algo-
+rithms for Scientiﬁc Computing, SYNASC 2015, Timisoara, Romania, September 21-24,
+2015, pp. 415—422, IEEE Computer Society
+[55] E. Ravve, Z. Volkovich, G.-W. Weber, A Uniform Approach to Incremental Automated
+Reasoning on Strongly Distributed Structures, Global Conference on Artiﬁcial Intelli-
+gence, GCAI 2015, Tbilisi, Georgia, October 16-19, 2015, EPiC Series in Computing
+21

@@ -13,7 +13,7 @@ def download_all_pdfs(csv_file, base_filename="Pdf", target_folder="ScrapedPDFs"
       pdf_url = row[0]
       # filename = f"{base_filename}{i + 1}.pdf" 
       # Enable the above line for multiple files
-      filename = f"{base_filename}.pdf"
+      filename = f"{base_filename}{i}.pdf"
       full_path = os.path.join(target_folder, filename)
 
       response = requests.get(pdf_url, stream=True)
@@ -28,7 +28,7 @@ def download_all_pdfs(csv_file, base_filename="Pdf", target_folder="ScrapedPDFs"
         print(f"Failed to download PDF from {pdf_url}")
 
 # csv_file = "OnlyURL.csv"
-# base_filename = "MyReport"
+# base_filename = "NewPdf"
 # target_folder = "OnlyPDFs"
 
 # download_all_pdfs(csv_file, base_filename, target_folder)

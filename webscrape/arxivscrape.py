@@ -9,7 +9,7 @@ def scrape(topic):
   # Refined Topic based on CS
   refined_topic = f"cat:cs* AND ti:{topic}"
   print(refined_topic)
-  num = 1
+  num = 3
   search = arxiv.Search(
     query = refined_topic,
     max_results = num,

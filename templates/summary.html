@@ -2,18 +2,20 @@
 
 {% block content %}
 
-
-<div class="position-absolute text-justify top-10 start-50 translate-middle w-50">
+{% for i in range(3) %}
+<div class="position-absolute text-justify start-50 translate-middle w-50 abcd{{i}}">
     <button class="btn btn-dark w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThis"
-        aria-expanded="false" aria-controls="collapseThis">
-        {{summary_data[0]}}
+        aria-expanded="false" aria-controls="collapseThis{{i}}">
+        
+        {{summary_data[0][i]}}
+        
         <!-- Paper Title -->
     </button>
 </div>
 
 <div class="position-absolute text-justify top-50 start-50 translate-middle overflow-auto summary collapse w-50"
-    id="collapseThis">
-    {{summary_data[1]}}
+    id="collapseThis{{i}}">
+    {{summary_data[1][i]}}
     <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi convallis dolor at aliquet consectetur. Vestibulum
     tortor erat, faucibus eu arcu nec, semper aliquam ligula. Suspendisse commodo ligula nec enim molestie convallis.
     Duis venenatis ullamcorper ultricies. Vivamus ornare dictum sem eu lacinia. Sed feugiat ligula in porttitor lacinia.
@@ -189,7 +191,7 @@
     sapien at posuere aliquam, risus ligula dignissim ipsum, et sagittis tortor sapien non sem. Sed nisl magna, semper
     id urna dignissim, vehicula facilisis ipsum. -->
 </div>
-
+{% endfor %}
 <div class="position-absolute text-justify bottom-0 start-50 translate-middle">
     <a href="/images"><button class="btn btn-dark">Go to images</button></a>
 </div>

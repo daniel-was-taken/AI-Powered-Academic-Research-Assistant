@@ -1,23 +1,50 @@
 Title,ID,URL,Summary
-AUFormer: Vision Transformers are Parameter-Efficient Facial Action Unit Detectors,http://arxiv.org/abs/2403.04697v1,http://arxiv.org/pdf/2403.04697v1,"Facial Action Units (AU) is a vital concept in the realm of affective
-computing, and AU detection has always been a hot research topic. Existing
-methods suffer from overfitting issues due to the utilization of a large number
-of learnable parameters on scarce AU-annotated datasets or heavy reliance on
-substantial additional relevant data. Parameter-Efficient Transfer Learning
-(PETL) provides a promising paradigm to address these challenges, whereas its
-existing methods lack design for AU characteristics. Therefore, we innovatively
-investigate PETL paradigm to AU detection, introducing AUFormer and proposing a
-novel Mixture-of-Knowledge Expert (MoKE) collaboration mechanism. An individual
-MoKE specific to a certain AU with minimal learnable parameters first
-integrates personalized multi-scale and correlation knowledge. Then the MoKE
-collaborates with other MoKEs in the expert group to obtain aggregated
-information and inject it into the frozen Vision Transformer (ViT) to achieve
-parameter-efficient AU detection. Additionally, we design a Margin-truncated
-Difficulty-aware Weighted Asymmetric Loss (MDWA-Loss), which can encourage the
-model to focus more on activated AUs, differentiate the difficulty of
-unactivated AUs, and discard potential mislabeled samples. Extensive
-experiments from various perspectives, including within-domain, cross-domain,
-data efficiency, and micro-expression domain, demonstrate AUFormer's
-state-of-the-art performance and robust generalization abilities without
-relying on additional relevant data. The code for AUFormer is available at
-https://github.com/yuankaishen2001/AUFormer."
+Light Efficient Flutter Shutter,http://arxiv.org/abs/1509.01220v1,http://arxiv.org/pdf/1509.01220v1,"Flutter shutter is a technique in which the exposure is chopped into segments
+and light is only integrated part of the time. By carefully selecting the
+chopping sequence it is possible to better condition the data for
+reconstruction problems such as motion deblurring, focal sweeping, and
+compressed sensing. The partial exposure trades better conditioning for less
+energy. In problems such as motion deblurring the available energy is what
+caused the problem in the first place (as strong illumination allows short
+exposure thus eliminates motion blur). It is still beneficial because the
+benefit from the better conditioning outweighs the cost in energy.
+  This documents is focused on light efficient flutter shutter that provides
+better conditioning and better energy utilization than conventional flutter
+shutter."
+Probabilistic Prediction of Coalescence Flutter Using Measurements: Application to the Flutter Margin Method,http://arxiv.org/abs/2210.15667v1,http://arxiv.org/pdf/2210.15667v1,"Zimmerman and Weissenburger's flutter margin method is widely used to
+estimate the aeroelastic coalescence flutter speed. In contrast to aeroelastic
+decay rates, the flutter margin exhibits monotonic decay with respect to
+airspeed redering it effective in extrapolating the flutter speed using flight
+test data conducted at pre-flutter airspeeds. This paper reports the
+generalization of the Bayesian formulation of the flutter margin method by
+Khalil et al. developed to tackle measurement and modeling uncertainties. This
+paper improves the predictive performance of the previous algorithm by
+incorporating the joint prior of aeroelastic modal frequencies and decay rates
+among airspeeds in order to better estimate the joint posterior of modal
+parameters using observational data. The modal parameter prior is constructed
+using the classical two-degree-of-freedom pitch-plunge aeroelastic model whose
+system matrices (e.g. structural stiffness and damping matrices) vary randomly.
+Such joint modal parameter prior enforces statistical dependence among
+posteriors of modal parameters and the associated flutter margins across
+airspeeds. Numerical studies demonstrate a considerable reduction of
+uncertainties on the predicted flutter speed obtained from the generalized
+Bayesian flutter margin method. This improved algorithm can cut cost by
+reducing the number of flight tests and better assess the uncertainty against
+aeroelastic flutter."
+Multi-agent control of airplane wing stability under the flexural torsion flutter,http://arxiv.org/abs/2012.04582v1,http://arxiv.org/pdf/2012.04582v1,"This paper proposes a novel method for prevention of the increasing
+oscillation of an aircraft wing under the flexural torsion flutter. The paper
+introduces the novel multi-agent method for control of an aircraft wing,
+assuming that the wing surface consists of controlled 'feathers' (agents).
+Theoretical evaluation of the approach demonstrates its high ability to prevent
+flexural-torsional vibrations of an aircraft. Our model expands the
+possibilities for damping the wing oscillations, which potentially allows an
+increase in aircraft speed without misgiving of flutter. The study shows that
+the main limitation is the time, during which the system is able to damp
+vibrations to a safe level and keep them. The relevance of this indicator is
+important because of the rather fast process of increasing wing oscillations
+during flutter. In this paper, we suggest a new method for controlling an
+aircraft wing, with the use of which it becomes theoretically possible to
+increase the maximum flight speed of an aircraft without flutter occurrence. A
+mathematical model of the bending-torsional vibrations of an airplane wing with
+controlled feathers on its surface is presented. Based on the Speed-Gradient
+method a new control laws are synthesized."
