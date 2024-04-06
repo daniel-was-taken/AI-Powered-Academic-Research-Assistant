@@ -16,38 +16,37 @@ def home():
 
 @app.route("/summary", methods=['GET', 'POST'])
 def summary():
-    # if request.method == "POST":
-    #     topic = request.form["input"]
-    #     arxivscrape.scrape(topic)
-    #     df = pd.read_csv("Scrape.csv")
-    #     title = []
-    #     for i in range(3):
-    #         title.append(df.iloc[i,0])
-    #     csv_file = "OnlyURL.csv"
-    #     base_filename = "NewPdf"
-    #     target_folder = "OnlyPDFs"
-    #     downloadpdf.download_all_pdfs(csv_file, base_filename, target_folder)
+    if request.method == "POST":
+        topic = request.form["input"]
+        arxivscrape.scrape(topic)
+        df = pd.read_csv("Scrape.csv")
+        title = []
+        for i in range(3):
+            title.append(df.iloc[i,0])
+        csv_file = "OnlyURL.csv"
+        base_filename = "NewPdf"
+        target_folder = "OnlyPDFs"
+        downloadpdf.download_all_pdfs(csv_file, base_filename, target_folder)
 
-    #     for i in range(3):
-    #         pdfscrape(f'{base_filename}{i}')
+        for i in range(3):
+            pdfscrape(f'{base_filename}{i}')
 
-    #     textFile = 'text/' + base_filename + '.txt'
-    #     cleanText = base_filename + '_cleaned' + '.txt'
-    #     # preprocess.clean_data(textFile, cleanText)
+        textFile = 'text/' + base_filename + '.txt'
+        cleanText = base_filename + '_cleaned' + '.txt'
+        # preprocess.clean_data(textFile, cleanText)
 
-    #     current_dateTime = datetime.now()
-    #     input = []
-    #     for i in range(3):
-    #         print(current_dateTime)
-    #         newInput = get_summary(f'text/{base_filename}{i}.txt')
-    #         input.append(newInput)
-    #         current_dateTime = datetime.now()
-    #         print(current_dateTime)
-    input = ["ABDC","ABD","Ag"]
-    title = ["ABDC","ABD","Ag"]
-    if not input:
-        input = "HELLO WORLD"
-    return render_template("summary.html", summary_data=[title,input])
+        current_dateTime = datetime.now()
+        input = []
+        for i in range(3):
+            print(current_dateTime)
+            newInput = get_summary(f'text/{base_filename}{i}.txt')
+            input.append(newInput)
+            current_dateTime = datetime.now()
+            print(current_dateTime)
+    if not inputs:
+        inputs = ["HELLO WORLD"]
+        titles = ["hello world"]
+    return render_template("summary.html", titles=titles, inputs=inputs)
 
 @app.route("/images")
 def images():
