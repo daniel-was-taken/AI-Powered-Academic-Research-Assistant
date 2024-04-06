@@ -20,9 +20,9 @@ def summary():
         topic = request.form["input"]
         arxivscrape.scrape(topic)
         df = pd.read_csv("Scrape.csv")
-        title = []
+        titles = []
         for i in range(3):
-            title.append(df.iloc[i,0])
+            titles.append(df.iloc[i,0])
         csv_file = "OnlyURL.csv"
         base_filename = "NewPdf"
         target_folder = "OnlyPDFs"
@@ -36,11 +36,11 @@ def summary():
         # preprocess.clean_data(textFile, cleanText)
 
         current_dateTime = datetime.now()
-        input = []
+        inputs = []
         for i in range(3):
             print(current_dateTime)
             newInput = get_summary(f'text/{base_filename}{i}.txt')
-            input.append(newInput)
+            inputs.append(newInput)
             current_dateTime = datetime.now()
             print(current_dateTime)
     if not inputs:
