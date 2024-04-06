@@ -1,30 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="container" style="width: 800px;">
-    <div class="d-flex justify-content-center">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            {% for title in titles %}
-            <li class="nav-item" role="presentation">
-                <button class="nav-link {% if loop.index0 == 0 %}active{% endif %}" id="{{ title }}-tab"
-                    data-bs-toggle="tab" data-bs-target="#{{ title }}" type="button" role="tab"
-                    aria-controls="{{ title }}" aria-selected="{{ loop.index0 == 0|lower }}">{{ title }}</button>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="tab-content" id="myTabContent">
-        {% for input in inputs %}
-        <div class="tab-pane fade {% if loop.index0 == 0 %}show active{% endif %}" id="{{ titles[loop.index0] }}"
-            role="tabpanel" aria-labelledby="{{ titles[loop.index0] }}-tab">{{ input }}</div>
+<div class="container" style="width: 800px; max-height: 80vh; overflow-y: auto;">
+    <ul class="nav nav-tabs" id="papersTab" role="tablist">
+        {% for i in range(0, titles|length) %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if i == 0 %} active {% endif %}" id="{{ titles[i]|replace(' ', '') }}-tab" data-bs-toggle="tab" data-bs-target="#{{ titles[i]|replace(' ', '') }}" type="button" role="tab" aria-controls="{{ titles[i]|replace(' ', '') }}" aria-selected="{{ i == 0 }}">{{ titles[i] }}</button>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content" id="papersTabContent">
+        {% for i in range(0, titles|length) %}
+        <div class="tab-pane fade {% if i == 0 %} show active {% endif %}" id="{{ titles[i]|replace(' ', '') }}" role="tabpanel" aria-labelledby="{{ titles[i]|replace(' ', '') }}-tab">
+            <p>{{ inputs[i] }}</p>
+        </div>
         {% endfor %}
     </div>
 </div>
 
-
 <div class="position-absolute text-justify bottom-0 start-50 translate-middle">
     <a href="/images"><button class="btn btn-dark">Go to images</button></a>
 </div>
-
 {% endblock %}
