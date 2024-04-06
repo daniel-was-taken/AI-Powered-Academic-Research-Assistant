@@ -5,17 +5,21 @@ import arxiv
 def scrape(topic):
   # topic = input("Enter the topic you need to search for : ")
   # num = int(input("Enter how many papers you want: "))
-
+  client = arxiv.Client()
   # Refined Topic based on CS
   refined_topic = f"cat:cs* AND ti:{topic}"
   print(refined_topic)
   num = 3
   search = arxiv.Search(
-    query = refined_topic,
+    query = f"cat:cs* AND ti:{topic}",
+    # query = refined_topic,
     max_results = num,
     # sort_by = arxiv.SortCriterion.SubmittedDate,
     # sort_order = arxiv.SortOrder.Descending
   )
+
+  for r in client.results(search):
+    print(r.title)
 
   all_data = []
   for result in search.results():
