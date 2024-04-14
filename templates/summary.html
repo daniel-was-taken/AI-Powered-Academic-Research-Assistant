@@ -1,20 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container" style="width: 800px; max-height: 80vh; overflow-y: auto;">
-    <ul class="nav nav-tabs" id="papersTab" role="tablist">
-        {% for i in range(0, titles|length) %}
-        <li class="nav-item" role="presentation">
-            <button class="nav-link {% if i == 0 %} active {% endif %}" id="{{ titles[i]|replace(' ', '') }}-tab" data-bs-toggle="tab" data-bs-target="#{{ titles[i]|replace(' ', '') }}" type="button" role="tab" aria-controls="{{ titles[i]|replace(' ', '') }}" aria-selected="{{ i == 0 }}">{{ titles[i] }}</button>
-        </li>
-        {% endfor %}
-    </ul>
-    <div class="tab-content" id="papersTabContent">
-        {% for i in range(0, titles|length) %}
-        <div class="tab-pane fade {% if i == 0 %} show active {% endif %}" id="{{ titles[i]|replace(' ', '') }}" role="tabpanel" aria-labelledby="{{ titles[i]|replace(' ', '') }}-tab">
-            <p>{{ inputs[i] }}</p>
+<div class="container" style="padding-top: 3rem; max-height: 80vh; overflow-y: auto; margin-left: 0;">
+    <div class="row">
+        <div class="col-auto">
+            <ul class="nav flex-column nav-pills" id="papersTab" role="tablist">
+                {% for i in range(0, titles|length) %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {% if i == 0 %} active {% endif %}" id="{{ titles[i]|replace(' ', '') }}-tab" data-bs-toggle="tab" data-bs-target="#{{ titles[i]|replace(' ', '') }}" type="button" role="tab" aria-controls="{{ titles[i]|replace(' ', '') }}" aria-selected="{{ i == 0 }}">{{ titles[i] }}</button>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-        {% endfor %}
+        <div class="col" style="padding-left: 10rem;">
+            <div class="tab-content" id="papersTabContent">
+                {% for i in range(0, titles|length) %}
+                <div class="tab-pane fade {% if i == 0 %} show active {% endif %}" id="{{ titles[i]|replace(' ', '') }}" role="tabpanel" aria-labelledby="{{ titles[i]|replace(' ', '') }}-tab">
+                    <p>{{ inputs[i] }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 

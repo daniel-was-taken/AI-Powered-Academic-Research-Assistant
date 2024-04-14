@@ -145,24 +145,14 @@ header h1 {
 } */
 
 #loading {
-    display: none;
-    cursor: wait;
+  display: none;
+  cursor: wait;
 }
 
 #loading-image {
-	position: absolute;
-	width: 10rem;
-	top: 40%;
-	left: 46%;
-	z-index: 100;
-  } 
-
-.abcd0 {
-  top: 10%;
-}
-.abcd1 {
-  top: 30%;
-}
-.abcd2 {
-  top: 50%;
+  position: absolute;
+  width: 10rem;
+  top: 40%;
+  left: 46%;
+  z-index: 100;
 }
