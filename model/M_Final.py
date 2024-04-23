@@ -38,19 +38,43 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-tokenizer = AutoTokenizer.from_pretrained("daniel-was-taken/long-t5-scisumm-accelerate-v2")
-model = AutoModelForSeq2SeqLM.from_pretrained("daniel-was-taken/long-t5-scisumm-accelerate-v2")
+import requests
+
+# API_URL = "https://api-inference.huggingface.co/models/daniel-was-taken/long-t5-scisumm-accelerate-v2"
+
+API_URL = "https://api-inference.huggingface.co/models/pszemraj/long-t5-tglobal-base-sci-simplify"
+headers = {"Authorization": "Bearer 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"}
+
+
+
+
+# tokenizer = AutoTokenizer.from_pretrained("daniel-was-taken/long-t5-scisumm-accelerate-v2")
+# model = AutoModelForSeq2SeqLM.from_pretrained("daniel-was-taken/long-t5-scisumm-accelerate-v2")
 
 with open("text/NewPdf0.txt", "r", encoding="utf-8") as f:
     text_to_summarize = f.read()
     
+
+# text_to_summarize = "Jack and Jill went up the hill to get a bucket of water, Jack fell down and broke his head and Jill came tumbling after."
 text = "Provide a brief summary of the following: " + text_to_summarize
 
 
-input_ids = tokenizer.encode(text, return_tensors="pt")
-generated_sequence = model.generate(input_ids=input_ids)
-output_text = tokenizer.decode(generated_sequence.squeeze(), skip_special_tokens=True)
-print(output_text)
+def query(payload):
+	response = requests.post(API_URL, headers=headers, json=payload)
+	return response.json()
+	
+output = query({
+	"inputs": f"{text_to_summarize}",
+})
+
+
+print(output)
+
+
+# input_ids = tokenizer.encode(text, return_tensors="pt")
+# generated_sequence = model.generate(input_ids=input_ids)
+# output_text = tokenizer.decode(generated_sequence.squeeze(), skip_special_tokens=True)
+# print(output_text)
 
 
 end = datetime.datetime.now()
