@@ -13,7 +13,7 @@ def extract_images_and_captions(pdf_path):
         page_text = pdf_document[page_num].get_text()
 
         # Use regex to find all captions associated with figures
-        figure_captions = re.findall(r'\bFigure\s+\d+:\s+(.*)', page_text, re.IGNORECASE)
+        figure_captions = re.findall(r'\bFigure\s+\d+.*\d*:\s+(.*)', page_text, re.IGNORECASE)
         # print(figure_captions)
         for img_index, img_info in enumerate(images):
             xref = img_info[0]
@@ -23,7 +23,10 @@ def extract_images_and_captions(pdf_path):
             if img_index < len(figure_captions):
                 caption = figure_captions[img_index]
             else:
-                caption = figure_captions[img_index-1]
+                try:
+                    caption = figure_captions[img_index-1]
+                except:
+                    caption = None
             
             images_cap[caption] = image_bytes
 
