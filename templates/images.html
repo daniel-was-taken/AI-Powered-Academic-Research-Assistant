@@ -7,10 +7,14 @@
     {% for i in range(0, data_length) %}
         <br/>
         Paper {{i}}
-
+        <br/>
         {% for k,v in images_caption[i].items() %}
-            <img id="picture" src="data:image/jpeg;base64,{{ v }}">
-            {{k}}
+            {% if k != None %}
+                <img id="picture" src="data:image/jpeg;base64,{{ v }}" height="100" width="150">
+                <br/>
+                {{k}}
+                <br/>
+            {% endif %}
         {% endfor %}
 
         <br/>

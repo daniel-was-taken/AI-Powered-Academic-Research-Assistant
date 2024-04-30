@@ -2,7 +2,9 @@ import fitz  # PyMuPDF
 from PyPDF2 import PdfReader 
 import re
 import PIL.Image
+from PIL import Image
 import io
+import base64
 
 def extract_images_and_captions(pdf_path):
     print(pdf_path)
@@ -35,8 +37,18 @@ def extract_images_and_captions(pdf_path):
                     caption = figure_captions[img_index-1]
                 except:
                     caption = None
+            pil_image = Image.open(io.BytesIO(image_bytes))
+            buffered = io.BytesIO()
+            pil_image.save(buffered, format="PNG")
+            img_str = base64.b64encode(buffered.getvalue()).decode()
             
-            images_cap[caption] = image_bytes
+
+
+            images_cap[caption] = img_str
+            # images_cap[caption] = image_bytes
+
+
+            # pil_image = Image.open(io.BytesIO(image_bytes))
 
             images_with_captions.append({
                 "caption": caption,
