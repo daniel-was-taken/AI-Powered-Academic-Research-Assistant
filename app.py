@@ -4,6 +4,8 @@ from flask import Flask, render_template, request
 # from datetime import datetime
 # from webscrape import arxivscrape, downloadpdf, preprocess
 # from M_pdfscrape import pdfscrape
+from M_ImageCapScrape import extract_images_and_captions
+
 # import os
 app = Flask(__name__)
 UPLOAD_FOLDER = 'OnlyPDFs'
@@ -52,8 +54,22 @@ def summary():
 
 @app.route("/images")
 def images():
-    counter = 7
-    return render_template("images.html", counter=counter+1)
+    base_filename = "NewPdf"
+    target_folder = "OnlyPDFs/"
+    pdf_location = target_folder + base_filename
+    
+    images_caption = []
+    for i in range(3):
+        images_caption.append(extract_images_and_captions(f'{pdf_location}{i}.pdf'))
+        # images_caption[i] = extract_images_and_captions(f'{pdf_location}{i}.pdf')
+        for i in range(0,len(images_caption)):
+            for k, v in images_caption[i].items():
+                print(k)
+
+    return render_template("images.html", images_caption = images_caption, data_length = len(images_caption))
+
+    # counter = 7
+    # return render_template("images.html", counter=counter+1)
 
 @app.route("/upload", methods=("GET","POST"))
 def upload():

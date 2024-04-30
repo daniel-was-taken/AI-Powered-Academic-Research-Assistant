@@ -2,10 +2,22 @@
 
 {% block content %}
 
-<div class="text-center">
-    {% for i in range(1,counter) %}
-    <img class="w-25 h-25" src="../static/images/image{{i}}.png" alt="alt-text">
+
+<div class = "text-center">
+    {% for i in range(0, data_length) %}
+        <br/>
+        Paper {{i}}
+
+        {% for k,v in images_caption[i].items() %}
+            <img id="picture" src="data:image/jpeg;base64,{{ v }}">
+            {{k}}
+        {% endfor %}
+
+        <br/>
+
+
     {% endfor %}
 </div>
+
 
 {% endblock %}

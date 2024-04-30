@@ -41,24 +41,28 @@ def extract_images_and_captions(pdf_path):
                 "image": image_bytes
             })
 
-        page_text = re.sub(r'\n+', '\n', page_text)  # Normalize newlines
-        page_text = re.sub(r'\n\s+', '\n', page_text)  # Remove leading spaces after newlines
-        page_text = re.sub(r'\s+\n', '\n', page_text)  # Remove trailing spaces before newlines
-        page_text = re.sub(r'\s+', ' ', page_text)  # Replace multiple spaces with a single space
+        # page_text = re.sub(r'\n+', '\n', page_text)  # Normalize newlines
+        # page_text = re.sub(r'\n\s+', '\n', page_text)  # Remove leading spaces after newlines
+        # page_text = re.sub(r'\s+\n', '\n', page_text)  # Remove trailing spaces before newlines
+        # page_text = re.sub(r'\s+', ' ', page_text)  # Replace multiple spaces with a single space
 
 
-        output_file = 'OCR_Rec/Text/' + "imageCap" + '.txt'
-        with open(output_file, 'a', encoding='utf-8') as file:
-            file.write(page_text)
+        # output_file = 'OCR_Rec/Text/' + "imageCap" + '.txt'
+        # with open(output_file, 'a', encoding='utf-8') as file:
+        #     file.write(page_text)
 
         figure_captions = [match.group() for match in re.finditer(r'\bFigure\s+\d+.*\d*:\s+(.*)',page_text)]
     
     pdf_document.close()
-    return images_with_captions, images_cap
+    # return images_with_captions, images_cap
+    return images_cap
+
 
 # Example usage
 pdf_path = "./OnlyPDFs/MyReport2.pdf"
-extracted_data , images_cap = extract_images_and_captions(pdf_path)
+
+# extracted_data , images_cap = extract_images_and_captions(pdf_path)
+images_cap = extract_images_and_captions(pdf_path)
 
 for k, v in images_cap.items():
-    print(k,v)
+    print(k)

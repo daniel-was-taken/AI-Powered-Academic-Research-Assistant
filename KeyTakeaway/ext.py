@@ -7,7 +7,9 @@ from sumy.summarizers.lsa import LsaSummarizer
 from sumy.summarizers.luhn import LuhnSummarizer
 from sumy.summarizers.kl import KLSummarizer
 
-file = 'text/textcontent.txt'
+# output_file = 'OCR_Rec/Text/' + "imageCap" + '.txt'
+
+file = 'text/NewPdf0.txt'
 parser = PlaintextParser.from_file(file, Tokenizer('english'))
 doc = parser.document
 
@@ -19,7 +21,8 @@ def print_out(sentences):
 print("\n LEX \n")
 
 lex = LexRankSummarizer()
-print_out(lex(doc, 2))
+
+print_out(lex(doc, 3))
 
 
 
