@@ -6,10 +6,11 @@ from sumy.summarizers.lex_rank import LexRankSummarizer
 from sumy.summarizers.lsa import LsaSummarizer
 from sumy.summarizers.luhn import LuhnSummarizer
 from sumy.summarizers.kl import KLSummarizer
-
+from preprocess_test import preprocess
 # output_file = 'OCR_Rec/Text/' + "imageCap" + '.txt'
+preprocess('./text/NewPdf2.txt')
 
-file = 'cleanTest.txt'
+file = 'KeyTakeaway/cleanTest.txt'
 parser = PlaintextParser.from_file(file, Tokenizer('english'))
 doc = parser.document
 
