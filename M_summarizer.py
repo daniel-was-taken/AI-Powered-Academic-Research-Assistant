@@ -17,7 +17,8 @@ def get_summary(text):
     # summarizer = Summarizer('pszemraj/long-t5-tglobal-base-sci-simplify')
 
     summarizer = Summarizer(
-        "daniel-was-taken/long-t5-tglobal-base-sci-simplify-scisumm",
+        # "daniel-was-taken/long-t5-tglobal-base-sci-simplify-scisumm",
+        "daniel-was-taken/long-t5-scisumm-accelerate-v2",
         use_cuda=True,
         max_length_ratio=max_length_ratio,
         token_batch_length=token_batch_length,

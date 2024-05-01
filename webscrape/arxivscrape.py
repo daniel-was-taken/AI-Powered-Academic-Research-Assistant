@@ -14,7 +14,7 @@ def scrape(topic):
     query = f"cat:cs* AND ti:{topic}",
     # query = refined_topic,
     max_results = num,
-    # sort_by = arxiv.SortCriterion.SubmittedDate,
+    sort_by = arxiv.SortCriterion.SubmittedDate,
     # sort_order = arxiv.SortOrder.Descending
   )
 
@@ -35,7 +35,8 @@ def scrape(topic):
   df = pd.DataFrame(all_data, columns=column_names)
 
   print("Number of papers extracted : ",df.shape[0])
-  df.head()
+  
+  print(df.head())
   data = {"Title":df["Title"],"ID":df["Id"],"URL": df['URL'],"Summary":df['Summary']}
   df1 = pd.DataFrame(data)
   data2 = {"URL":df["URL"]}
