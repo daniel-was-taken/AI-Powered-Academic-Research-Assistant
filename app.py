@@ -5,8 +5,8 @@ from datetime import datetime
 from webscrape import arxivscrape, downloadpdf #, preprocess
 from M_pdfscrape import pdfscrape
 from M_ImageCapScrape import extract_images_and_captions
+import os
 
-# import os
 app = Flask(__name__)
 UPLOAD_FOLDER = 'OnlyPDFs'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -62,12 +62,15 @@ def images():
     pdf_location = target_folder + base_filename
     
     images_caption = []
-    for i in range(3):
-        images_caption.append(extract_images_and_captions(f'{pdf_location}{i}.pdf'))
-        # images_caption[i] = extract_images_and_captions(f'{pdf_location}{i}.pdf')
-        for i in range(0,len(images_caption)):
-            for k, v in images_caption[i].items():
-                print(k)
+    if len(titles) == 1:
+        images_caption.append(extract_images_and_captions(f'{target_folder + titles[0]}.pdf'))
+    else:
+        for i in range(len(titles)):
+            images_caption.append(extract_images_and_captions(f'{pdf_location}{i}.pdf'))
+            # images_caption[i] = extract_images_and_captions(f'{pdf_location}{i}.pdf')
+            # for i in range(0,len(images_caption)):
+            #     for k, v in images_caption[i].items():
+            #         print(k)
 
     return render_template("images.html", images_caption = images_caption, data_length = len(images_caption), titles= titles)
 
@@ -89,14 +92,17 @@ def upload():
         current_dateTime = datetime.now()
 
         print(current_dateTime)
-        input = get_summary(textFile)
+        # inp = get_summary(textFile)
+        titles.clear()
+        titles.append(base_filename)
+        inp = "ABCD"
+        inputs = []
+        inputs.append(inp)
         current_dateTime = datetime.now()
 
         print(current_dateTime)
 
-    if not input:
-        input = "HELLO WORLD"
-    return render_template("summary.html", summary_data=[base_filename,input])
+    return render_template("summary.html", titles=titles, inputs=inputs)
 
 if __name__ == '__main__':
     app.run(debug=True)
