@@ -3,23 +3,38 @@
 {% block content %}
 
 
-<div class = "text-center">
+<div class="container text-center">
+
     {% for i in range(0, data_length) %}
-        <br/>
-        Paper {{i}}
-        <br/>
+    <br />
+    <h3>{{ titles[i] }}</h3>
+    <br />
+    {% if images_caption|length/3 > images_caption|length//3 %}
+    {% set n = images_caption|length//3+1 %}
+    {% else %}
+    {% set n = images_caption|length//3 %}
+    {% endif %}
+
+    {% if images_caption[i] != {} %}
+    {% for j in range(n) %}
+    <div class="row">
         {% for k,v in images_caption[i].items() %}
-            {% if k != None %}
-                <img id="picture" src="data:image/jpeg;base64,{{ v }}" height="100" width="150">
-                <br/>
-                {{k}}
-                <br/>
-            {% endif %}
+        {% if k != None %}
+        <div class="col-4">
+            <figure>
+                <img id="picture" src="data:image/jpeg;base64,{{ v }}" height="70%" width="70%">
+                <figcaption>{{k}}</figcaption>
+            </figure>
+        </div>
+        {% endif %}
         {% endfor %}
-
-        <br/>
-
-
+        
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No images present in the paper</p>
+    {% endif %}
+    <hr />
     {% endfor %}
 </div>
 

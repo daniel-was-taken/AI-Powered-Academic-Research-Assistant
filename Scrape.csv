@@ -1,50 +1,44 @@
 Title,ID,URL,Summary
-Light Efficient Flutter Shutter,http://arxiv.org/abs/1509.01220v1,http://arxiv.org/pdf/1509.01220v1,"Flutter shutter is a technique in which the exposure is chopped into segments
-and light is only integrated part of the time. By carefully selecting the
-chopping sequence it is possible to better condition the data for
-reconstruction problems such as motion deblurring, focal sweeping, and
-compressed sensing. The partial exposure trades better conditioning for less
-energy. In problems such as motion deblurring the available energy is what
-caused the problem in the first place (as strong illumination allows short
-exposure thus eliminates motion blur). It is still beneficial because the
-benefit from the better conditioning outweighs the cost in energy.
-  This documents is focused on light efficient flutter shutter that provides
-better conditioning and better energy utilization than conventional flutter
-shutter."
-Probabilistic Prediction of Coalescence Flutter Using Measurements: Application to the Flutter Margin Method,http://arxiv.org/abs/2210.15667v1,http://arxiv.org/pdf/2210.15667v1,"Zimmerman and Weissenburger's flutter margin method is widely used to
-estimate the aeroelastic coalescence flutter speed. In contrast to aeroelastic
-decay rates, the flutter margin exhibits monotonic decay with respect to
-airspeed redering it effective in extrapolating the flutter speed using flight
-test data conducted at pre-flutter airspeeds. This paper reports the
-generalization of the Bayesian formulation of the flutter margin method by
-Khalil et al. developed to tackle measurement and modeling uncertainties. This
-paper improves the predictive performance of the previous algorithm by
-incorporating the joint prior of aeroelastic modal frequencies and decay rates
-among airspeeds in order to better estimate the joint posterior of modal
-parameters using observational data. The modal parameter prior is constructed
-using the classical two-degree-of-freedom pitch-plunge aeroelastic model whose
-system matrices (e.g. structural stiffness and damping matrices) vary randomly.
-Such joint modal parameter prior enforces statistical dependence among
-posteriors of modal parameters and the associated flutter margins across
-airspeeds. Numerical studies demonstrate a considerable reduction of
-uncertainties on the predicted flutter speed obtained from the generalized
-Bayesian flutter margin method. This improved algorithm can cut cost by
-reducing the number of flight tests and better assess the uncertainty against
-aeroelastic flutter."
-Multi-agent control of airplane wing stability under the flexural torsion flutter,http://arxiv.org/abs/2012.04582v1,http://arxiv.org/pdf/2012.04582v1,"This paper proposes a novel method for prevention of the increasing
-oscillation of an aircraft wing under the flexural torsion flutter. The paper
-introduces the novel multi-agent method for control of an aircraft wing,
-assuming that the wing surface consists of controlled 'feathers' (agents).
-Theoretical evaluation of the approach demonstrates its high ability to prevent
-flexural-torsional vibrations of an aircraft. Our model expands the
-possibilities for damping the wing oscillations, which potentially allows an
-increase in aircraft speed without misgiving of flutter. The study shows that
-the main limitation is the time, during which the system is able to damp
-vibrations to a safe level and keep them. The relevance of this indicator is
-important because of the rather fast process of increasing wing oscillations
-during flutter. In this paper, we suggest a new method for controlling an
-aircraft wing, with the use of which it becomes theoretically possible to
-increase the maximum flight speed of an aircraft without flutter occurrence. A
-mathematical model of the bending-torsional vibrations of an airplane wing with
-controlled feathers on its surface is presented. Based on the Speed-Gradient
-method a new control laws are synthesized."
+Real-time stock analysis for blending recipes in industrial plants,http://arxiv.org/abs/1909.02960v1,http://arxiv.org/pdf/1909.02960v1,"Many companies use Excel spreadsheets to keep stock records and to calculate
+process-specific data. These spreadsheets are often hard to understand and
+track. And if the user does not protect them, there is a risk that the user
+randomly changes or erase formulas. The paper focuses on the stocks of products
+used in a blending process with a known recipe. Developing an application that
+can bring this data in a centralized form and that can assist the operator in
+decide is a necessity. When a programmer implements an application that uses
+data from plants he needs to consider one fundamental aspect as reading
+real-time data from the process. The real-time stock analysis application takes
+into account all the above elements. The application is easy to use by an
+operator in the command room of installation because of the planning algorithms
+integrated into it. The algorithms proposed and implemented in this paper have
+well-defined goals: identifying the ingredients needed to achieve the blending
+process for required quantities, determine the quantities of the finished
+product that can be made with the existing ingredients and determine the
+optimum quantities of the finished product. The application implemented in C#
+intensively uses these algorithms and gives the user the ability to build the
+result step by step."
+Training Recipe for N:M Structured Sparsity with Decaying Pruning Mask,http://arxiv.org/abs/2209.07617v1,http://arxiv.org/pdf/2209.07617v1,"Sparsity has become one of the promising methods to compress and accelerate
+Deep Neural Networks (DNNs). Among different categories of sparsity, structured
+sparsity has gained more attention due to its efficient execution on modern
+accelerators. Particularly, N:M sparsity is attractive because there are
+already hardware accelerator architectures that can leverage certain forms of
+N:M structured sparsity to yield higher compute-efficiency. In this work, we
+focus on N:M sparsity and extensively study and evaluate various training
+recipes for N:M sparsity in terms of the trade-off between model accuracy and
+compute cost (FLOPs). Building upon this study, we propose two new decay-based
+pruning methods, namely ""pruning mask decay"" and ""sparse structure decay"". Our
+evaluations indicate that these proposed methods consistently deliver
+state-of-the-art (SOTA) model accuracy, comparable to unstructured sparsity, on
+a Transformer-based model for a translation task. The increase in the accuracy
+of the sparse model using the new training recipes comes at the cost of
+marginal increase in the total training compute (FLOPs)."
+Making Hybrid Languages: A Recipe,http://arxiv.org/abs/2403.01335v1,http://arxiv.org/pdf/2403.01335v1,"The dominant programming languages support only linear text to express ideas.
+Visual languages offer graphical representations for entire programs, when
+viewed with special tools. Hybrid languages, with support from existing tools,
+allow developers to express their ideas with a mix of textual and graphical
+syntax tailored to an application domain. This mix puts both kinds of syntax on
+equal footing and, importantly, the enriched language does not disrupt a
+programmer's typical workflow. This paper presents a recipe for equipping
+existing textual programming languages as well as accompanying IDEs with a
+mechanism for creating and using graphical interactive syntax. It also presents
+the first hybrid language and IDE created using the recipe."

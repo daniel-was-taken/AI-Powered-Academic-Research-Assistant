@@ -9,7 +9,7 @@ from sumy.summarizers.kl import KLSummarizer
 
 # output_file = 'OCR_Rec/Text/' + "imageCap" + '.txt'
 
-file = 'text/NewPdf0.txt'
+file = 'cleanTest.txt'
 parser = PlaintextParser.from_file(file, Tokenizer('english'))
 doc = parser.document
 
