@@ -41,7 +41,7 @@
     <div class="messageBox position-absolute bottom-0 start-50 translate-middle">
       <label for="pdf">Upload pdf</label>
       <input class="form-control" id="pdf" name="pdf" type="file" />
-      <button class="btn btn-primary" type="submit">Upload</button>
+      <button class="btn btn-primary" type="submit" onclick="loading();">Upload</button>
     </div>
   </form>
 
@@ -61,6 +61,7 @@
   function loading() {
     $("#loading").show();
     $("#content").hide();
+    $("body").css("background", "black")
     setTimeout(() => console.log("Done"), 5000)
   }
 </script>

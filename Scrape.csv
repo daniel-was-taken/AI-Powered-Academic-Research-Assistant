@@ -1,44 +1,55 @@
 Title,ID,URL,Summary
-Real-time stock analysis for blending recipes in industrial plants,http://arxiv.org/abs/1909.02960v1,http://arxiv.org/pdf/1909.02960v1,"Many companies use Excel spreadsheets to keep stock records and to calculate
-process-specific data. These spreadsheets are often hard to understand and
-track. And if the user does not protect them, there is a risk that the user
-randomly changes or erase formulas. The paper focuses on the stocks of products
-used in a blending process with a known recipe. Developing an application that
-can bring this data in a centralized form and that can assist the operator in
-decide is a necessity. When a programmer implements an application that uses
-data from plants he needs to consider one fundamental aspect as reading
-real-time data from the process. The real-time stock analysis application takes
-into account all the above elements. The application is easy to use by an
-operator in the command room of installation because of the planning algorithms
-integrated into it. The algorithms proposed and implemented in this paper have
-well-defined goals: identifying the ingredients needed to achieve the blending
-process for required quantities, determine the quantities of the finished
-product that can be made with the existing ingredients and determine the
-optimum quantities of the finished product. The application implemented in C#
-intensively uses these algorithms and gives the user the ability to build the
-result step by step."
-Training Recipe for N:M Structured Sparsity with Decaying Pruning Mask,http://arxiv.org/abs/2209.07617v1,http://arxiv.org/pdf/2209.07617v1,"Sparsity has become one of the promising methods to compress and accelerate
-Deep Neural Networks (DNNs). Among different categories of sparsity, structured
-sparsity has gained more attention due to its efficient execution on modern
-accelerators. Particularly, N:M sparsity is attractive because there are
-already hardware accelerator architectures that can leverage certain forms of
-N:M structured sparsity to yield higher compute-efficiency. In this work, we
-focus on N:M sparsity and extensively study and evaluate various training
-recipes for N:M sparsity in terms of the trade-off between model accuracy and
-compute cost (FLOPs). Building upon this study, we propose two new decay-based
-pruning methods, namely ""pruning mask decay"" and ""sparse structure decay"". Our
-evaluations indicate that these proposed methods consistently deliver
-state-of-the-art (SOTA) model accuracy, comparable to unstructured sparsity, on
-a Transformer-based model for a translation task. The increase in the accuracy
-of the sparse model using the new training recipes comes at the cost of
-marginal increase in the total training compute (FLOPs)."
-Making Hybrid Languages: A Recipe,http://arxiv.org/abs/2403.01335v1,http://arxiv.org/pdf/2403.01335v1,"The dominant programming languages support only linear text to express ideas.
-Visual languages offer graphical representations for entire programs, when
-viewed with special tools. Hybrid languages, with support from existing tools,
-allow developers to express their ideas with a mix of textual and graphical
-syntax tailored to an application domain. This mix puts both kinds of syntax on
-equal footing and, importantly, the enriched language does not disrupt a
-programmer's typical workflow. This paper presents a recipe for equipping
-existing textual programming languages as well as accompanying IDEs with a
-mechanism for creating and using graphical interactive syntax. It also presents
-the first hybrid language and IDE created using the recipe."
+Analyzing and Exploring Training Recipes for Large-Scale Transformer-Based Weather Prediction,http://arxiv.org/abs/2404.19630v1,http://arxiv.org/pdf/2404.19630v1,"The rapid rise of deep learning (DL) in numerical weather prediction (NWP)
+has led to a proliferation of models which forecast atmospheric variables with
+comparable or superior skill than traditional physics-based NWP. However, among
+these leading DL models, there is a wide variance in both the training settings
+and architecture used. Further, the lack of thorough ablation studies makes it
+hard to discern which components are most critical to success. In this work, we
+show that it is possible to attain high forecast skill even with relatively
+off-the-shelf architectures, simple training procedures, and moderate compute
+budgets. Specifically, we train a minimally modified SwinV2 transformer on ERA5
+data, and find that it attains superior forecast skill when compared against
+IFS. We present some ablations on key aspects of the training pipeline,
+exploring different loss functions, model sizes and depths, and multi-step
+fine-tuning to investigate their effect. We also examine the model performance
+with metrics beyond the typical ACC and RMSE, and investigate how the
+performance scales with model size."
+A Recipe for CAC: Mosaic-based Generalized Loss for Improved Class-Agnostic Counting,http://arxiv.org/abs/2404.09826v1,http://arxiv.org/pdf/2404.09826v1,"Class agnostic counting (CAC) is a vision task that can be used to count the
+total occurrence number of any given reference objects in the query image. The
+task is usually formulated as a density map estimation problem through
+similarity computation among a few image samples of the reference object and
+the query image. In this paper, we point out a severe issue of the existing CAC
+framework: Given a multi-class setting, models don't consider reference images
+and instead blindly match all dominant objects in the query image. Moreover,
+the current evaluation metrics and dataset cannot be used to faithfully assess
+the model's generalization performance and robustness. To this end, we discover
+that the combination of mosaic augmentation with generalized loss is essential
+for addressing the aforementioned issue of CAC models to count objects of
+majority (i.e. dominant objects) regardless of the references. Furthermore, we
+introduce a new evaluation protocol and metrics for resolving the problem
+behind the existing CAC evaluation scheme and better benchmarking CAC models in
+a more fair manner. Besides, extensive evaluation results demonstrate that our
+proposed recipe can consistently improve the performance of different CAC
+models. The code will be released upon acceptance."
+The Need for Speed: Pruning Transformers with One Recipe,http://arxiv.org/abs/2403.17921v1,http://arxiv.org/pdf/2403.17921v1,"We introduce the $\textbf{O}$ne-shot $\textbf{P}$runing $\textbf{T}$echnique
+for $\textbf{I}$nterchangeable $\textbf{N}$etworks ($\textbf{OPTIN}$) framework
+as a tool to increase the efficiency of pre-trained transformer architectures
+$\textit{without requiring re-training}$. Recent works have explored improving
+transformer efficiency, however often incur computationally expensive
+re-training procedures or depend on architecture-specific characteristics, thus
+impeding practical wide-scale adoption. To address these shortcomings, the
+OPTIN framework leverages intermediate feature distillation, capturing the
+long-range dependencies of model parameters (coined $\textit{trajectory}$), to
+produce state-of-the-art results on natural language, image classification,
+transfer learning, and semantic segmentation tasks $\textit{without
+re-training}$. Given a FLOP constraint, the OPTIN framework will compress the
+network while maintaining competitive accuracy performance and improved
+throughput. Particularly, we show a $\leq 2$% accuracy degradation from NLP
+baselines and a $0.5$% improvement from state-of-the-art methods on image
+classification at competitive FLOPs reductions. We further demonstrate the
+generalization of tasks and architecture with comparative performance using
+Mask2Former for semantic segmentation and cnn-style networks. OPTIN presents
+one of the first one-shot efficient frameworks for compressing transformer
+architectures that generalizes well across different class domains, in
+particular: natural language and image-related tasks, without
+$\textit{re-training}$."

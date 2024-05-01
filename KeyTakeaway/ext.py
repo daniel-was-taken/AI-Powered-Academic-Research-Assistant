@@ -6,24 +6,19 @@ from sumy.summarizers.lex_rank import LexRankSummarizer
 from sumy.summarizers.lsa import LsaSummarizer
 from sumy.summarizers.luhn import LuhnSummarizer
 from sumy.summarizers.kl import KLSummarizer
-from preprocess_test import preprocess
+from KeyTakeaway.preprocess_test import preprocess
 # output_file = 'OCR_Rec/Text/' + "imageCap" + '.txt'
-preprocess('./text/NewPdf2.txt')
-
-file = 'KeyTakeaway/cleanTest.txt'
-parser = PlaintextParser.from_file(file, Tokenizer('english'))
-doc = parser.document
-
-
-def print_out(sentences):
-    for sent in sentences:
-        print(sent)
-
-print("\n LEX \n")
-
-lex = LexRankSummarizer()
-
-print_out(lex(doc, 3))
+def lexrank(filename):
+    preprocess(filename)
+    file = 'KeyTakeaway/cleanTest.txt'
+    parser = PlaintextParser.from_file(file, Tokenizer('english'))
+    doc = parser.document
+    lex = LexRankSummarizer()
+    sent_list = lex(doc, 3)
+    sentences = []
+    for sent in sent_list:
+        sentences.append(str(sent))
+    return sentences
 
 
 
