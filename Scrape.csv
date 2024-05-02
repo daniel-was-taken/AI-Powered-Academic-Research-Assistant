@@ -1,55 +1,67 @@
 Title,ID,URL,Summary
-Analyzing and Exploring Training Recipes for Large-Scale Transformer-Based Weather Prediction,http://arxiv.org/abs/2404.19630v1,http://arxiv.org/pdf/2404.19630v1,"The rapid rise of deep learning (DL) in numerical weather prediction (NWP)
-has led to a proliferation of models which forecast atmospheric variables with
-comparable or superior skill than traditional physics-based NWP. However, among
-these leading DL models, there is a wide variance in both the training settings
-and architecture used. Further, the lack of thorough ablation studies makes it
-hard to discern which components are most critical to success. In this work, we
-show that it is possible to attain high forecast skill even with relatively
-off-the-shelf architectures, simple training procedures, and moderate compute
-budgets. Specifically, we train a minimally modified SwinV2 transformer on ERA5
-data, and find that it attains superior forecast skill when compared against
-IFS. We present some ablations on key aspects of the training pipeline,
-exploring different loss functions, model sizes and depths, and multi-step
-fine-tuning to investigate their effect. We also examine the model performance
-with metrics beyond the typical ACC and RMSE, and investigate how the
-performance scales with model size."
-A Recipe for CAC: Mosaic-based Generalized Loss for Improved Class-Agnostic Counting,http://arxiv.org/abs/2404.09826v1,http://arxiv.org/pdf/2404.09826v1,"Class agnostic counting (CAC) is a vision task that can be used to count the
-total occurrence number of any given reference objects in the query image. The
-task is usually formulated as a density map estimation problem through
-similarity computation among a few image samples of the reference object and
-the query image. In this paper, we point out a severe issue of the existing CAC
-framework: Given a multi-class setting, models don't consider reference images
-and instead blindly match all dominant objects in the query image. Moreover,
-the current evaluation metrics and dataset cannot be used to faithfully assess
-the model's generalization performance and robustness. To this end, we discover
-that the combination of mosaic augmentation with generalized loss is essential
-for addressing the aforementioned issue of CAC models to count objects of
-majority (i.e. dominant objects) regardless of the references. Furthermore, we
-introduce a new evaluation protocol and metrics for resolving the problem
-behind the existing CAC evaluation scheme and better benchmarking CAC models in
-a more fair manner. Besides, extensive evaluation results demonstrate that our
-proposed recipe can consistently improve the performance of different CAC
-models. The code will be released upon acceptance."
-The Need for Speed: Pruning Transformers with One Recipe,http://arxiv.org/abs/2403.17921v1,http://arxiv.org/pdf/2403.17921v1,"We introduce the $\textbf{O}$ne-shot $\textbf{P}$runing $\textbf{T}$echnique
-for $\textbf{I}$nterchangeable $\textbf{N}$etworks ($\textbf{OPTIN}$) framework
-as a tool to increase the efficiency of pre-trained transformer architectures
-$\textit{without requiring re-training}$. Recent works have explored improving
-transformer efficiency, however often incur computationally expensive
-re-training procedures or depend on architecture-specific characteristics, thus
-impeding practical wide-scale adoption. To address these shortcomings, the
-OPTIN framework leverages intermediate feature distillation, capturing the
-long-range dependencies of model parameters (coined $\textit{trajectory}$), to
-produce state-of-the-art results on natural language, image classification,
-transfer learning, and semantic segmentation tasks $\textit{without
-re-training}$. Given a FLOP constraint, the OPTIN framework will compress the
-network while maintaining competitive accuracy performance and improved
-throughput. Particularly, we show a $\leq 2$% accuracy degradation from NLP
-baselines and a $0.5$% improvement from state-of-the-art methods on image
-classification at competitive FLOPs reductions. We further demonstrate the
-generalization of tasks and architecture with comparative performance using
-Mask2Former for semantic segmentation and cnn-style networks. OPTIN presents
-one of the first one-shot efficient frameworks for compressing transformer
-architectures that generalizes well across different class domains, in
-particular: natural language and image-related tasks, without
-$\textit{re-training}$."
+UWAFA-GAN: Ultra-Wide-Angle Fluorescein Angiography Transformation via Multi-scale Generation and Registration Enhancement,http://arxiv.org/abs/2405.00542v1,http://arxiv.org/pdf/2405.00542v1,"Fundus photography, in combination with the ultra-wide-angle fundus (UWF)
+techniques, becomes an indispensable diagnostic tool in clinical settings by
+offering a more comprehensive view of the retina. Nonetheless, UWF fluorescein
+angiography (UWF-FA) necessitates the administration of a fluorescent dye via
+injection into the patient's hand or elbow unlike UWF scanning laser
+ophthalmoscopy (UWF-SLO). To mitigate potential adverse effects associated with
+injections, researchers have proposed the development of cross-modality medical
+image generation algorithms capable of converting UWF-SLO images into their
+UWF-FA counterparts. Current image generation techniques applied to fundus
+photography encounter difficulties in producing high-resolution retinal images,
+particularly in capturing minute vascular lesions. To address these issues, we
+introduce a novel conditional generative adversarial network (UWAFA-GAN) to
+synthesize UWF-FA from UWF-SLO. This approach employs multi-scale generators
+and an attention transmit module to efficiently extract both global structures
+and local lesions. Additionally, to counteract the image blurriness issue that
+arises from training with misaligned data, a registration module is integrated
+within this framework. Our method performs non-trivially on inception scores
+and details generation. Clinical user studies further indicate that the UWF-FA
+images generated by UWAFA-GAN are clinically comparable to authentic images in
+terms of diagnostic reliability. Empirical evaluations on our proprietary UWF
+image datasets elucidate that UWAFA-GAN outperforms extant methodologies. The
+code is accessible at https://github.com/Tinysqua/UWAFA-GAN."
+Exploring Self-Supervised Vision Transformers for Deepfake Detection: A Comparative Analysis,http://arxiv.org/abs/2405.00355v1,http://arxiv.org/pdf/2405.00355v1,"This paper investigates the effectiveness of self-supervised pre-trained
+transformers compared to supervised pre-trained transformers and conventional
+neural networks (ConvNets) for detecting various types of deepfakes. We focus
+on their potential for improved generalization, particularly when training data
+is limited. Despite the notable success of large vision-language models
+utilizing transformer architectures in various tasks, including zero-shot and
+few-shot learning, the deepfake detection community has still shown some
+reluctance to adopt pre-trained vision transformers (ViTs), especially large
+ones, as feature extractors. One concern is their perceived excessive capacity,
+which often demands extensive data, and the resulting suboptimal generalization
+when training or fine-tuning data is small or less diverse. This contrasts
+poorly with ConvNets, which have already established themselves as robust
+feature extractors. Additionally, training and optimizing transformers from
+scratch requires significant computational resources, making this accessible
+primarily to large companies and hindering broader investigation within the
+academic community. Recent advancements in using self-supervised learning (SSL)
+in transformers, such as DINO and its derivatives, have showcased significant
+adaptability across diverse vision tasks and possess explicit semantic
+segmentation capabilities. By leveraging DINO for deepfake detection with
+modest training data and implementing partial fine-tuning, we observe
+comparable adaptability to the task and the natural explainability of the
+detection result via the attention mechanism. Moreover, partial fine-tuning of
+transformers for deepfake detection offers a more resource-efficient
+alternative, requiring significantly fewer computational resources."
+Transformer-based Reasoning for Learning Evolutionary Chain of Events on Temporal Knowledge Graph,http://arxiv.org/abs/2405.00352v1,http://arxiv.org/pdf/2405.00352v1,"Temporal Knowledge Graph (TKG) reasoning often involves completing missing
+factual elements along the timeline. Although existing methods can learn good
+embeddings for each factual element in quadruples by integrating temporal
+information, they often fail to infer the evolution of temporal facts. This is
+mainly because of (1) insufficiently exploring the internal structure and
+semantic relationships within individual quadruples and (2) inadequately
+learning a unified representation of the contextual and temporal correlations
+among different quadruples. To overcome these limitations, we propose a novel
+Transformer-based reasoning model (dubbed ECEformer) for TKG to learn the
+Evolutionary Chain of Events (ECE). Specifically, we unfold the neighborhood
+subgraph of an entity node in chronological order, forming an evolutionary
+chain of events as the input for our model. Subsequently, we utilize a
+Transformer encoder to learn the embeddings of intra-quadruples for ECE. We
+then craft a mixed-context reasoning module based on the multi-layer perceptron
+(MLP) to learn the unified representations of inter-quadruples for ECE while
+accomplishing temporal knowledge reasoning. In addition, to enhance the
+timeliness of the events, we devise an additional time prediction task to
+complete effective temporal information within the learned unified
+representation. Extensive experiments on six benchmark datasets verify the
+state-of-the-art performance and the effectiveness of our method."

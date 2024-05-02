@@ -156,3 +156,8 @@ header h1 {
   left: 46%;
   z-index: 100;
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
