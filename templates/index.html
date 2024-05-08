@@ -20,7 +20,7 @@
 
 
   <form action="/summary" method="POST">
-    <div class="messageBox position-absolute top-50 start-50 translate-middle">
+    <div class="messageBox position-fixed top-50 start-50 translate-middle">
       <input required="" placeholder="Enter your query..." type="text" id="messageInput" aria-label="input" name="input"
         value="{{ request.form['input'] }}" />
       <button id="sendButton" type="submit" onclick="loading();">
@@ -38,7 +38,7 @@
   </form>
 
   <form action="/upload" method="POST" enctype="multipart/form-data">
-    <div class="messageBox position-absolute bottom-0 start-50 translate-middle">
+    <div class="messageBox position-fixed start-50 translate-middle" style="bottom: 35%;">
       <label for="pdf">Upload pdf</label>
       <input class="form-control" id="pdf" name="pdf" type="file" />
       <button class="btn btn-primary" type="submit" onclick="loading();">Upload</button>
