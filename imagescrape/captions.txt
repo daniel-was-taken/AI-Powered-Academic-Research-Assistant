@@ -1,4 +1,0 @@
-Figure 1: Visualization of T5 Positional Embeddings. To plot figures of bm,n, we set m = 7500 and vary thevalue of n from 0 to 15k. Each attention head of a Flan-T5-XL encoder learns a set of positional embeddings thatcapture different attention bias. For example, the positional embeddings in the left figure encourage the model tofocus on nearby tokens. In contrast, the ones in the right figure let the model focus on only remote tokens.
-Figure 2: QQ plots of Flan-T5-XL. We experiment with short and long sequences. The red reference line is y=x.
-Figure 3: Topic Retrieval Temperature Analysis.Curves are given by Proposition 1 and 2. Cross signsand dots are given by Algorithm 1. logL 512 is givenby Yao et al. (2021); Su (2021).
-Figure 5: Passkey Retrieval Temperature Analysis.Curves are given by Proposition 1 and 2. Cross signsand dots are given by Algorithm 1. logL 512 is givenby Yao et al. (2021); Su (2021).

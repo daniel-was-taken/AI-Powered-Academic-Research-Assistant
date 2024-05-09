@@ -27,8 +27,3 @@ def download_all_pdfs(csv_file, base_filename="Pdf", target_folder="ScrapedPDFs"
       else:
         print(f"Failed to download PDF from {pdf_url}")
 
-# csv_file = "OnlyURL.csv"
-# base_filename = "NewPdf"
-# target_folder = "OnlyPDFs"
-
-# download_all_pdfs(csv_file, base_filename, target_folder)

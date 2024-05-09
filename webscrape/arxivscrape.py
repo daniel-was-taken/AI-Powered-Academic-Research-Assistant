@@ -3,10 +3,11 @@ import pandas as pd
 import arxiv
 
 def scrape(topic):
-  # topic = input("Enter the topic you need to search for : ")
-  # num = int(input("Enter how many papers you want: "))
+  
   client = arxiv.Client()
+
   # Refined Topic based on CS
+  
   refined_topic = f"cat:cs* AND ti:{topic}"
   print(refined_topic)
   num = 3
