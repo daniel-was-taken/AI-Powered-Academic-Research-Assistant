@@ -15,7 +15,7 @@ Our project aims to aid students in computer science, or those passionate about 
 - Each summary will be presented with the paper's title displayed at the top, accompanied by key takeaways extracted from the content of each paper. 
 - This streamlined approach aims to provide users with concise yet comprehensive insights, facilitating a more accessible and efficient research process.
 - This project uses the LongT5 model which is trained on the [Scisumm](https://cs.stanford.edu/~myasu/projects/scisumm_net/) dataset and the [textsum](https://pypi.org/project/textsum/) package for summarization.
-- The model card can be found at [daniel-was-taken/long-t5-scisumm-accelerate-v2](https://huggingface.co/daniel-was-taken/long-t5-scisumm-accelerate-v2)
+- The model card can be found at [daniel-was-taken/long-t5-scisumm-accelerate-v2](https://huggingface.co/daniel-was-taken/long-t5-scisumm-accelerate-v2).
 
 ## Installation 
 
@@ -24,7 +24,7 @@ Our project aims to aid students in computer science, or those passionate about 
 
 1. Create a virtual environment.
    - In this project we use the virtualenv package which can be installed by running ``` pip install virtualenv ``` in the terminal.
-   - Create a virtual environment by running ``` python -m virtualenv venv ```
+   - Create a virtual environment by running ``` python -m virtualenv venv ```.
    - Activate the virtual environment by running ``` venv\Scripts\activate ``` on Windows.
     
 2. Install the required packages.
@@ -32,7 +32,7 @@ Our project aims to aid students in computer science, or those passionate about 
    - This should install the necessary packages, however, some packages could be deprecated.
   
 3. Run the project.
-   - To start the project run ```flask app run``` in the terminal.
+   - To start the project run ```flask --app app run``` or ```flask run``` in the terminal.
     
 ## Resources
 
