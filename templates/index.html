@@ -18,7 +18,6 @@
     </p>
   </div>
 
-
   <form action="/summary" method="POST">
     <div class="messageBox position-absolute top-50 start-50 translate-middle">
       <input required="" placeholder="Enter your query..." type="text" id="messageInput" aria-label="input" name="input"
@@ -33,29 +32,17 @@
           </path>
         </svg>
       </button>
-
     </div>
   </form>
-
   <form action="/upload" method="POST" enctype="multipart/form-data">
-    <div class="messageBox position-absolute bottom-0 start-50 translate-middle">
-      <label for="pdf">Upload pdf</label>
+    <div class="messageBox position-absolute start-50 translate-middle" style="bottom: 30%;">
+      
       <input class="form-control" id="pdf" name="pdf" type="file" />
       <button class="btn btn-primary" type="submit" onclick="loading();">Upload</button>
     </div>
   </form>
 
 </div>
-
-<!-- <div class="position-absolute top-50 start-50 translate-middle">
-  <form action="/summary" method="POST">
-    <div class="input-group">
-      <input type="text" class="form-control" id="in" placeholder="Enter query" aria-label="input"
-        aria-describedby="button-addon2" name="input" value="{{ request.form['input'] }}">
-      <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
-    </div>
-  </form>
-</div> -->
 
 <script type="text/javascript">
   function loading() {
