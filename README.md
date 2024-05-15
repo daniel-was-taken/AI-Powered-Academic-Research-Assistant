@@ -6,7 +6,7 @@ Our project aims to aid students in computer science, or those passionate about 
 
 ## Working Implementation
 
-
+https://github.com/daniel-was-taken/AI-Powered-Academic-Research-Assistant/assets/97611290/61009516-1284-4551-a57c-263aa050ba16
 
 ## Proposed Solution
 - The proposed solution is to design an AI-powered academic research assistant that utilizes document scraping, machine learning, and natural language processing techniques to enhance the research process. 
@@ -26,7 +26,7 @@ Our project aims to aid students in computer science, or those passionate about 
    - In this project we use the virtualenv package which can be installed by running ``` pip install virtualenv ``` in the terminal.
    - Create a virtual environment by running ``` python -m virtualenv venv ```.
    - Activate the virtual environment by running ``` venv\Scripts\activate ``` on Windows.
-    
+
 2. Install the required packages.
    - The packages can be installed by running ``` pip install -r requirements.txt ```.
    - This should install the necessary packages, however, some packages could be deprecated.
